@@ -1,0 +1,44 @@
+Adım 0 - İstemci Konfigürasyonu
+- İstemcilere verilen ip adresleri atayın
+- Aynı switch'e bağlı cihazlar birbirine ping atabiliyor olmalı.
+
+Adım 1 - Temel Switch Konfigürasyon
+Switchler için ;
+- Saat ve tarih bilgilerini güncelleyin
+- Cihazlara etiketlerinde bulunan isimleri tanımlayın
+- Enable girişlerine parola verin (Örnek parola SW1 için Sw1Enable verilmeli).
+- Konfigürasyonda tanımlanan parola bilgileri config dosyasında level7 algoritması kullanılarak şifrelenmeli
+- Console portuna parola atayın (Örnek parola SW1 için Sw1Console). 
+- Switchlere vlan 1 aratüzlerine verilen ip adresleri atanarak;
+	|-> SSH konfigürasyonu yapılmalı. (key seçimi = 2048 - Parola Fromatı SW1 için = Sw1Ssh - Domain-name = cisco.com)
+- Girişe "Giris yasaktir!!
+Yetkisiz giris tespit edildiginde yasal islem baslatilacaktir." yazılı bir banner ekleyin.
+
+Konfigürasyon sonunda;
+- "show eunning-config" komutuyla konfigürasyonlar kontrol edilmeli.
+- PC0 ve Laptop0'dan SW1 ip adresine ping atılabilmeli.
+- PC0 ve Laptop0'dan SW1'e ssh ile bağlanılabilmeli.
+
+
+
+
+Adım 2 - Temel Router Konfigürasyonu
+- Saat ve tarih bilgilerini güncelleyin
+- Cihazlara etiketlerinde bulunan isimleri tanımlayın
+- Enable girişlerine parola verin (Örnek parola R1 için R1Enable verilmeli).
+- Console ve Aux portlarına parola atayın (Örnek parola R1 için R1Console , R1Aux). 
+- Router arayüzlerine verilen ip adreslerini atayın. (Unutma bu ip adresleri aynı zamanda bu arayüze bağlı networklere gateway hizmeti veriyor.).
+- Telnel konfigürasyonu yapın. (Örnek parola olarak R1 için = R1Telnet )
+
+Konfigürasyon sonunda;
+- "show eunning-config" komutuyla konfigürasyonlar kontrol edilmeli.
+- Routerların bağlı olduğu arayüzlerdeki istemcilerden routera ping atabililir olması gerekiyor. 
+- Routerların bağlı olduğu arayüzlerdeki istemcilerden routera Telnel bağlantısı yapabiliyor olması gerekiyor.
+- "show ip route" komutuyla routerlarda arayüzlerine bağlanan networkler kontrol edilmeli. (Arayüzlere bağlanan netwoorkler için ikişer satır bulunması gerekiyor.)
+
+
+Soru1: R1'DE R2'te ping atılabiliyor mu?
+Soru2: R1'DE R2'te Telnet bağlantısı kurulabilir mi?
+
+
+
