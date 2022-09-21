@@ -1,0 +1,52 @@
+Switch Konfigürasyonu 
+
+SW1 ;
+Switch>en
+Switch#conf ter
+Switch(config)#hostname SW1
+
+SW1(config)#vlan 10
+SW1(config-vlan)#name Personel
+SW1(config-vlan)#vlan 20
+SW1(config-vlan)#name Misafir
+SW1(config-vlan)#vlan 30
+SW1(config-vlan)#name Sunucu
+SW1(config-vlan)#vlan 40
+SW1(config-vlan)#name IpTelefon
+
+SW1(config)#interface range fastEthernet 0/1-10
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#exit
+SW1(config)#interface range fastEthernet 0/11-20
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+SW1(config)#interface range fastEthernet 0/21-24
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 30
+SW1(config-if-range)#exit
+SW4(config)#interface gigabitEthernet 0/1
+SW4(config-if)#switchport mode trunk 
+SW1(config)#end
+SW1#wr
+
+
+
+Labaratuvarda switchler arasında farklılık gösteren durumlar
+- Hostname tanımları
+	|-> hostname SW2
+
+- Voice VLAN bağlı portlar 
+	|-> SW4(config)#interface fastEthernet 0/1
+	    SW4(config-if)#switchport access vlan 10
+	    SW4(config-if)#switchport voice vlan 40
+	    SW4(config-if)#exit
+
+- Switchler arası bağlı olunan portlardır (Gi0/1 veya Gi0/1-2)
+	|->SW2(config)#interface range gigabitEthernet 0/1-2
+	   SW2(config-if-range)#switchport mode trunk 
+	   SW2#wr
+
+
+ Farklı durumlarda kullanılacak konfigürasyonlar ayrıca gösterilmiştir.
