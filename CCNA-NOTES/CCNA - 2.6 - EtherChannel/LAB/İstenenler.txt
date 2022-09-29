@@ -1,0 +1,35 @@
+ADIM-0-
+- İstemcilere ip adresleri atayın
+- L3 switchlerin güç sağlayıcılarını bağlayın
+- Swtichlere hostname verin
+
+ADIM-1-
+- Switchlerde VLAN'lar oluşturun
+*** VLAN 10 -> Personel
+*** VLAN 20 -> Misafir
+*** VLAN 30 -> Sunucu
+
+- Bütün FastEthernet portlarını (L2) Access moduna alın
+*** 1-10 portlar -> VLAN 10
+*** 11-20 portlar -> VLAN 20
+*** 21-24 portlar -> VLAN 30
+- Kullanılan GigabitEthernet portları Trunk moduna alınmalı.
+*** Unutma EtherChannel yapılandırılacak portlar port-channel arayzünden konfigüre ediliyordu (ADIM-4-).
+- L3 switchlerde InterVLAN haberleşmesi için VLAN arayüzlerine ip adresleri (default gateway) verilmeli.
+*** VLAN 10 -> 192.168.1.1
+*** VLAN 20 -> 192.168.5.1
+*** VLAN 30 -> 192.168.8.1
+!!!Yönlendirme tablosunü aktive etmeyi unutma.!!!
+
+ADIM-2-
+- L3 switchler arasında LACP konfigürasyonu yapılmalı
+*** Konfigürasyonda mantıksa port Trunk moduna alınmalı 
+*** L3 switchler arasında sadece VLAN 10 ve 20 trafiğine izin verilmeli.
+
+Adım-4-
+- Aynı VLAN'a dahil istemciler aralarında ping atabilir durumda olmalı
+- Etherchannel konfigürasyonu kontrol edilmeli
+*** Oluşturulan mantıksal portun bant genişliği kontrol edilmeli
+- Son durumda;
+*** VLAN 10 her VLAN'a ping atabilmeli
+*** VLAN 20 ile VLAN 30 aralarında ping atamıyor durumda olmalı.
