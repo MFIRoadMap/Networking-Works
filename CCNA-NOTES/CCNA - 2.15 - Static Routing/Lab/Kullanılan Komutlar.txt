@@ -1,0 +1,45 @@
+Switch konfigürasyonu
+
+Switch>en
+Switch#conf ter
+Switch(config)#hostname SW1 
+
+
+
+
+
+Router Konfigürasyonu (R2 için)
+
+Router>en
+Router#conf ter
+Router(config)#hostname R2
+
+
+R2(config)#interface gigabitEthernet 0/2
+R2(config-if)#ip address 192.168.2.1 255.255.255.0
+R2(config-if)#no sh
+R2(config-if)#int gi 0/0
+R2(config-if)#ip address 10.0.0.1 255.255.255.0
+R2(config-if)#no sh
+R2(config-if)#int gi 0/1
+R2(config-if)#ip address 30.0.0.2 255.255.255.0
+R2(config-if)#no sh
+R2(config-if)#exit
+
+R2(config)#ip route 192.168.1.0 255.255.255.0 10.0.0.2
+R2(config)#ip route 192.168.3.0 255.255.255.0 30.0.0.1
+
+R2(config)#ip route 192.168.3.0 255.255.255.0 10.0.0.2
+
+//3.0 networkü üzerinden bağlantının önceliği düşürüldü (AD değeri yükseltirdi)
+R2(config)#no ip route 192.168.3.0 255.255.255.0 10.0.0.2
+R2(config)#ip route 192.168.3.0 255.255.255.0 10.0.0.2 5
+//komut sonrasında AD değeri 5 olan rota tanımı tabloda görünmüyor
+//görebilmek için R2-R3 atası bağlantıyı kesmen gerekiyor. Bağlantı kesildikten sonra yönelndirme tablosuna bakabilirsin.
+
+R2(config)#ip route 192.168.3.5 255.255.255.255 Null 0
+
+R2(config)#end
+R2#wr
+
+
