@@ -1,0 +1,34 @@
+ADIM-0-
+- İstemcilere ip adreslerini verin
+- L3 switchin güç sağlayıcısılarını bağla
+- Switchlere ve routerlara hostname verin
+- Router arayüzlerine ip adreslerini tanımlayıp portları açın.
+- R3'de Loopback arayüzüne 70.0.0.3 255.255.255.0 ip adresini verin.
+- Pingler atılarak routerlara doğru ip adresleri verildiğinden emin olun.
+
+ADIM-1-
+- R6 dışında bütün routerlarda temel OSPF konfigürasyonu yapılacak
+*** Routerlarda process numarası 10 seçilecek
+*** OSPF Area 5 seçilmeli.
+*** R3'ün L3SW1'e bağlı portunun Priority değerini 0 yapın.
+*** R4'de 60.0.0.0/24 networkü OSPF protokolüyle aanons edilmesin/öğretilmesin.
+- Kontrol komutlarını kullanarak OSPF'in oturduğundan emin ol.
+- 20.0.0.0/24 networkünde DR ve BDR routerlar hangileri seçildi? neden?
+|--> Bende R2 DR R3 BDR seçildi :D. PT'ı kapatıp açılırsa tüm topoloji yeniden ayağa kalkar ve DR router 60.0.0.0/24 netowrkü seçilir.
+*** OSPF konfigürasyonuna R3'den başlasan sonuç nasıl olurdu?
+- Ethernet kullanılan Point-to-Point bağlantıların bağlantı tipini değiştirin
+*** 30.0.0.0/24 ve 40.0.0.0/24 networkleri
+*** "sh ip osfp int <Interface>" komutuyla routerların bağlantı tipinin değiştiğinde emin ol
+
+ADIM-2-
+- En iyi rota seçiminin doğru yapılabilmesi için referans bant genişliği değerini uygun bir değerle değiştir 
+*** Sanırım bunun konfigürasyon başında yapılması gerekiyordu. Cost değeleri yeniden hesaplanacağı için çalışan bir topolojide uygulanması kesintilere neden olabilir. 
+*** Metrik değerlerinde değişim oldu mu? kontrol et.
+- İnternet çıkışı için routerlarda statik default rota tanımı yap ve bütün routerlara bu bilginin öğretilmesini sağla.
+*** Unutma internete çıkış routerunda tanımlanması gerekiyordu (R4)
+*** Topolojideki routerlara öğretilip öğretilmediğini kontrol etmelisin
+- R5'in bağlantısı koparıldığında R1'deki trafikler nereden internete çıkarılıyor?
+- Son olarak da R6'da R4'e cevap dönecek paketler için statik rota tanımı yapmalısın.
+*** 192.168.10.0/24 networkünden 192.168.20.0/24 networküne ping atabiliyor olmalısın
+TEBRİKLER LABI TAMAMLADIN
+
