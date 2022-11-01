@@ -1,0 +1,38 @@
+ADIM-0-
+- L3 switchin güç sağlayıcıların takın
+- İstemcilere ip adreslerini verin
+- Routerlara ip adreslerini verin ve erişim kontrollerini yapın
+*** L3 switchde yönlendirme tablosunu devreye al
+*** Router-L3 switch arası kullanılan port L2'den L3'e çekilecek
+
+ADIM-1-
+- L2 switchlere  hostname verin
+- L2 switchlerde;
+*** VLAN 10 - Personel - fa 0/1-10
+*** VLAN 20 - Misafir - fa 0/11-20
+*** VLAN 30 - Sunucu- fa 0/21-24
+oluştur.
+- L3 switchlere hostname verin
+- L3 switchlerde VLAN'lere ip adreslerini verin
+*** VLAN 10 -> 192.168.10.1 255.255.255.0
+*** VLAN 20 -> 192.168.20.1 255.255.255.0
+*** VLAN 30 -> 192.168.30.1 255.255.255.0
+- istemciler arasında ping atılabiliyor mu? kontrol edin.
+- R1 ve R2 arasında statik rota tanımı yapın 
+*** R1'e 192.168.40.0/24 için satır ekleyebilrsin. R2'de ise default rota tanımı iş görecektir.
+- L3 switch ile R1 arasında da statik rota tanımı yapmalısın (insanlar internete çıkabilsin :D).
+*** bunun için kolaylaık olsun diye default rota tanımı yapabilirisin
+*** İstemciler arası bağlantı kontrolü zamanı (.40 ile .10 arasını ping atmayı deneyebilirsin)
+
+ADIM-2-
+- R1'e SSH konfigürasyonu yap.
+*** enable parolası vermezsen Privileged Exec moda geçişine izin vermiyor.
+*** bir istemciden SSH ile bağlanmayı denemelisin
+- R1'e sadece Personel VLAN'dan ulaşılabilecek
+*** Standar ACL R1'in "line vty" arayüzüne uygulanmalı
+*** Extended ACL yazarak routerda kullanılan her arayüzüne uygulayabilirsin. !! Tanımlarken Dikkatli ol !! 
+- (L3 switchde) Sunucu VLAN'a sadece Personel VLAN'ı erişebilmeli.
+*** Misafir VLAN'i Sunucu VLAN'a erişemeyecek
+
+
+
