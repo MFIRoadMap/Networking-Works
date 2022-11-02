@@ -1,0 +1,75 @@
+R1
+-----------------------------------------------------
+en
+conf ter
+hostname R1
+
+int gi 0/0
+ip address 192.168.10.1 255.255.255.0
+no sh
+int gi 0/1
+ip address 10.0.0.1 255.255.255.0
+no sh
+int gi 0/2
+ip address 20.0.0.1 255.255.255.0
+no sh
+exit
+
+ip route 209.165.10.0 255.255.255.0 10.0.0.2
+
+ip nat pool NATLab 10.0.0.1 10.0.0.10 netmask 255.255.255.0
+access-list 10 permit 192.168.10.0 0.0.0.255
+ip nat inside source list 10 pool NATLab overload
+int gi 0/0
+ip nat inside
+int gi 0/1
+ip nat outside
+exit
+end 
+wr
+
+
+R2
+-----------------------------------------------------
+en
+conf ter
+hostname R2
+
+int gi 0/0
+ip address 209.165.10.1 255.255.255.0
+no sh
+int gi 0/1
+ip address 10.0.0.2 255.255.255.0
+no sh
+exit
+
+ip route 192.168.20.0 255.255.255.0 10.0.0.1
+
+end 
+wr
+
+R3
+-----------------------------------------------------
+en
+conf ter
+hostname R3
+
+int gi 0/0
+ip address 192.168.20.1 255.255.255.0
+no sh
+int gi 0/2
+ip address 20.0.0.3 255.255.255.0
+no sh
+exit
+
+ip route 20.0.0.0 255.255.255.0 10.0.0.1
+
+access-list 10 permit 192.168.20.0 0.0.0.255
+ip nat inside source list 10 interface GigabitEthernet 0/2 overload
+int gi 0/0
+ip nat inside
+int gi 0/2
+ip nat outside
+exit
+end
+wr

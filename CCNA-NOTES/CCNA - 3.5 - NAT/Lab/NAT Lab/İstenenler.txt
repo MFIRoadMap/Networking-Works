@@ -1,0 +1,27 @@
+ADIM-0-
+- istemcilere ip adreslerini veri
+- routerlara hostname verin ve arayüzlerne ip adresleri atayın
+- Erişilebilirlik kontrolü yapın (ping at)
+- R3'den ve R1'den 209.165.10.0/24 networküne statik rota tanımı yapın
+- R2'den 20.0.0.0/24 networküne statik rota tanımı yapman yeterli olacaktır
+*** Fark ettiysen statik rota tanımları NAT işlemine göre yapıldı ve bazı yerlerde ayrıca tanımlama yapmaa gerek kalmadı neden?
+
+
+ADIM-1-
+- 192.168.10.0/24 networkü için Dynamic NAT -PAT konfigürasyonu yapılacak;
+*** Public ip adres aralığı 10.0.0.1 10.0.0.10
+*** Pool name -> NATLab
+*** Tanımlamada "overload" eklemeyi unutma
+
+- 192.168.20.0/24 networkü için Dynamic NAT konfigürasyonu yapılacak;
+*** İp havuzu oluşturulayacak
+*** Outside tanımlanan arayüze verilecek ip adresleri kullanılarak NAT yapılacak
+*** Tanımlamada "overload" eklemeyi unutma
+
+ADIM-2-
+- Kontorl için 209.165.10.5 istemcisine 192.168.10.0/24 networkünden ping at
+*** R1'de NAT Translation tablosunu kontrol et
+- Kontorl için 209.165.10.5 istemcisine 192.168.20.0/24 networkünden ping at
+*** R1'de NAT Translation tablosunu kontrol et
+
+
