@@ -1,0 +1,24 @@
+
+ADIM-0-
+- İstemcilere ip adreslerini atayın
+- Routerun parolasını unuttum!! Konfigürasyonu kurtarman gerekiyor.
+*** Parola = PassLab123 olmalı.
+*** confreg değerini güncellemeyi unutma!!!
+- Switchlere ve routera hastmname verin ve router eksik arayüzlerine ip adresi verip açın
+- Erişim testi yapın. 
+*** İstemciler birbirine ping atabilir durumda olmalı
+
+ADIM-1-
+- Switchlerde FastEthernet portlarında CDP protokolünü kapatın
+- Router tarih ve saat bilgisini sunucudan almalı
+*** Hay aksi Switchlerin ip adresi yok ki!! nasıl sorgu yapacak?
+*** *** SW1-> 192.168.10.2 SW2-> 192.168.20.2 SW3-> 192.168.30.2
+*** Cihazlar saat ve tarih bilgisi alıyor görünyüyor ama "sh clock" komutuna yansımıyor. Sanırım Bug var??
+
+
+ADIM-2-
+- Sunucu üzerinde Syslog sunuculuğu da yapılıyor. Router ve switchlerdeki logların sunucuya gönderilmesini sağlayın.
+*** Bunun için switchlere default gateway adresivermeyei unutma. Yoksa networkr dışına paket gönderemezsin.
+- Sunucuya gelen logları kontrol etmelisin.
+- Sunucuda TFTP serrvisi aktif. Buraya routerun ve switchlerin konfigürasyon dosyalarını yedekle.
+- TFTP sunucusunu kontrol et. Konfig dosyaları sorunsuz yedeklenmişse Labtamamlanmıştır.

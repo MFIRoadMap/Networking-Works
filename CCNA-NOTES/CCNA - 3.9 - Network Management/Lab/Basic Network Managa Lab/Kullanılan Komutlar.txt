@@ -1,0 +1,113 @@
+R1
+--------------------------------------------------------
+//gücünü kesip yeniden yüklenirken ROMMonitor mpda giriş yapıldı
+confreg 0x2142
+reset
+
+// cihaz yeniden açıldığında hostname değişmiş olacak :D 
+
+en
+copy sturtup-config running-config
+
+conf ter
+enable secret PassLab123
+config-register 0x2102
+
+int gi 0/0
+ip address 192.168.10.1 255.255.255.0
+no sh 
+exit
+int gi 0/1
+ip address 192.168.20.1 255.255.255.0
+no sh 
+exit
+int gi 0/2
+ip address 192.168.30.1 255.255.255.0
+no sh 
+exit
+
+ntp server 192.168.30.100
+ntp master
+
+logging 192.168.30.100
+
+exit
+copy running-config tftp: 
+** 192.168.30.100
+wr
+
+
+
+SW1
+------------------------------
+en
+conf ter
+hostname SW1
+int vlan 1 
+ip address 192.168.10.2 255.255.255.0
+no sh
+exit
+ip default-gateway 192.168.10.1
+int range fa 0/1-24
+no cdp enable
+exit
+
+ntp server 192.168.10.1
+
+logging 192.168.30.100
+
+exit
+copy running-config tftp: 
+** 192.168.30.100
+wr
+
+
+
+SW2
+------------------------------
+en
+conf ter
+hostname SW2
+int vlan 1 
+ip address 192.168.20.2 255.255.255.0
+no sh
+exit
+ip default-gateway 192.168.20.1
+int range fa 0/1-24
+no cdp enable
+exit
+
+ntp server 192.168.20.1
+
+logging 192.168.30.100
+
+exit
+copy running-config tftp: 
+** 192.168.30.100
+wr
+
+
+
+SW3
+------------------------------
+en
+conf ter
+hostname SW3
+int vlan 1 
+ip address 192.168.30.2 255.255.255.0
+no sh
+exit
+ip default-gateway 192.168.30.1
+int range fa 0/1-24
+no cdp enable
+exit
+
+ntp server 192.168.30.1
+
+logging 192.168.30.100
+
+exit
+copy running-config tftp: 
+** 192.168.30.100
+wr
+
