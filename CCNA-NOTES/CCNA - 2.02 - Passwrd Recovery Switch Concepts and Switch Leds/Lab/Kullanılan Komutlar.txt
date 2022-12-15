@@ -1,0 +1,39 @@
+- Öncelikle router güç tuşu kullanılarak kapatılıp yeniden açılıyor.
+*** OS yüklenirken "Ctrl+c" kombinasyonu yapılarak RomMon moduna girilir.
+- "confreg 0x2142" 
+- reset
+
+- Cihaz yenide başlatılır ve temiz konfigürasyonda açılır.
+
+en
+copy startup-config running-config
+
+conf ter
+
+line console 0
+password LabConsole0
+login
+exit
+
+interface gigabitEthernet 0/0/0
+ip address 192.168.1.1 255.255.255.0 
+description gateway of network 192.168.1.0
+no sh
+exit
+
+interface gigabitEthernet 0/0/1
+ip address 192.168.2.1 255.255.255.0 
+description gateway of network 192.168.2.0
+no sh
+exit
+
+end
+wr
+
+- Son olarak router güç tuşu kullanılarak kapatılıp yeniden açılıyor.
+*** OS yüklenirken "Ctrl+c" kombinasyonu yapılarak RomMon moduna girilir.
+- "confreg 0x2102" 
+- reset
+
+
+komutlarıyla eski haline getiriliyor.

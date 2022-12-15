@@ -1,0 +1,10 @@
+ADIM-0- 
+Yeni başlayan network mühendisi R1 routeru için temel cihaz konfigürasyonu yaparken cihaza bağlanabilmek için tanımladığı parola bilgilerini unutuyor.
+Konfigürasyon yaparken de arayüzlere yanlış ip adreslerini atandığı için network erişimi durdu!!
+
+- R1 cihazında Password Recovery yaparak konfigürasyonları ve parolayı kurtar 
+*** Parola : LabConsole0
+*** *** Enable parolası : R1Enable 
+- Ip adres atamasındaki hatayı düzelt
+*** Lab sonunda cihazlar gateway adreslerine ping atabilmeli.
+*** Lab sonunda cihazlar aralarınad ping atabilmeli.

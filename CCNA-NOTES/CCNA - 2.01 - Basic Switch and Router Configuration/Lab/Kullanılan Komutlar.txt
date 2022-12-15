@@ -1,0 +1,267 @@
+
+SW1 Konfigürasyonu;
+-----------------------------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname SW1 
+
+enable secret Sw1Enable 
+
+service password-encryption 
+
+line console 0
+password Sw1Console 
+login
+exit
+
+interface vlan 1
+ip address 192.168.1.2 255.255.255.0 
+no sh
+exit
+
+ip domain-name cisco.com
+crypto key generate rsa
+2048
+username myadmin secret Sw1Ssh 
+
+line vty 0 15
+transport input ssh
+login local 
+exit
+
+banner motd 1
+Giris yasaktir!!
+Yetkisiz giris tespit edildiginde yasal islem baslatilacaktir.
+1
+
+end
+wr
+
+
+SW2 Konfigürasyonu;
+-----------------------------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname SW2
+
+enable secret Sw2Enable 
+
+service password-encryption 
+
+line console 0
+password Sw2Console 
+login
+exit
+
+interface vlan 1
+ip address 192.168.2.2 255.255.255.0 
+no sh
+exit
+
+ip domain-name cisco.com
+crypto key generate rsa
+2048
+username myadmin secret Sw2Ssh 
+
+line vty 0 15
+transport input ssh
+login local 
+exit
+
+banner motd 1
+Giris yasaktir!!
+Yetkisiz giris tespit edildiginde yasal islem baslatilacaktir.
+1
+
+end
+wr
+
+
+
+SW3 Konfigürasyonu;
+-----------------------------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname SW3
+
+enable secret Sw3Enable 
+
+service password-encryption 
+
+line console 0
+password Sw3Console 
+login
+exit
+
+interface vlan 1
+ip address 192.168.3.2 255.255.255.0 
+no sh
+exit
+
+ip domain-name cisco.com
+crypto key generate rsa
+2048
+username myadmin secret Sw3Ssh 
+
+line vty 0 15
+transport input ssh
+login local 
+exit
+
+banner motd 1
+Giris yasaktir!!
+Yetkisiz giris tespit edildiginde yasal islem baslatilacaktir.
+1
+
+end
+wr
+
+
+
+SW4 Konfigürasyonu;
+-----------------------------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname SW4
+
+enable secret Sw4Enable 
+
+service password-encryption 
+
+line console 0
+password Sw4Console 
+login
+exit
+
+interface vlan 1
+ip address 192.168.4.2 255.255.255.0 
+no sh
+exit
+
+ip domain-name cisco.com
+crypto key generate rsa
+2048
+username myadmin secret Sw4Ssh 
+
+line vty 0 15
+transport input ssh
+login local 
+exit
+
+banner motd 1
+Giris yasaktir!!
+Yetkisiz giris tespit edildiginde yasal islem baslatilacaktir.
+1
+
+end
+wr
+
+
+
+
+
+R1 Konfigürasyonu
+-----------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname R1  
+enable secret R1Enable 
+service password-encryption 
+
+line console 0
+password R1Console 
+login
+exit
+
+line aux 0  
+password R1Aux 
+login
+exit
+
+line vty 0 15 
+transport input telnet 
+password R1Telnet
+login
+exit
+
+interface gigabitEthernet 0/0/0
+ip address 192.168.1.1 255.255.255.0 
+description gateway of network 192.168.1.0
+no sh
+exit
+
+interface gigabitEthernet 0/0/1
+ip address 192.168.2.1 255.255.255.0 
+description gateway of network 192.168.2.0
+no sh
+exit
+
+interface serial 0/1/0
+ip address 10.0.0.1 255.255.255.0 
+description client of network 10.0.0.0
+no sh
+exit
+
+end
+wr
+
+
+
+
+R2 Konfigürasyonu
+-----------------------------------------------
+en
+clock set 10:10:00 1 jan 2022
+configure terminal 
+hostname R2  
+enable secret R2Enable 
+service password-encryption 
+
+line console 0
+password R2Console 
+login
+exit
+
+line aux 0  
+password R2Aux 
+login
+exit
+
+line vty 0 15 
+transport input telnet 
+password R2Telnet
+login
+exit
+
+interface gigabitEthernet 0/0/0
+ip address 192.168.3.1 255.255.255.0 
+description gateway of network 192.168.3.0
+no sh
+exit
+
+interface gigabitEthernet 0/0/1
+ip address 192.168.4.1 255.255.255.0 
+description gateway of network 192.168.4.0
+no sh
+exit
+
+interface serial 0/1/0
+ip address 10.0.0.2 255.255.255.0 
+description client of network 10.0.0.0
+no sh
+exit
+
+end
+wr
+
+
+Soru1: R1'DE R2'te ping atılabiliyor mu?
+- Atamaz çünkü, yönlendirme tablolarında da görüldüğü gibi routerlar birbirlerinde tanımlı olan network bilgilerini bilmiyorlar. Sadece kendilerine bağlı networklerin bilgilerini tanıyorlar. Bu nedenle kendisine gelen ping paketlerini farklı router üzerindeki networklere iletemeyecektir. Bunun için ilerleyen konularda dinamik ve stik routing konularıyla farklı router üzerindeki netowrklerin öğretilmesi sağlanarak paketlerin farklı router üzerinde bulunan netpwrklere iletilmesi sağlanacaktır.
+
+Soru2: R1'DE R2'te Telnet bağlantısı kurulabilir mi?
+- Routerlar arasında paket iletilemediği için Telnet veya SSH bağlantıları da kurulamayacaktır.
