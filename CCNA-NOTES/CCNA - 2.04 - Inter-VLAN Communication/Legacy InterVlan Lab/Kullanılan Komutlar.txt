@@ -1,0 +1,47 @@
+
+SW1
+----------------------------------
+en
+conf ter
+hostname SW1
+vlan 10
+exit
+vlan 20
+exit
+interface range fastEthernet 0/1-12
+switchport mode access 
+exit
+interface range fastEthernet 0/1-12
+switchport access vlan 10
+exit
+interface range fastEthernet 0/13-24
+switchport mode access 
+switchport access vlan 20
+exit
+interface gigabitEthernet 0/1
+switchport mode access 
+switchport access vlan 10
+interface gigabitEthernet 0/2
+switchport mode access 
+switchport access vlan 20
+exit
+
+end 
+wr
+
+
+R1
+----------------------------------------
+en
+conf ter
+hostname R1
+interface gigabitEthernet 0/0/0
+ip address 192.168.10.1 255.255.255.0
+no sh
+
+interface gigabitEthernet 0/0/1
+ip address 192.168.20.1 255.255.255.0
+no sh
+exit
+end
+wr

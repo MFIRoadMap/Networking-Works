@@ -1,0 +1,168 @@
+SWİTCH KONFİGÜRASYONU
+
+SW1
+-------------------------
+en
+conf ter
+hostname SW1
+vlan 33
+name Pesonel
+vlan 55
+name Sunucu
+vlan 77
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 33
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 55
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 77
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk 
+
+end
+wr
+
+
+SW2
+--------------------------------
+en
+conf ter
+hostname SW2
+vlan 33
+name Pesonel
+vlan 55
+name Sunucu
+vlan 77
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 33
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 55
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 77
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk 
+exit
+interface gigabitEthernet 0/2
+switchport mode trunk 
+
+end
+wr
+
+
+SW3
+------------------------------------
+en
+conf ter
+hostname SW3
+vlan 33
+name Pesonel
+vlan 55
+name Sunucu
+vlan 77
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 33
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 55
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 77
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk 
+exit
+interface gigabitEthernet 0/2
+switchport mode trunk 
+end
+wr
+
+
+SW4
+--------------------------------
+en
+conf ter
+hostname SW4
+vlan 33
+name Pesonel
+vlan 55
+name Sunucu
+vlan 77
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 33
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 55
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 77
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk 
+exit
+interface gigabitEthernet 0/2
+switchport mode trunk 
+
+end
+wr
+
+
+
+R1
+-----------------------------------------------
+en
+conf ter
+hostname R1
+
+interface gigabitEthernet 0/0/0
+no sh
+exit
+
+interface gigabitEthernet 0/0/0.33
+encapsulation dot1Q 33
+ip address 192.168.33.1 255.255.255.0
+exit
+interface gigabitEthernet 0/0/0.55
+encapsulation dot1Q 55
+ip address 192.168.55.1 255.255.255.0
+exit
+interface gigabitEthernet 0/0/0.77
+encapsulation dot1Q 77
+ip address 192.168.77.1 255.255.255.0
+
+end
+wr
+

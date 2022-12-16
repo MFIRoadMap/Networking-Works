@@ -1,0 +1,28 @@
+ADIM-0-
+- İstemcilere ip adresleriatanacak
+- L3 switchlerin güş sağlayıcıları takılacak
+- Konfigürasyon öncesinde her istemci birbirini pingleyebiliR durumda olması gerekiyor.
+
+ ADIM-1-
+- Switchlere hostname verilecek
+- Switchlerde VLAN 10, VLAN 20, VLAN 30 oluşturulacak
+- Switchlerde FastEthernet portlarında;
+**0-10 portları VLAN 10 (Personel)
+**11-20 portları VLAN 20 (Sunucu)
+**21-24 portları VLAN 30 (Yonetici)'na atanacak.
+- L2 switch - L3 switch arasında bağlanan portlar Trunk moduna alınmalı (Gi 0/1).
+
+
+ADIM-2-
+- L2 switchlerde olduğu gibi VLAN'lar tanımlanmalı.
+- L3 switchde, L2 switchlerin bağlı olduğu portlar trun moduna alınmalı.
+- SVI arayüzlerine ip adresleir verilmeli
+**192.168.10.1 - VLAN 10
+**192.168.20.1 - VLAN 20
+**192.168.30.1 - VLAN 30
+
+ADIM-3-
+- Konfigürasyon sonunda Vlanlar aralarında haberleşebilir durumda olmalılar.
+
+
+ 

@@ -1,0 +1,28 @@
+ADIM-0-
+- İstemcilere ip adresleriatanacak
+- Konfigürasyon öncesinde her istemci birbirini pingleyebilit durumda olması gerekiyor.
+
+ ADIM-1-
+- Switchlere hostname verilecek
+- Switchlerde VLAN 33, VLAN 55, VLAN 77 oluşturulacak
+- Switchlerde FastEthernet portlarında;
+**0-10 portları VLAN 33 (Personel)
+**11-20 portları VLAN 55 (Yonetici)
+**21-24 portları VLAN 77 (Sunucu)'na atanacak.
+- Switch-switch, switch-router bağlanan portlar Trunk moduna alınmalı.
+!!UNUTMA!! farklı VLAN'a ait aynı networke dahil sitemciler haberleşemez. Bu nedenle ip adreslerini verirken dikkatli ol  !!! (LAB OLUŞTURULURKEN KARŞILAŞILDI :D)
+
+ADIM-2-
+- Routerda swİtch bağlanan portlar fiziksel olarak açılması gerekiyor.
+** Bu adım önemli
+- Port fiziksel olarak açıldıktan sonra her VLAN için sub-interface oluşturulacak.
+** VLAN 33 = (0/0/0.33)
+** VLAN 55 = (0/0/0.55)
+** VLAN 77 = (0/0/0.77)
+- Oluşturulan arayüzlere VLAN'lar için ip adresleri ve "encapsulation dot1q" komutu kullanılarak VLAN etiketleri bildirilecek. Ardından ip adresleri atanmalı.
+
+ADIM-3-
+- Konfigürasyon sonunda Vlanlar aralarında haberleşebilir durumda olmalılar.
+
+
+ 

@@ -1,0 +1,20 @@
+ADIM-0-
+- İstemcilere ip adresleri atandıktan sonra
+- İstemcilerin konfigürasyon öncesinde birbirlerini ping atabilmeleri kontrol edilecek.
+
+ADIM-1-
+- Switche hostname verilecek.
+- Switchlerde VLAN 10 ve VLAN 20 oluşturulacak.
+- Switchde bütün portlar access moduna alınacak
+- Switchde FastEthernet portlarının;
+**ilk 12 port VLAN 10, 
+**sonraki 12 port VLAN 20'ye alınacak.  
+Gigabit portlarından;
+** 0/1 potru VLAN 10 , 
+**0/2 portu VLAN 20'ye atanacak.
+
+ADIM-2- 
+- Routera hostname verilecek
+- Switchin bağlı olduğu arayüzlerine ip adresleri atanarak VLAN'lara gatewaylik yapması sağlanacak.
+ 
+Son durumda ilk 12 porta bağlanan istemciler, sonraki 12 porta bağlana  istemcilerle haberleşebiliyor/ping atabilir durumda olmalılar.
