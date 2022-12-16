@@ -1,0 +1,28 @@
+ADIM-0-
+- İstemcilere ip adresleri atanacak
+
+ADIM-1-
+- Switchlere hostanme verilecek
+- VLAN'lar oluşturulacak;
+*** VLAN 10 -> Personel
+*** VLAN 20 -> Misafir
+*** VLAN 30 -> Sunucu
+- Switch bağlaan portlar dışında bütün portlar access moduna alınacak
+- Switchlerde;
+*** 1-7 portları -> VLAN 10
+*** 8-15 portları -> VLAN 20
+*** Switch bağlı portlar Trunk moduna alınacak
+
+ADIM-3-
+- Swithclerde Rapid PVSTP protokolüne geçin (Unutma ilgili komut bütün switchlerde uygulanmalı).
+- Leptop ve Sunucu bağlanan portların bekelmeden açılabilmesi için PortFast özelliğini açın.
+*** Bu portlara switch takılmasında döngü oluşma ihtimalini engellemek için BPDU Guard korumasını açın.
+- Root switch hangisi?
+- Priority değerini değiştirerek Bütün VLAN'lar için (1-4096) SW1'in root switch seçilmesini sağlayın (öncelik numarası 4096 verilebilir).
+
+ADIM-4-
+- Aynı VLAN'a dahil istemciler aralarında ping atabiliyor durumda olmalı.
+- SW1 root swtich olmalı. Bunu konfigürasyon sonunda yine port yönlerine bakarak anlayabilirsin.
+*** Root switchin bütün portları designated port olamsı gerekiyordu.
+- Yonetici ağına bir istemci bağlandığında 30 saniye beklemeden ip adresi alabilmeli 
+(Leptopları 8-15 arası herhangi bir porta bağlayıp ip adresi atamasını DHCP/Dynamic seçin).
