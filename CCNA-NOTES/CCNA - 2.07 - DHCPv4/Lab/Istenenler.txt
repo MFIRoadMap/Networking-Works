@@ -1,0 +1,36 @@
+ADIM-0-
+- DHCP sunucusuna ip adresi verin
+- L3 switchin güç sağlayıcılarını bağlayın
+- Bütün switchlere hostname verin
+- L3 swtich portlar varsayılanda L2 'de çalışıyordu. L3'e alın
+*** "no swtichport" komutunu arayüzlerie uygulayın
+- Sunucu üzerinde DHCP sunucusunu devreye alın ve verilen tanımlamaları uygulayın.
+*** Net1 - DG: 192.168.1.1 - DNS: 8.8.8.8 - StartIp: 192.168.1.30/24 Max Num of User 225
+*** Net2 - DG: 192.168.2.1 - DNS: 8.8.8.8 - StartIp: 192.168.2.20/24 Max Num of User 235
+*** Net3 - DG: 192.168.3.1 - DNS: 8.8.8.8 - StartIp: 192.168.3.50/24 Max Num of User 205
+
+
+ADIM-1-
+- L3 switchde yönlendirme tablosunu aktive edin.
+- L3 switch portlarına ip adresleri atayarak portları açın.
+Gİ 1/0/1 -> 192.168.1.1/24
+Gİ 1/0/2 -> 192.168.2.1/24
+Gİ 1/0/3 -> 192.168.3.1/24
+Gİ 1/0/4 -> 192.168.100.1/24
+- Networklerin sunucudan hizmet alabilmesi için L3 switch portlarına DHCP Relay Agent özelliğini tanımlayın
+*** Sunucu ip adresi 192.168.100.100
+
+ADIM-2-
+- İstemcilerin sunucudan ip alıp almadığını kontrol edin.
+- L2 switchlerin VLAN 1 arayüzlerien DHCP sunucularında ip adresi aldırın.
+*** İp adresi aldığında konsola log düşecektir. (Mouse swithcin üzerine getirildiğinde de görülebilir.)
+*** *** Normalde switchlere de yönetilebilmesi için statik ip verilir. 
+*** ***Burada uygulama amaçlı dinamik ip aldırılmaktadır.
+- SW2 portlarına bir bilgisayar bağlayın ve ardından sunucudan ip alıp almadığını kontrol edin.
+*** alamaması gerekiyor.
+
+ADIM-3-
+- SW2'ye bağlanan istemci neden ip adresi alamadı? 
+*** SW2'ye bağlanan istemcilerin doğrudan ip almasını sağlayın (Fa portları).
+*** *** BPDU guard korumasını açmayı unutma
+- Konfigürasyon sonunda SW2'ye yeni bir istemci bağla ve ip adresi alıp almadığını kontrol et.

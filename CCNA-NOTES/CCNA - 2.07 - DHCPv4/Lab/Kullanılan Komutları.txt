@@ -1,0 +1,105 @@
+
+SW1
+------------------------------------------------------------
+en
+conf ter
+hostname SW1
+
+interface vlan 1
+ip address dhcp 
+no sh
+exit
+
+end
+wr
+
+
+
+
+SW2
+------------------------------------------------------------
+en
+conf ter
+hostname SW2
+
+interface vlan 1
+ip address dhcp 
+no sh
+exit
+
+interface range fastEthernet 0/1-24
+spanning-tree portfast 
+spanning-tree bpduguard enable 
+exit
+
+end
+wr
+
+
+
+SW3
+------------------------------------------------------------
+en
+conf ter
+hostname SW3
+
+interface vlan 1
+ip address dhcp 
+no sh
+exit
+
+end
+wr
+
+
+
+
+
+Switchlerde STP protokolü çalıştığı için istmeciler netowrke 30 saniye boyunca paket bırakamıyorlar. Bu nedenle ip adresi alamayıp APIPA'ya düşüyorlarÇözüm olarak FastEethernet portlarda PortFast özelliği ve BPDU guard koruması açılmalı.
+
+SADECE SW2'ye bağlanan portların beklemeden ip alabilmeleri için  PortFast özelliği açılmıştır
+
+
+
+
+
+L3SW1
+-----------------------------------------------------------
+en 
+conf ter
+hostname L3SW1
+interface range gigabitEthernet 1/0/1-4
+no switchport 
+exit
+
+ip routing
+
+interface gigabitEthernet 1/0/1
+ip address 192.168.1.1 255.255.255.0
+no sh
+exit
+interface gigabitEthernet 1/0/2
+ip address 192.168.2.1 255.255.255.0
+no sh
+exit
+interface gigabitEthernet 1/0/3
+ip address 192.168.3.1 255.255.255.0
+no sh
+exit
+interface gigabitEthernet 1/0/4
+ip address 192.168.100.1 255.255.255.0
+no sh
+exit
+
+interface gigabitEthernet 1/0/3
+ip helper-address 192.168.100.100
+exit
+interface gigabitEthernet 1/0/2
+ip helper-address 192.168.100.100
+exit
+interface gigabitEthernet 1/0/1
+ip helper-address 192.168.100.100
+exit
+
+end
+wr
