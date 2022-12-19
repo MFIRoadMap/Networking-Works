@@ -1,0 +1,28 @@
+ADIM-0-
+- Router ve switchlere hostname verilmeli
+- Routerlarda IPv6 yönlendirme tablosunu devreye alın
+*** "ipv6 unicast-routing"
+- Router arayüzlerine belirtilen IPv6 adreslerini tanımlayın
+
+
+ADIM-1-
+- Routerun arayüzlerinde
+*** gi0/0/0 -> Only SLAAC conf. yapılacak
+*** *** İstemcilere DNS bilgisi verilmeyecek
+
+*** gi0/0/1 -> SLAAC witch DHCP conf. yapılacak
+*** *** konfigürasyon sonunda network içerisinde DHCP sunucu olup olmadığını kontrol edecektir.
+*** *** DNS bilgisi alabilecek DHCP sunucusu bulursa IPv6 Link Local adresini öğrenecektir.
+
+*** gi0/0/2 -> DHCP conf. yapılacak
+
+
+ADIM-2-
+- Router üzerindkei DHCPv6 konfigürasyonunu kontrol etmelisin
+- İstemciler sağlıklı bir şekilde ip adresi alıyorlar mı?
+*** Sunuculara da GUA alabiliyor.
+- Swştchlerin de networkte belirlenen yöntemle VLAN1 arayüzlerine ip adresi atanması gerekiyor
+*** Konfigürasyon öncesinde switchlerde IPv6 desteğini açmayı unutma
+*** Her ne kadar konfigürasyonu yapsam da switchlere ip adresi aldıramadım. PT'da bug olabilir.
+*** Link Local adresi alıyor ama sunucudan veya routerdan GUA adresi almıyor.
+- İstemciler arasında erişim kontrolü yapmalısın.
