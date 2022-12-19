@@ -1,0 +1,127 @@
+
+R1
+--------------------------------------------
+en
+conf ter
+hostname R1
+
+ipv6 unicast-routing
+
+int gi 0/0
+ipv6 address 2001:db8:acad:1::1/64
+no sh
+exit 
+
+int gi 0/1
+ipv6 address 2001:db8:acad:2::1/64
+no sh
+exit
+
+int gi 0/2
+ipv6 address 2001:db8:acad:3::1/64
+no sh
+exit
+
+
+ipv6 dhcp pool ACAD1
+exit
+int gi 0/0
+ipv6 dhcp server ACAD1
+exit
+
+ipv6 dhcp pool ACAD2
+exit
+int gi 0/1
+ipv6 dhcp server ACAD2
+ipv6 nd other-config-flag
+exit
+
+ipv6 dhcp pool ACAD3
+address prefix 2001:db8:acad:3::1/64 lifetime 172800 86400
+exit
+int gi 0/2
+ipv6 dhcp server ACAD3
+ipv6 nd managed-config-flag
+exit
+
+end
+wr
+
+
+
+
+SW1
+------------------------------------------------
+en
+conf ter
+hostname SW1
+
+sdm prefer dual-ipv4-and-ipv6 default
+do reload
+y
+
+en
+conf ter
+int vlan 1
+ipv6 enable
+ipv6 address autoconfig
+no sh
+exit
+
+end
+wr
+
+
+
+
+SW2
+------------------------------------------------
+en
+conf ter
+hostname SW2
+
+sdm prefer dual-ipv4-and-ipv6 default
+do reload
+y
+
+en
+conf ter
+int vlan 1
+ipv6 enable
+ipv6 address autoconfig
+no sh
+exit
+
+end
+wr
+
+
+SW3
+------------------------------------------------
+en
+conf ter
+hostname SW3
+
+sdm prefer dual-ipv4-and-ipv6 default 
+do reload
+y
+
+en
+conf ter
+int vlan 1
+ipv6 enable
+ipv6 address dhcp
+no sh
+exit
+
+end
+wr
+
+
+
+
+
+
+
+
+
