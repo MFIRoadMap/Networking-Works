@@ -1,0 +1,38 @@
+ADIM-0-
+- İstemcilere ip adreslerini atayın
+
+ADIM-1-
+- Routerlara hostname verin
+- Router arayüzlerine ip adresleri atayın
+*** R1 -> Gi 0/0 - 192.168.1.2/24 | Gi 0/1 - 192.168.5.2 | Gi 0/2 - 192.168.10.2
+*** R2 -> Gi 0/0 - 192.168.1.3/24 | Gi 0/1 - 192.168.5.3 | Gi 0/2 - 192.168.10.3
+- İstemciler arasında erişimin sorunsuz olduğunu ping atarak kontorl et
+
+- HSRP konfigürasyonu için;
+*** Network 1 için Routerlarda (R1 ve R2'de Gi 0/0 arayüzüne)
+*** *** Grup 1 kullanılacak
+*** *** sanal ip adresi - 192.168.1.1 
+*** *** R1'in öncelik değeri 150 olmalı
+*** *** Preemption özelliği aktive edilecek
+
+*** Network 2 için Routerlarda (R1 ve R2'de Gi 0/1 arayüzüne)
+*** *** Grup 2 kullanılacak
+*** *** sanal ip adresi - 192.168.5.1 
+*** *** öncelik değerlerinde değişim olmayacak
+*** *** Preemption özelliği aktive edilecek
+
+*** Network 3 için Routerlarda (R1 ve R2'de Gi 0/2 arayüzüne)
+*** *** Grup 3 kullanılacak
+*** *** sanal ip adresi - 192.168.10.1 
+*** *** R2'in öncelik değeri 150 olmalı
+*** *** Preemption özelliği aktive edilecek
+
+
+ADIM-2-
+- Aktif router hangisi oldu?
+*** Normalde preemption özelliği açık olduğu için priority deperi yüksek olan router aktifliği alması gerekiyor
+- Konfigürasyon tamamlandıktna sonra 1.0/24 networkünden sunucuya 1000 ping paketi gönderilirken;
+*** R1'i kapatın ve ping atarken oluşan değişimini gözlemleyin
+*** R1'i tekrar açın ve ping atarken oluşan değişimi gözlemleyin.
+*** DİKKAT Packet Tracer ÜZERİNDE SANIRIM BUG VAR. AKTİF BAĞLANTI KOPRUĞUNDA YEDEK BAĞLANTIYI DA ALGILAMIYOR/GÖRMÜYOR. BU NEDENELE UYGULAMAYI GNS3 ÜZERİNDE TEST ETTİM VE SAĞLIKLI ÇALIŞIYOR. İSTERSEN ROUTERLAR ARASINDAKİ BAĞLANTILARI KESİP YİNE ROUTERLAR ÜZERİNDE "sh standby brief" KOMUTUNU KULLANARAK DEĞİŞİMLERİ GÖZLEMLEYEBİLİRSİN. 
+ 
