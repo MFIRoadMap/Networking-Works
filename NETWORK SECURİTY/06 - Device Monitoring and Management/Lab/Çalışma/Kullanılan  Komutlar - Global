@@ -1,0 +1,89 @@
+R1
+-------------------------------------------
+conf te
+int fa 0/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+int fa 0/1
+ip address 30.0.0.1 255.255.255.0
+no sh
+exit
+
+router ospf 1
+network 10.0.0.1 0.0.0.0 area 1
+network 30.0.0.1 0.0.0.0 area 1
+exit
+
+int range fa 0/0
+ip ospf message-digest-key 1 md5 MyPass
+exit
+int fa 0/1
+ip ospf message-digest-key 1 md5 MyPass
+exit
+
+router ospf 1
+area 1 authentication message-digest
+exit
+
+
+
+R2
+------------------------------------------
+conf ter
+int fa 0/0
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+int fa 0/1
+ip address 10.0.0.2 255.255.255.0
+no sh
+exit
+
+router ospf 2
+network 10.0.0.2 0.0.0.0 area 1
+network 20.0.0.2 0.0.0.0 area 1
+exit
+
+int range fa 0/0
+ip ospf message-digest-key 1 md5 MyPass
+exit
+int fa 0/1
+ip ospf message-digest-key 1 md5 MyPass
+exit
+
+router ospf 2
+area 1 authentication message-digest
+exit
+
+
+
+
+
+R3
+------------------------------------------
+conf ter
+int fa 0/0
+ip address 30.0.0.3 255.255.255.0
+no sh
+exit
+int fa 0/1
+ip address 20.0.0.3 255.255.255.0
+no sh
+exit
+
+
+router ospf 3
+network 20.0.0.3 0.0.0.0 area 1
+network 30.0.0.3 0.0.0.0 area 1
+exit
+
+int range fa 0/0
+ip ospf message-digest-key 1 md5 MyPass
+exit
+int fa 0/1
+ip ospf message-digest-key 1 md5 MyPass
+exit
+router ospf 3
+area 1 authentication message-digest
+exit
