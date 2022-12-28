@@ -1,0 +1,21 @@
+ADIM-0-
+- İstemcilere ip adresleriatanacak
+- IP telefonun güç kablosunu bağlayın
+- Konfigürasyon öncesinde her istemci birbirini pingleyebilir durumda olması gerekiyor.
+
+ ADIM-1-
+- Switchlere hostname verilecek
+- Switchlerde VLAN 10(Personel), VLAN 20(Misafir), VLAN 30(Sunucu), VLAN 40(IpTelefon) oluşturulacak
+- Switchlerde FastEthernet portlarında;
+**0-10 portları VLAN 10 
+**11-20 portları VLAN 20 
+**21-24 portları VLAN 30'a ve Access modunda atanacak.
+**** IP telefon bağlanan portlarda Voice VLAN, VLAN 40'a atanacak.
+- Switchleri birbirine bağlayan portlar (switch- switch) trunk moduna alınmalı.
+
+
+ADIM-2-
+- Konfigürasyon sonunda aynı VLAN'daki istemciler birbirlerini pingleyebilir durumda olmalılar.
+
+
+ 

@@ -1,0 +1,149 @@
+Switch Konfigürasyonu 
+
+SW1 
+---------------------------------------------------
+en
+conf ter
+hostname SW1
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+vlan 40
+name IpTelefon
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 10
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 20
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 30
+exit
+
+interface gigabitEthernet 0/1
+switchport mode trunk 
+
+end
+wr
+
+
+
+SW2 
+---------------------------------------------------
+en
+conf ter
+hostname SW2
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+vlan 40
+name IpTelefon
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 10
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 20
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 30
+exit
+
+interface range gigabitEthernet 0/1-2
+switchport mode trunk 
+
+end
+wr
+
+
+
+SW3
+---------------------------------------------------
+en
+conf ter
+hostname SW3
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+vlan 40
+name IpTelefon
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 10
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 20
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 30
+exit
+
+interface range gigabitEthernet 0/1-2
+switchport mode trunk 
+
+end
+wr
+
+
+SW4
+---------------------------------------------------
+en
+conf ter
+hostname SW4
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+vlan 40
+name IpTelefon
+
+interface range fastEthernet 0/1-10
+switchport mode access 
+switchport access vlan 10
+exit
+interface fastEthernet 0/1
+switchport access vlan 10
+switchport voice vlan 40
+exit
+interface range fastEthernet 0/11-20
+switchport mode access 
+switchport access vlan 20
+exit
+interface range fastEthernet 0/21-24
+switchport mode access 
+switchport access vlan 30
+exit
+
+interface gigabitEthernet 0/2
+switchport mode trunk 
+
+end
+wr
+
+
+
