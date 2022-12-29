@@ -1,0 +1,28 @@
+ADIM-0-
+- Switchlere hostname tanımlayın
+- Switchlerin birbirine bağlandığı portlar Trunk moduna alınmalı
+
+ADIM-1-
+- SW1 üzerinde;
+*** domain = CCNPLab.io
+*** bu konfigürasyon sonunda cihazlar domain bilgisini aldı mı? (sh vtp status)
+- SW1 mode = Server
+*** SW2, SW4 = Client moduna almalısın
+*** SW3 = Transparent  moduna almalısın
+- Her switch üzerinde parola bilgisi "CCNPLabPass" olmalı.
+*** SW3'e parola ataması yapmazsan SW4 SW1'den gelen güncellemeleri almaya devam eder mi?
+
+ADIM-2-
+- SW2 üzerinde;
+*** VLAN 10 -> name Personel oluşturabiliyor musun?
+
+- SW1 üzerinde ;
+*** VLAN 10 -> name IT
+*** VLAN 20 -> name HR
+*** VLAN 30 -> name Finance  oluşturmalısın.
+*** Oluşturulan VLAN'lar SW4 üzerinde de uygulandı mı? (sh vlan)
+- SW3 üzerinde VLAN bilgileri alınmadı. Manuel olarka tanımlaman gerekiyor.
+
+
+Topolojideki bütün switchler tanımlı VLAN bilgilerini aldıysa lab başarıyla tamamlanmış demektir.
+
