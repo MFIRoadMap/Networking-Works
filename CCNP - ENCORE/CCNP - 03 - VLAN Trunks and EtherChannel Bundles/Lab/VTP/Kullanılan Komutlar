@@ -1,0 +1,94 @@
+SW1
+----------------------------------------
+en
+conf ter
+hostname SW1
+
+int gi 0/1
+sw mode trunk
+exit
+
+
+vtp domain CCNPLab.io
+vtp version 2
+vtp mode server
+vtp password CCNPLabPass
+
+vlan 10
+name IT
+vlan 20
+name HR
+vlan 30 
+name Finance
+exit
+
+end
+wr
+
+
+
+
+
+SW2
+-----------------------------------------
+en
+conf ter
+hostname SW2
+
+int range gi 0/1-2
+sw mode trunk
+exit
+
+vtp version 2
+vtp mode client
+vtp password CCNPLabPass
+
+end 
+wr
+
+
+SW3
+------------------------------------------
+en
+conf ter
+hostname SW3
+
+int range gi 0/1-2
+sw mode trunk
+exit
+
+vtp version 2
+vtp mode transparent 
+
+vlan 10
+name IT
+vlan 20
+name HR
+vlan 30 
+name Finance
+exit
+
+end
+wr
+
+
+SW4
+------------------------------------------
+en
+conf ter
+hostname SW4
+
+int gi 0/2
+sw mode trunk
+exit
+
+vtp version 2
+vtp mode client 
+vtp password CCNPLabPass
+
+end
+wr
+
+
+
+
