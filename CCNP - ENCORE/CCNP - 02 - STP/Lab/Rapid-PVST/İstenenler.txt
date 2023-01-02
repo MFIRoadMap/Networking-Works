@@ -1,0 +1,34 @@
+ADIM -0- 
+- Switchlere hostname verin
+- Switchlerin hepsi Rapid-PVST çalışmalı
+- VLAN'lar oluşturulmalı ve bütün portlar access moduna alınmalı
+*** VLAN 10 name -> IT
+*** VLAN 20 name -> IK
+*** VLAN 30 name -> Finance
+- Switch portlarında;
+*** SW1,SW2,SW3 için 
+*** *** fa 0/1-12 VLAN 10
+*** *** fa 0/13-22 VLAN 20
+*** SW4,SW5,SW6 için 
+*** *** fa 0/1-12 VLAN 10
+*** *** fa 0/13-24 VLAN 30 atanmalı
+*** Switchlerin birbirine bağlı olduğu portlar Trunk olmalı ve gereksiz trafikler engellenmeli. (allowed VLAN)
+- STP protokolünde her VLAN için Root Bridge seçilen switchi hangisi ? 
+
+
+ADIM-1-
+- SW1-SW3 arasında iki bağlantı var. Bunlardan biri bloklanmış. Burada EtherChannel konfigürasyonu yapmalısın.
+*** Channel Group -> 2 seçilmeli
+*** Desirable modunda olmalı
+*** Trunk moduna alınmalı ve sadece VLAN 10 ve VLAN 20 trafiğine izin verilmeli.
+*** Konfigürasyon sonrası EtherChannel devrede mi kontrol etmelisin.
+
+- SW4-SW2 arasındaki portun blok durumda olması gerkeiyor. SW4 üzerinde blokl durumda olan portun VLAN 10 için Cost değerini düşürerek (3) VLAN 10 için kullanılmasını sağlamalısın.
+*** konfigürasyon sonunda VLAN 10 için işlerin yolunda olup olmadığını kontrol et.
+*** VLAN 10 için hangi port bloklandı? (SW5 gibi duruyor)
+
+- Access moduna alınan portlarda istemci bağlanacağı için (fa 0/1-22) PortFast açılmalı.
+*** Aynı zamanda bu portlarda BPDU Guard koruması da devreye alınmalı (Bunun için cihaz genelinde açman yeterli). 
+
+- Son olarak PortFast açılan portlardan birine bir switch takmayı deneyebilirsin. Portun Err_Disabled olması gerekiyor.
+*** Notlarda bulunan kontrol komutlarını deneyebilirsin. Farklı denemeler yabailirsin (Her VLAN için farklı switchlerin Root Bridge seçilmesini sağlayabilirsin, birincil ve ikincil Root Bridge seçimi yapabilirsin, Belirli portlarda Root Guard özelliğini devreye alıp farklı bir switch üzerinden düşük prioority değere sahip BPDU paketleri gönderilmesini sağlayarak portun inconsistent duruma geçtiğini görebilirsin ...). Kolay Gelsin.
