@@ -1,0 +1,48 @@
+SW1
+----------------------------------------
+en
+conf ter
+hostname SW1
+spanning-tree mode rapid-pvst
+
+
+
+
+
+
+
+
+SW2
+----------------------------------------
+en
+conf ter
+hostname SW2
+spanning-tree mode rapid-pvst
+
+
+
+
+
+
+
+
+
+
+SW3
+----------------------------------------
+en
+conf ter
+hostname SW3
+spanning-tree mode rapid-pvst
+
+
+
+
+
+
+
+
+
+
+
+
