@@ -1,0 +1,258 @@
+SW1
+--------------------------------
+en
+conf ter
+hostname SW1
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,20
+exit
+
+
+
+int range fa 0/23-24
+channel-group 2 mode desirable 
+exit
+int port-channel 2
+sw mode trunk
+sw trunk allowed vlan 10,20
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr
+
+
+SW2
+--------------------------------
+en
+conf ter
+hostname SW2
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,20
+int fa 0/24
+sw mode trunk
+sw trunk allowed vlan 10,20
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr
+
+
+
+
+SW3
+--------------------------------
+en
+conf ter
+hostname SW3
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,20
+exit
+
+
+int range fa 0/23-24
+channel-group 2 mode desirable 
+exit
+int port-channel 2
+sw mode trunk
+sw trunk allowed vlan 10,20
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr
+
+
+
+SW4
+--------------------------------
+en
+conf ter
+hostname SW4
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,30
+exit
+
+int gi 0/2
+spanning-tree vlan 10 cost 3
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr
+
+
+
+SW5
+--------------------------------
+en
+conf ter
+hostname SW5
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,30
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr
+
+
+
+SW6
+--------------------------------
+en
+conf ter
+hostname SW6
+
+spanning-tree mode rapid-pvst 
+
+vlan 10
+name IT
+vlan 20
+name IK
+vlan 30
+name Finance
+exit
+
+int range fa 0/1-24
+sw mode access
+int range gi 0/1-2
+sw mode access
+int range fa 0/1-12
+sw access vlan 10
+int range fa 0/13-22
+sw access vlan 20
+int range gi 0/1-2
+sw mode trunk
+sw trunk allowed vlan 10,30
+exit
+
+int range fa 0/1-22
+spanning-tree portfast 
+exit
+spanning-tree portfast bpduguard default
+
+end
+wr

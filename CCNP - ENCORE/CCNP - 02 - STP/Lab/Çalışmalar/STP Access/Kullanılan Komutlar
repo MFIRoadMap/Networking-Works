@@ -1,0 +1,63 @@
+SW1
+---------------------------------------------
+en 
+conf ter
+hostname SW1
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+exit
+
+int fa 0/1
+sw mode access
+sw access vlan 10
+exit
+int fa 0/2
+sw mode access
+sw access vlan 20
+exit
+
+end
+wr
+
+
+
+
+
+SW2
+--------------------------------------------
+en 
+conf ter
+hostname SW2
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+exit
+
+int fa 0/1
+sw mode access
+sw access vlan 10
+exit
+int fa 0/2
+sw mode access
+sw access vlan 20
+exit
+
+end
+wr
+
+
+
+
+
+
+
+
+
+
+
+
