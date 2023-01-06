@@ -1,0 +1,50 @@
+Jan 06 18:46:59.498 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Jan 06 18:46:59.498 HYPERVISOR: Started on IP = localhost, TCP port = 53323.
+Jan 06 18:46:59.844 HYPERVISOR: exec_cmd: hypervisor version 
+Jan 06 18:46:59.845 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\VM-User\Desktop\Networking\CCNP\CCNP - 04 - IP Routing Essentials\Lab\Çalışma\VRF\VRF\project-files\dynamips 
+Jan 06 18:46:59.854 GENERAL: working_dir=C:\Users\VM-User\Desktop\Networking\CCNP\CCNP - 04 - IP Routing Essentials\Lab\Çalışma\VRF\VRF\project-files\dynamips
+Jan 06 18:46:59.854 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\VM-User\Desktop\Networking\CCNP\CCNP - 04 - IP Routing Essentials\Lab\Çalışma\VRF\VRF\project-files\dynamips\c3c52525-f56f-4cab-ab21-129acf87968c 
+Jan 06 18:46:59.856 GENERAL: working_dir=C:\Users\VM-User\Desktop\Networking\CCNP\CCNP - 04 - IP Routing Essentials\Lab\Çalışma\VRF\VRF\project-files\dynamips\c3c52525-f56f-4cab-ab21-129acf87968c
+Jan 06 18:46:59.856 HYPERVISOR: exec_cmd: vm create R2 2 c7200 
+Jan 06 18:46:59.857 VM: VM R2 created.
+Jan 06 18:46:59.857 HYPERVISOR: exec_cmd: vm set_con_tcp_port R2 5001 
+Jan 06 18:46:59.857 HYPERVISOR: exec_cmd: c7200 get_mac_addr R2 
+Jan 06 18:46:59.857 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:46:59.857 HYPERVISOR: exec_cmd: vm slot_add_binding R2 0 0 C7200-IO-FE 
+Jan 06 18:46:59.858 HYPERVISOR: exec_cmd: vm set_disk0 R2 0 
+Jan 06 18:46:59.858 HYPERVISOR: exec_cmd: vm set_exec_area R2 64 
+Jan 06 18:46:59.858 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:46:59.858 HYPERVISOR: exec_cmd: vm set_idle_pc R2 0x62cc90e4 
+Jan 06 18:46:59.859 HYPERVISOR: exec_cmd: vm set_ios R2 C:/Users/VM-User/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Jan 06 18:46:59.859 HYPERVISOR: exec_cmd: c7200 set_mac_addr R2 ca02.023c.0000 
+Jan 06 18:46:59.860 HYPERVISOR: exec_cmd: vm set_nvram R2 512 
+Jan 06 18:46:59.860 HYPERVISOR: exec_cmd: vm set_ram R2 512 
+Jan 06 18:46:59.860 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:46:59.860 HYPERVISOR: exec_cmd: vm slot_remove_binding R2 0 0 
+Jan 06 18:46:59.861 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:46:59.861 HYPERVISOR: exec_cmd: vm slot_add_binding R2 0 0 C7200-IO-2FE 
+Jan 06 18:47:00.800 HYPERVISOR: exec_cmd: nio create_udp udp-737cdf90-0aa8-4bc1-bea8-3d233f2bae0c 10004 127.0.0.1 10005 
+Jan 06 18:47:01.038 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 0 0 udp-737cdf90-0aa8-4bc1-bea8-3d233f2bae0c 
+Jan 06 18:47:01.038 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:47:01.081 HYPERVISOR: exec_cmd: nio create_udp udp-0b31728e-57db-44a6-8549-01eff0bc2633 10008 127.0.0.1 10009 
+Jan 06 18:47:01.082 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 0 1 udp-0b31728e-57db-44a6-8549-01eff0bc2633 
+Jan 06 18:47:01.082 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:47:07.198 HYPERVISOR: exec_cmd: vm set_ghost_status R2 2 
+Jan 06 18:47:07.199 HYPERVISOR: exec_cmd: vm set_ghost_file R2 C:\Users\VM-User\Desktop\Networking\CCNP\CCNP - 04 - IP Routing Essentials\Lab\Çalışma\VRF\VRF\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Jan 06 18:47:07.199 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:47:07.199 HYPERVISOR: exec_cmd: vm set_config R2 configs\i2_startup-config.cfg 
+Jan 06 18:47:07.200 HYPERVISOR: exec_cmd: vm start R2 
+Jan 06 18:47:37.496 HYPERVISOR: exec_cmd: vm extract_config R2 
+Jan 06 18:48:32.969 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:48:32.970 HYPERVISOR: exec_cmd: vm stop R2 
+Jan 06 18:48:33.117 VM: VM R2 shutdown.
+Jan 06 18:48:33.117 HYPERVISOR: exec_cmd: vm extract_config R2 
+Jan 06 18:48:35.668 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:48:35.669 HYPERVISOR: exec_cmd: vm extract_config R2 
+Jan 06 18:48:35.908 HYPERVISOR: exec_cmd: vm get_status R2 
+Jan 06 18:48:35.908 HYPERVISOR: exec_cmd: vm extract_config R2 
+Jan 06 18:48:35.910 HYPERVISOR: exec_cmd: vm delete R2 
+Jan 06 18:48:35.910 VM: VM R2 destroyed.
+Jan 06 18:48:35.912 HYPERVISOR: exec_cmd: hypervisor stop 
+Jan 06 18:48:36.418 HYPERVISOR: Stopped.
+Jan 06 18:48:36.418 GENERAL: reset done.
