@@ -1,0 +1,100 @@
+SW1
+--------------------------------------------
+en
+conf ter
+hostname SW1
+do wr
+
+
+
+SW2
+--------------------------------------------
+en
+conf ter
+hostname SW2
+do wr
+
+
+
+SW3
+--------------------------------------------
+en
+conf ter
+hostname SW3
+do wr
+
+
+R1
+------------------------------------------
+en
+conf ter
+hostname R1
+
+interface gigabitEthernet 0/2
+ip address 192.168.1.1 255.255.255.0
+no sh
+int gi 0/0
+ip address 20.0.0.1 255.255.255.0
+no sh
+int gi 0/1
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+
+ip route 192.168.2.0 255.255.255.0 10.0.0.2
+ip route 192.168.3.0 255.255.255.0 20.0.0.3
+
+do wr
+
+
+R2
+------------------------------------------
+en
+conf ter
+hostname R2
+
+interface gigabitEthernet 0/2
+ip address 192.168.2.1 255.255.255.0
+no sh
+int gi 0/0
+ip address 10.0.0.2 255.255.255.0
+no sh
+int gi 0/1
+ip address 30.0.0.2 255.255.255.0
+no sh
+exit
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.3.0 255.255.255.0 30.0.0.3
+
+ip route 192.168.3.0 255.255.255.0 10.0.0.1
+
+no ip route 192.168.1.0 255.255.255.0 10.0.0.1
+ip route 192.168.1.0 255.255.255.0 10.0.0.1 5
+
+ip route 192.168.3.5 255.255.255.255 Null 0
+
+do wr
+
+
+R3
+------------------------------------------
+en
+conf ter
+hostname R3
+
+interface gigabitEthernet 0/2
+ip address 192.168.3.1 255.255.255.0
+no sh
+int gi 0/0
+ip address 30.0.0.3 255.255.255.0
+no sh
+int gi 0/1
+ip address 20.0.0.3 255.255.255.0
+no sh
+exit
+
+ip route 192.168.1.0 255.255.255.0 20.0.0.1
+ip route 192.168.2.0 255.255.255.0 30.0.0.2
+
+do wr

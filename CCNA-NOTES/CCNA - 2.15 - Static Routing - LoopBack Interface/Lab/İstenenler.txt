@@ -1,0 +1,22 @@
+ADIM-0-
+- İstemcilere ip adreslerini atayın
+- Router ve swithclere hostname verin
+- Router arayüzlerine ip adreslerini tanımlayın ve portları kullanıma açın.
+*** Ip adreslerin tanımlandıktan sonra gateway adreslerine ping atarak kontrol edin
+*** Yönlendirme tablolarını kontrol edin
+
+ADIM-1-
+- Her routerda her rota erişimi için statik rota tanımı yapılmalı
+*** Unutma tam erişim sağlamak için yönlendiricilrin yönlendirme tablosunda topolojide bulunan network sayısı kadar satır bulunmalı
+- Statik rota tanımına ek olarak 2.0 networkünden 3.0 networküne alternatif rota olarak 10.0.0.0/24 - 20.0.0.0/24 üzerinden de rota tanımı yapılmalı.
+(NOT !!! - Dönüş paketleri için de statik rota tanımlamayı unutma)
+- 2.0 netwokründeki bir istemciden ping atıldığında paket nereden gönderiliyor?
+*** Alt alta görünen rota tanımları mı var yoksa? (3.0 netowkrü için load balance mı yapılıyor?)
+- 2.0 networkünden 1.0 networküne bağlı rotanın (10.0.0.0/24) Serial bağlı olduğunu varsayalım. 
+*** Bu durum bağlantı hızını düşürecektir. Bu nedenle 2.0 networkünden 30.0.0.0/24 - 20.0.0.0/24 üzerinden bağlı rotaya öncelik verilmesini sağla. 
+*** *** Bunun için 2.0 networkünden 1.0'a olan bağlantısının önceliğini düşürebilirsin
+*** *** Tanımlama sonrası önceliğini düşürdüğün rota tanımı yönlendirme tablosunda görünmüyor. Görebilmek için R2-R3 arası kablonun bağlantısını kesip öyle yönlendirme tablosunu incele veya "sh run" komutunu kullanabilirsin.
+ADIM-2-
+- R2-R3 arası bağlantıyı kesin. Yedek hat devreye giriyor mu? Bağlantı devam ediyor mu? 
+- 2.0 networkünden 192.168.3.5 ip adresine giden paketlerin drop edilmesi/engellenmesi isteniyor.
+*** Routerlarda 3.5 istemcisine giden trafikleri NULL 0 arayüzüne gönder.
