@@ -1,0 +1,139 @@
+SW1-2
+--------------------------------------------------------------------------
+en
+conf ter
+hostname SW1
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+exit
+
+int range fa 0/1-10
+switchport mode access
+switchport access vlan 10
+exit
+int range fa 0/11-20
+switchport mode access
+switchport access vlan 20
+exit
+int range fa 0/21-24
+switchport mode access
+switchport access vlan 30
+exit
+
+int gi 0/1
+switchport mode trunk 
+exit
+
+end 
+wr
+
+
+
+L3SW1
+-----------------------------------------------------------------
+en
+conf ter
+hostname L3SW1
+
+vlan 10
+name Personel
+vlan 20
+name Misafir
+vlan 30
+name Sunucu
+exit
+
+int vlan 10
+ip address 192.168.10.1 255.255.255.0
+no sh
+exit
+int vlan 20
+ip address 192.168.20.1 255.255.255.0
+no sh
+exit
+int vlan 30
+ip address 192.168.30.1 255.255.255.0
+no sh
+exit
+
+ip routing
+
+int gi 1/0/24
+no switchport
+ip address 10.0.0.2 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+exit
+
+access-list 50 permit 192.169.10.0 0.0.0.255 
+int vlan 30
+ip access-group 50 out
+exit
+
+end 
+wr
+
+
+
+R1
+-----------------------------------------------------------------
+en
+conf ter
+hostname R1
+enable secret labgen
+
+int gi 0/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+int gi 0/1
+ip address 20.0.0.1 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+ip route 192.168.40.0 255.255.255.0 20.0.0.2
+
+ip domain-name lab.com
+crypto key generate rsa
+username labgen password labgen
+line vty 0 15
+transport input ssh
+login local
+exit
+
+access-list 10 permit 192.168.10.0 0.0.0.255
+line vty 0 15
+access-class 10 in
+exit
+
+end 
+wr
+
+
+
+R2
+---------------------------------------------------------------
+en
+conf ter
+hostname R2
+
+int gi 0/1 
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+int gi 0/0
+ip address 192.168.40.1 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 20.0.0.1
+
+end 
+wr

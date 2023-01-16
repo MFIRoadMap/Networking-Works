@@ -1,0 +1,7 @@
+Sunucuta sadece 192.168.10.0/24 networkü ssh ile bağlanabilmesi isteniyor. Gerekli konfigürasyonu gerçekleştirin
+- Router arayüzlerien ve istemcilere ip adreslerini ata
+- R2'de SSH konf. yap ve istemcileri kullanarak bağlanmaya çalış.
+*** R2 192.168.10.0/24 ve 192.168.30.0/24 networklerini tanımıyor. Statik rota tanımlayabilirsin
+- R1'de Extended ACL tanımı yap
+*** Unutma sunucu SSH dışında hizmet veriyor (imlicit deny kalan trafiği engeller). Bunun için iki satır daha eklemelisin.
+- PC1 ve PC2'den SSH kuruluyor mu? kontrol et
