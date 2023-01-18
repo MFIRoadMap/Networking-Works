@@ -1,0 +1,123 @@
+ISP Router
+--------------------------------
+en
+conf ter
+hostname ISPRouter
+
+int gi 0/0
+ip address 10.0.0.100 255.255.255.0
+no sh
+exit
+
+ip route 172.16.0.0 255.255.0.0 10.0.0.1 
+
+end
+wr
+
+
+
+R1
+---------------------------------
+en
+conf ter
+hostname R1
+
+int gi 0/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+
+int gi 0/1
+ip address 20.0.0.1 255.255.255.0
+no sh
+exit
+
+int gi 0/2
+ip address 30.0.0.1 255.255.255.0
+no sh
+exit
+
+ip route 172.16.20.0 255.255.255.0 20.0.0.2
+ip route 172.16.30.0 255.255.255.0 30.0.0.3
+ip route 0.0.0.0 0.0.0.0 10.0.0.100
+
+end
+wr
+
+
+
+R2
+---------------------------------
+en
+conf ter
+hostname R2
+
+int gi 0/0
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+
+int gi 0/1
+ip address 172.16.20.1 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 20.0.0.1
+
+end
+wr
+
+
+
+R3
+---------------------------------
+en
+conf ter
+hostname R3
+
+int gi 0/0
+ip address 30.0.0.3 255.255.255.0
+no sh
+exit
+
+int gi 0/1
+ip address 172.16.30.1 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 30.0.0.1
+
+end 
+wr
+
+
+
+
+Konfigürasyon sonunda Packet Ttracert uygulamasını similasyon moduna alarak ISPRouter üzerinden 172.16.50.5 adresine ping atıp gözlem yapabilirsin (Paket ISPRouter'a geri dönünce Drop ediliyor ama bu PT üzerinde böyle. Normalde Loop oluşuyor. Bunu döne paket içerisindeki Dest Ip Address kısmına bakara anlayabilirsin). 
+Gözlem sonrasında  R1 üzerinde kullanılmayan network aralıkları için null 0 arayüzüne yönlendirilmesini sağlayan komutu ekleyebilirsin.
+"ip route 172.16.0.0 255.255.0.0 null 0" gibi.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
