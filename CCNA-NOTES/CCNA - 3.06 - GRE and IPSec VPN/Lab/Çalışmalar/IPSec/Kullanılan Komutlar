@@ -1,0 +1,136 @@
+// Konfigürasyon öncesi securityk9 özelliğinin açılması için her cihazda "license boot module c1900 technology-package securityk9" komutu kullanılıyor. Ardından "wr" komutuyla kaydeilip "do reload " komutuyla yenide başlatılması gerekiyor.
+
+R1
+--------------------------------------------
+en
+conf ter
+hostname R1
+
+license boot module c2900 technology-package securityk9
+y
+do wr
+do reload
+y
+
+en
+conf ter
+int s 0/3/0
+ip address 10.0.0.1 255.255.255.0
+no shutdown
+int gigabitEthernet 0/0
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+
+
+crypto isakmp policy 11
+encryption aes
+hash sha 
+authentication pre-share 
+group 2
+lifetime 8640
+crypto isakmp key MyPass address 20.0.0.3
+exit
+
+crypto ipsec transform-set TS1 esp-aes esp-sha-hmac
+
+
+access-list 110 permit ip 192.168.1.0 0.0.0.255 192.168.2.0 0.0.0.255 
+
+crypto map CM1 11 ipsec-isakmp 
+set peer 20.0.0.3
+set transform-set TS1
+match address 110
+exit
+
+int s 0/3/0
+crypto map CM1
+exit
+
+
+
+
+
+
+R2
+--------------------------------------------
+en
+conf ter
+hostname R2
+
+license boot module c2900 technology-package securityk9
+y
+do wr
+do reload
+y
+
+en
+conf ter
+int s 0/3/0
+ip address 10.0.0.2 255.255.255.0
+no shutdown
+int s 0/3/1
+ip address 20.0.0.2 255.255.255.0
+no shutdown
+exit
+
+
+
+
+
+R3
+--------------------------------------------
+en
+conf ter
+hostname R3
+
+license boot module c2900 technology-package securityk9
+y
+do wr
+do reload
+y
+
+en
+conf ter
+int s 0/3/1
+ip address 20.0.0.3 255.255.255.0
+no shutdown
+exit
+interface gigabitEthernet 0/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 20.0.0.2
+
+
+crypto isakmp policy 11
+encryption aes
+hash sha 
+authentication pre-share 
+group 2
+lifetime 8640
+crypto isakmp key MyPass address 10.0.0.1
+exit
+
+crypto ipsec transform-set TS1 esp-aes esp-sha-hmac
+
+access-list 110 permit ip 192.168.2.0 0.0.0.255  192.168.1.0 0.0.0.255 
+
+crypto map CM1 11 ipsec-isakmp 
+set peer 10.0.0.1
+set transform-set TS1
+match address 110
+exit
+
+int s 0/3/1
+crypto map CM1
+exit
+
+
+
+
+
+
+//İstemcilere ip bilgilerini vaermeyi unutma
+

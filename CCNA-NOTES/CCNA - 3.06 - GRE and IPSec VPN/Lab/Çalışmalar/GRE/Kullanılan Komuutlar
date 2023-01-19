@@ -1,0 +1,68 @@
+
+R1
+--------------------------------------------
+en
+conf ter
+hostname R1
+
+int gigabitEthernet 0/0
+ip address 10.0.0.1 255.255.255.0
+no shutdown
+int gigabitEthernet 0/2
+ip address 192.168.1.1 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.0.0.2
+
+interface tunnel 0 
+ip address 192.168.3.1 255.255.255.0 
+tunnel source gi 0/0
+tunnel destination 20.0.0.3
+tunnel mode gre ip 
+exit
+ip route 192.168.2.0 255.255.255.0 192.168.3.3
+
+
+R2
+--------------------------------------------
+en
+conf ter
+hostname R2
+
+interface gigabitEthernet 0/0
+ip address 10.0.0.2 255.255.255.0
+no shutdown
+exit
+interface gigabitEthernet 0/1
+ip address 20.0.0.2 255.255.255.0
+no shutdown
+
+
+
+R3
+--------------------------------------------
+en
+conf ter
+hostname R3
+
+interface gigabitEthernet 0/1
+ip address 20.0.0.3 255.255.255.0
+no shutdown
+exit
+interface gigabitEthernet 0/2
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 20.0.0.2
+
+interface tunnel 0 
+ip address 192.168.3.3 255.255.255.0
+tunnel mode gre ip
+tunnel source gi 0/1
+tunnel destination 10.0.0.1
+exit
+ip route 192.168.1.0 255.255.255.0 192.168.3.1
+
+
+
+//İstemcilere ip bilgilerini vaermeyi unutma
