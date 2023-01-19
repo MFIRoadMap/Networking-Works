@@ -1,0 +1,199 @@
+R1
+-----------------------------------
+en
+conf ter
+
+ipv6 unicast-routing
+
+int fa 0/0
+ipv6 address 2001:db8:acad:10::1/64
+no sh
+exit
+int loopback 0
+ipv6 address 2001:db8:acad:1111::1/64
+no sh
+exit
+
+router ospfv3 10
+router-id 1.1.1.1
+exit
+int fa 0/0
+ospfv3 10 ipv6 area 1
+exit
+int loopback 0
+ospfv3 10 ipv6 area 1
+exit
+
+
+R2
+-----------------------------------
+en
+conf ter
+
+ipv6 unicast-routing
+
+int fa 0/0
+ipv6 address 2001:db8:acad:10::2/64
+no sh
+exit
+int loopback 0
+ipv6 address 2001:db8:acad:2222::2/64
+no sh
+exit
+
+router ospfv3 10
+router-id 2.2.2.2
+exit
+int fa 0/0
+ospfv3 10 ipv6 area 1
+exit
+int loopback 0
+ospfv3 10 ipv6 area 1
+exit
+
+
+
+R3
+-----------------------------------
+en
+conf ter
+
+ipv6 unicast-routing
+
+int fa 0/0
+ipv6 address 2001:db8:acad:10::3/64
+no sh
+exit
+int fa 0/1
+ipv6 address 2001:db8:acad:20::3/64
+no sh
+exit
+int loopback 0
+ipv6 address 2001:db8:acad:3333::3/64
+no sh
+exit
+
+router ospfv3 10
+router-id 3.3.3.3
+exit
+int fa 0/0
+ospfv3 10 ipv6 area 1
+exit
+int fa 0/1
+ospfv3 10 ipv6 area 1
+exit
+int loopback 0
+ospfv3 10 ipv6 area 1
+exit
+
+
+R4
+-----------------------------------
+en
+conf ter
+
+ipv6 unicast-routing
+
+int fa 0/0
+ipv6 address 2001:db8:acad:30::4/64
+no sh
+exit
+int fa 0/1
+ipv6 address 2001:db8:acad:20::4/64
+no sh
+exit
+int loopback 0
+ipv6 address 2001:db8:acad:4444::4/64
+no sh
+exit
+
+router ospfv3 10
+router-id 4.4.4.4
+exit
+int fa 0/0
+ospfv3 10 ipv6 area 1
+exit
+int fa 0/1
+ospfv3 10 ipv6 area 1
+exit
+int loopback 0
+ospfv3 10 ipv6 area 1
+exit
+
+
+
+R5
+-----------------------------------
+en
+conf ter
+
+ipv6 unicast-routing
+
+int fa 0/0
+ipv6 address 2001:db8:acad:30::5/64
+no sh
+exit
+int loopback 0
+ipv6 address 2001:db8:acad:5555::5/64
+no sh
+exit
+
+router ospfv3 10
+router-id 5.5.5.5
+exit
+int fa 0/1
+ospfv3 10 ipv6 area 1
+exit
+int loopback 0
+ospfv3 10 ipv6 area 1
+exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

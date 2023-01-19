@@ -1,0 +1,129 @@
+R1
+-------------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+int loopback 0
+ip address 1.0.0.1 255.255.255.0
+exit
+
+router ospf 10
+network 0.0.0.0 255.255.255.255 area 1
+exit
+
+end
+wr
+
+
+R2
+-------------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 10.0.0.2 255.255.255.0
+no sh
+exit
+int loopback 0
+ip address 2.0.0.2 255.255.255.0
+exit
+
+router ospf 10
+network 0.0.0.0 255.255.255.255 area 1
+exit
+
+end 
+wr
+
+
+R3
+-------------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 10.0.0.3 255.255.255.0
+no sh
+exit
+int fa 0/1
+ip address 20.0.0.3 255.255.255.0
+no sh
+exit
+int loopback 0
+ip address 3.0.0.3 255.255.255.0
+exit
+
+router ospf 10
+network 0.0.0.0 255.255.255.255 area 1
+exit
+
+end 
+wr
+
+
+
+R4
+-------------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 30.0.0.4 255.255.255.0
+no sh
+exit
+int fa 0/1
+ip address 20.0.0.4 255.255.255.0
+no sh
+exit
+int loopback 0
+ip address 4.0.0.4 255.255.255.0
+exit
+
+router ospf 10
+network 20.0.0.4 0.0.0.255 area 1
+network 30.0.0.4 0.0.0.255 area 0
+network 4.0.0.4 0.0.0.255 area 1
+exit
+
+ip prefix-list BlockNet seq 10 deny 1.0.0.1/32
+ip prefix-list BlockNet seq 11 deny 2.0.0.2/32
+ip prefix-list BlockNet seq 20 permit 0.0.0.0/0 le 32
+
+router ospf 10
+area 0 filter-list prefix BlockNet in
+exit
+
+end 
+wr
+
+//Hem Area 1'e balan hem de Area 0'a bakan arayüzlerde kullanıla networkler tek bir proses altında çalıştırıldı.
+//Area 0'a geçişlerde öğretilen networkler için filter yazıldı
+////Area1'de bulunan networkler Area 0'a giriş yaparken uygulanması sağlandı (yani Area 0 için yazılıyor, yönü de Area 0'a göre belirleniyor)
+////Benzer şekilde prefix-list Area 1'e çılış yönünde de uygulanabilirdi. Yine sorunsuz çalışırdı.
+
+
+
+
+R5
+-------------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 30.0.0.5 255.255.255.0
+no sh
+exit
+int loopback 0
+ip address 5.0.0.5 255.255.255.0
+exit
+
+router ospf 10
+network 0.0.0.0 255.255.255.255 area 0
+exit
+
+end 
+wr
