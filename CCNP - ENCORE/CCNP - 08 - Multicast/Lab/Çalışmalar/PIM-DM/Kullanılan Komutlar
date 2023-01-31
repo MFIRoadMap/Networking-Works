@@ -1,0 +1,95 @@
+R1
+----------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 10.0.0.1 255.255.255.0
+no sh 
+int fa 0/1
+ip address 20.0.0.1 255.255.255.0
+no sh 
+exit
+
+router ospf 10
+network 10.0.0.1 0.0.0.255 area 1
+network 20.0.0.1 0.0.0.255 area 1
+exit
+
+ip multicast-routing
+int fa 0/0
+ip pim dense-mode
+int fa 0/1
+ip pim dense-mode
+exit
+
+
+
+
+R2
+----------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 10.0.0.2 255.255.255.0
+no sh 
+int fa 0/1
+ip address 30.0.0.2 255.255.255.0
+no sh 
+exit
+
+router ospf 10
+network 10.0.0.2 0.0.0.255 area 1
+network 30.0.0.2 0.0.0.255 area 1
+exit
+
+ip multicast-routing
+int fa 0/0
+ip pim dense-mode
+int fa 0/1
+ip pim dense-mode
+exit
+
+
+
+
+
+
+
+R3
+----------------------------------
+en
+conf ter
+
+int fa 0/0
+ip address 30.0.0.3 255.255.255.0
+no sh 
+int fa 0/1
+ip address 20.0.0.3 255.255.255.0
+no sh 
+exit
+
+router ospf 10
+network 20.0.0.3 0.0.0.255 area 1
+network 30.0.0.3 0.0.0.255 area 1
+exit
+
+ip multicast-routing
+int fa 0/0
+ip pim dense-mode
+int fa 0/1
+ip pim dense-mode
+exit
+
+
+
+
+
+
+
+
+
+
+
+
