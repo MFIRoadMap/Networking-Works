@@ -6,7 +6,7 @@
 * Cisco CCNP ENARSI Works
 
 
-## Okuma Listesi
+## Okunacaklar Listesi
 * [Gökhan Akın](http://www.gokhanakin.net/)
 
 ## İzlenecekler Listesi
