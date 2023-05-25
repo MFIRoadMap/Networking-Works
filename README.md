@@ -8,3 +8,7 @@
 
 ## Okuma Listesi
 * [Gökhan Akın](http://www.gokhanakin.net/)
+
+## İzlenecekler Listesi
+* [Kevin Wallace](https://www.youtube.com/@kwallaceccie)
+* [Dat Huynh](https://www.youtube.com/@dathuynh5949)
