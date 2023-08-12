@@ -1,0 +1,184 @@
+!!DİKKAT!!
+Bu labaratuvarda normalde bağlantı koparıldığında line-protocol down olması gerekiyor ama GNS3 kaynaklı olduğunu düşünüorum port down olmuyor. Bu nedenle çalşığ çalışmadığını görebilmek için R1 ve R2'nin R3'e bağlanan portunun arayüzüne girip "sh" komutu çalıştırılarak Priority değerinin değiştiği görülebilir.
+
+
+
+R1
+--------------------------------------------------------
+en
+conf ter
+hostname R1
+
+int fa 0/0
+ip address 192.168.1.10 255.255.255.0
+no sh
+int fa 1/0
+ip address 10.0.10.1 255.255.255.0
+no sh
+
+router ospf 10
+network 10.0.10.1 0.0.0.0 area 5
+network 192.168.1.0 0.0.0.255 area 5
+exit
+
+
+int fa0/0
+standby version 1
+standby 1 ip 192.168.1.1
+standby 1 preempt
+exit
+
+
+track 1 int fa 1/0 line-protocol
+exit
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
+
+
+
+
+
+
+
+
+
+
+
+R2
+----------------------------------------------------------
+en
+conf ter
+hostname R2
+
+int fa 0/0
+ip address 192.168.1.20 255.255.255.0
+no sh
+int fa 1/1
+ip address 10.0.20.2 255.255.255.0
+no sh
+
+router ospf 10
+network 10.0.20.2 0.0.0.0 area 5
+network 192.168.1.0 0.0.0.255 area 5
+exit
+
+int fa0/0
+standby version 1
+standby 1 preempt
+standby 1 ip 192.168.1.1
+exit
+
+
+track 1 int fa 1/1 line-protocol
+exit
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
+
+
+
+
+
+
+
+R3
+----------------------------------------------------------
+en
+conf ter
+hostname R3
+
+int fa 0/0
+ip address 192.168.2.1 255.255.255.0
+no sh
+int fa 1/0
+ip address 10.0.10.3 255.255.255.0
+no sh
+int fa 1/1
+ip address 10.0.20.3 255.255.255.0
+no sh
+
+router ospf 10
+network 10.0.20.3 0.0.0.0 area 5
+network 10.0.10.3 0.0.0.0 area 5
+network 192.168.2.0 0.0.0.255 area 5
+exit
+
+
+
+
+VPC1
+------------------------------------------------
+ip 192.168.1.5/24 192.168.1.1
+
+
+
+VPC2
+------------------------------------------------
+ip 192.168.2.5/24 192.168.2.1
+
+
+
+Track ile arayüzün bağlantı durumunu takip ettirmek yerine herhangi bir ip adresi de takip ettirilebiliyor ama GNS3 üzerinde çalıştıramadım. Konfigürasyonlar yaklaşık olarak aşağıdakine benzer olması gerekiyor (Çalıştıramadığım için emin olamıyorum). 
+
+
+R1
+---------------------------------
+track 1 ip route 10.0.10.3 255.255.255.0 reachability
+exit
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
+
+
+
+R2
+---------------------------------
+track 1 ip route 10.0.20.3 255.255.255.0 reachability
+exit
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
+
+
+
+*** NOT ***
+İp route 192.168.2.0 255.255.255.0 fastEthernet 1/1 10.0.20.3 gibi statik rota tanımı yapılması durumunda tanımlı rota sürekli tönlendirme tablosunda tanımlı olacağı için reachibility değer isürekli up görünecek ve Priority değeri düşürülmeyecektir.
+
+Track komutunda routerun nex hop ip adresi tanımlanıyor. 
+
+"no track <>Track number>" komutuyla tanımlanan track'lar kaldırılabiliyor 
+
+
+
+
+
+
+
+
+
+
+
+Anladığım kadarıyşa ping gönderilmesi sağlanarak da bağlantı kontrolü sağlanabiliyor
+
+no ip sla 1
+icmp-echo 10.0.10.3 source-interface FastEthernet1/0
+
+track 1 ip sla 1 reachability
+
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
+
+
+
+
+
+ip sla 1
+icmp-echo 10.0.20.3 source-interface FastEthernet1/1
+
+track 1 ip sla 1 reachability
+
+int fa 0/0 
+standby 1 track 1 decrement 30
+exit
