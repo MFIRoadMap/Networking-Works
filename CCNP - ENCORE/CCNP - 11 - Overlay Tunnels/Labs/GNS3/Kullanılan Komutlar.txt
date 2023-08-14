@@ -1,0 +1,246 @@
+VPC1
+-----------------------------------------------------
+ip 192.168.1.5/24 192.168.1.1
+
+
+
+VPC2
+-----------------------------------------------------
+ip 192.168.4.5/24 192.168.4.1
+
+
+
+VPC3
+-----------------------------------------------------
+ip 192.168.5.5/24 192.168.5.1
+
+
+
+
+
+R1
+-----------------------------------------------------
+en
+conf ter
+hostname R1
+
+int fa 0/0 
+ip address 192.168.1.1 255.255.255.0
+no sh
+int fa 1/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+
+router ospf 1
+network 10.0.0.1 0.0.0.0 area 5
+exit
+
+
+
+
+crypto isakmp policy 4
+authentication pre-share
+encryption aes 128
+group 2
+hash sha256
+exit
+crypto isakmp key 0 MyPass1 address 30.0.0.4
+
+crypto ipsec transform-set TS1 esp-aes esp-sha-hmac
+mode tunnel
+exit
+access-list 102 permit ip 192.168.1.0 0.0.0.255 192.168.4.0 0.0.0.255
+crypto map CM1 10 ipsec-isakmp
+match address 102
+set transform-set TS1
+set peer 30.0.0.4
+exit
+
+int fa 1/0
+crypto map CM1 
+exit
+
+ip route 192.168.4.0 255.255.255.0 30.0.0.4
+
+
+
+crypto isakmp key 0 MyPass2 address 40.0.0.5
+
+access-list 104 permit ip 192.168.1.0 0.0.0.255 192.168.5.0 0.0.0.255
+
+crypto map CM1 20 ipsec-isakmp
+match address 104
+set transform-set TS1
+set peer 40.0.0.5
+exit
+
+ip route 192.168.5.0 255.255.255.0 40.0.0.5
+
+
+
+
+
+
+
+R2
+-----------------------------------------------------
+en
+conf ter
+hostname R2
+
+int fa 1/0
+ip address 10.0.0.2 255.255.255.0
+no sh
+int fa 1/1
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+
+router ospf 1
+network 10.0.0.2 0.0.0.0 area 5
+network 20.0.0.2 0.0.0.0 area 5
+exit
+
+
+R3
+-----------------------------------------------------
+en
+conf ter
+hostname R3
+
+int fa 1/1
+ip address 20.0.0.3 255.255.255.0
+no sh
+int fa 2/0
+ip address 30.0.0.3 255.255.255.0
+no sh
+int fa 2/1
+ip address 40.0.0.3 255.255.255.0
+no sh
+exit
+
+router ospf 1
+network 20.0.0.3 0.0.0.0 area 5
+network 40.0.0.3 0.0.0.0 area 5
+network 30.0.0.3 0.0.0.0 area 5
+exit
+
+
+
+R4
+-----------------------------------------------------
+en
+conf ter
+hostname R4
+
+int fa 0/0
+ip address 192.168.4.1 255.255.255.0
+no sh
+int fa 2/0
+ip address 30.0.0.4 255.255.255.0
+no sh
+exit 
+
+router ospf 1
+network 30.0.0.4 0.0.0.0 area 5
+exit
+
+
+crypto isakmp policy 4
+authentication pre-share
+encryption aes 128
+group 2
+hash sha256
+exit
+crypto isakmp key 0 MyPass1 address 10.0.0.1
+
+crypto ipsec transform-set TS1 esp-aes esp-sha-hmac
+mode tunnel
+exit
+access-list 102 permit ip 192.168.4.0 0.0.0.255 192.168.1.0 0.0.0.255
+crypto map CM1 10 ipsec-isakmp
+match address 102
+set transform-set TS1
+set peer 10.0.0.1
+exit
+
+int fa 2/0
+crypto map CM1 
+exit
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+
+
+
+R5
+-----------------------------------------------------
+en
+conf ter
+hostname R5
+
+int fa 0/0
+ip address 192.168.5.1 255.255.255.0
+no sh
+int fa 2/1
+ip address 40.0.0.5 255.255.255.0
+no sh
+exit
+
+router ospf 1
+network 40.0.0.5 0.0.0.0 area 5
+exit
+
+
+
+crypto isakmp policy 5
+authentication pre-share
+encryption aes 128
+group 2
+hash sha256
+exit
+crypto isakmp key 0 MyPass2 address 10.0.0.1
+
+crypto ipsec transform-set TS1 esp-aes esp-sha-hmac
+mode tunnel
+exit
+access-list 102 permit ip 192.168.5.0 0.0.0.255 192.168.1.0 0.0.0.255
+crypto map CM1 10 ipsec-isakmp
+match address 102
+set transform-set TS1
+set peer 10.0.0.1
+exit
+
+int fa 2/1
+crypto map CM1 
+exit
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
