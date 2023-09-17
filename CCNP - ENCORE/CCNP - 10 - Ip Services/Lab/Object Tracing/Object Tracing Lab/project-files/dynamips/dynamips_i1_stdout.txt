@@ -1,6 +1,0 @@
-cygwin warning:
-  MS-DOS style path detected: C:\Users\LabPC\Documents\GitHub\Networking-Works\CCNP - ENCORE\CCNP - 10 - Ip Services\Lab\Object Tracing\Object Tracing Lab\project-files\dynamips
-  Preferred POSIX equivalent is: /cygdrive/c/Users/LabPC/Documents/GitHub/Networking-Works/CCNP - ENCORE/CCNP - 10 - Ip Services/Lab/Object Tracing/Object Tracing Lab/project-files/dynamips
-  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
-  Consult the user's guide for more details about POSIX paths:
-    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
