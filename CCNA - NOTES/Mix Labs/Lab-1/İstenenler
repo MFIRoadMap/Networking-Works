@@ -1,0 +1,41 @@
+Bilinmesi Gerken Teknolojiler;
+-----------------------------------
+- DHCP
+- VLAN
+- Dinamik yönlendirme protokolü
+- ACL
+
+
+İstenenler
+------------------------
+ESW1 üzerinde ip adresleri sırasıyla;
+192.168.10.0 255.255.255.0
+192.168.20.0 255.255.255.0
+192.168.30.0 255.255.255.0
+olacak şekilde VLAN 10,20 ve 30 oluşturulacak.
+
+ESW1 üzerinde ip adresleri sırasıyla;
+172.16.10.0 255.255.255.0
+172.16.20.0 255.255.255.0
+172.16.30.0 255.255.255.0
+olacak şekilde VLAN 10,20 ve 30 oluşturulacak.
+
+Oluşturulan VLAN'lara dahil VPC'ler R2 üzerinde oluşturulacak DHCP sunucuları kullanılarka ip adresi alacaklar.
+
+Dinamik yonlendirme protokolü olarak OSPF kullanabilirsin.
+
+VPC'ler ip adresi alabilir duruma geldikten sonra 192.168.30.0/24 networküne 172.16.0.0/16 networküne ait hiçbir istemcinin erişememesi gerekiyor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

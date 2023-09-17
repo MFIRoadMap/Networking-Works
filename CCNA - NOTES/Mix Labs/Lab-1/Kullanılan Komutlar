@@ -1,0 +1,285 @@
+ESW1 
+-------------------------------------------
+en
+conf ter
+hostname ESW1
+
+ip routing
+
+exit
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+int vlan 10
+ip address 192.168.10.2 255.255.255.0
+ip default-gateway 192.168.10.1
+int vlan 20
+ip address 192.168.20.2 255.255.255.0
+ip default-gateway 192.168.20.1
+int vlan 30
+ip address 192.168.30.2 255.255.255.0
+ip default-gateway 192.168.30.1
+exit
+
+conf ter
+int fa 1/0
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+exit
+int fa 1/15
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+exit
+
+
+
+
+
+
+ESW2
+-------------------------------------------
+en
+conf ter
+hostname ESW2
+
+ip routing
+
+exit
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+int vlan 10
+ip address 172.16.10.2 255.255.255.0
+ip default-gateway 172.16.10.1
+int vlan 20
+ip address 172.16.20.2 255.255.255.0
+ip default-gateway 172.16.20.1
+int vlan 30
+ip address 172.16.30.2 255.255.255.0
+ip default-gateway 172.16.30.1
+exit
+
+conf ter
+int fa 1/0
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+exit
+int fa 1/15
+switchport trunk encapsulation dot1q
+switchport mode trunk 
+exit
+
+
+
+R1
+-------------------------------------------
+en
+conf ter
+hostname R1
+
+int fa 0/0
+no sh
+int fa 1/0
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+
+int fa 0/0.10
+description VLAN 10
+encapsulation dot1Q 10
+ip address 192.168.10.1 255.255.255.0
+ip helper-address 10.0.0.2
+exit
+int fa 0/0.20
+description VLAN 20
+encapsulation dot1Q 20
+ip address 192.168.20.1 255.255.255.0
+ip helper-address 10.0.0.2
+exit
+int fa 0/0.30
+description VLAN 30
+encapsulation dot1Q 30
+ip address 192.168.30.1 255.255.255.0
+ip helper-address 10.0.0.2
+exit
+
+
+router ospf 5
+network 10.0.0.1 0.0.0.255 area 10
+network 192.168.10.1 0.0.0.255 area 10
+network 192.168.20.1 0.0.0.255 area 10
+network 192.168.30.1 0.0.0.255 area 10
+exit
+
+
+access-list 105 deny ip 192.168.20.0 0.0.0.255 172.16.0.0 0.0.255.255
+access-list 105 permit ip any any 
+access-list 106 deny ip 172.16.0.0 0.0.255.255 192.168.20.0 0.0.0.255
+access-list 106 permit ip any any 
+int fa 0/0.20
+ip access-group 105 in
+ip access-group 106 out
+exit
+
+
+
+R2
+-------------------------------------------
+en
+conf ter
+hostname R2
+
+int fa 0/0
+ip address 10.0.0.2 255.255.255.0
+no sh
+int fa 1/0
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+
+ip dhcp pool R1vlan10
+dns-server 8.8.8.8
+default-router 172.16.10.1
+network 172.16.10.0 255.255.255.0
+exit
+
+ip dhcp pool R1vlan20
+dns-server 8.8.8.8
+default-router 172.16.20.1
+network 172.16.20.0 255.255.255.0
+exit
+
+ip dhcp pool R1vlan30
+dns-server 8.8.8.8
+default-router 172.16.30.1
+network 172.16.30.0 255.255.255.0
+exit
+
+ip dhcp pool R3vlan10
+dns-server 8.8.8.8
+default-router 192.168.10.1
+network 192.168.10.0 255.255.255.0
+exit
+
+ip dhcp pool R3vlan20
+dns-server 8.8.8.8
+default-router 192.168.20.1
+network 192.168.20.0 255.255.255.0
+exit
+
+ip dhcp pool R3vlan30
+dns-server 8.8.8.8
+default-router 192.168.30.1
+network 192.168.30.0 255.255.255.0
+exit
+
+ip dhcp excluded-address 192.168.10.0 192.168.10.50
+ip dhcp excluded-address 192.168.20.0 192.168.20.50
+ip dhcp excluded-address 192.168.30.0 192.168.30.50
+ip dhcp excluded-address 172.16.10.0 172.16.10.50
+ip dhcp excluded-address 172.16.20.0 172.16.20.50
+ip dhcp excluded-address 172.16.30.0 172.16.30.50
+
+
+router ospf 5
+network 10.0.0.2 0.0.0.255 area 10
+network 20.0.0.2 0.0.0.255 area 10
+exit
+
+
+
+R3
+-------------------------------------------
+en
+conf ter
+hostname R3
+
+int fa 0/0
+no sh
+int fa 1/0
+ip address 20.0.0.3 255.255.255.0
+no sh
+exit
+
+
+int fa 0/0.10
+description VLAN 10
+encapsulation dot1Q 10
+ip address 172.16.10.1 255.255.255.0
+ip helper-address 20.0.0.2
+exit
+int fa 0/0.20
+description VLAN 20
+encapsulation dot1Q 20
+ip address 172.16.20.1 255.255.255.0
+ip helper-address 20.0.0.2
+exit
+int fa 0/0.30
+description VLAN 30
+encapsulation dot1Q 30
+ip address 172.16.30.1 255.255.255.0
+ip helper-address 20.0.0.2
+exit
+
+
+router ospf 5
+network 20.0.0.2 0.0.0.255 area 10
+network 172.16.10.1 0.0.0.255 area 10
+network 172.16.20.1 0.0.0.255 area 10
+network 172.16.30.1 0.0.0.255 area 10
+exit
+
+
+
+
+
+https://community.cisco.com/t5/switching/vlan-20-doesn-t-exists-but-it-shows-it-does/td-p/2889837
+https://www.gns3.com/community/featured/need-help-with-dhcp-setup
+https://www.computernetworkingnotes.com/ccna-study-guide/configure-dhcp-server-for-multiple-vlans-on-the-switch.html
+https://forum.networklessons.com/t/dhcp-through-l3-etherchannel/9689
+
+
+
+VPC'lere DHCP üzerinden ip aldırabilmek için "ip dhcp" komutunu kullanabilirsin.
+
+İlk olarak konfigürasyona arayüzlere ip adreslerini tanımlayarak başlanmalı
+
+EtherswirchRouter olduğu için VLAN veritabanına VLAN'ların ayrıca kayıt yapılması gerekiyormuş.
+
+VLAN'ların aralarına haberleşebilmeleri için L3 switch üzerinde her VLAN arayüzüne ip adresleri ve default gateway adresleri tanımlandı. 
+
+L3 switch sayesinde VLAN'lar aralarında haberleşebilirken ip alabilmek için router arayüzüne ulaşması gerekiyor ki VLAN etiketine göre hangi ip havuzundan ip adresi çekeceği belirlenebilsin (bir tür L2-L3 arası bağlantı sağlanıyor) ve doğeu havuza yönlendirilebilsin. Son durumda da istemciler dahil oldukları VLAN'a göre ip adreslerini sunucudan alabiliyor (Burada Router üzerinde her bir sub-interface arayüzü içerisinde relay-agent özelliği ile farklı bir network üzerinden ip adresi alabilmeleri de sağlanabilirdi).
+
+
+NOT: OSPF protokolü oturmadan routerlarsa sub-interface konfigürasyonuna başlama. Başlandığında OSPF oturmayabiliyor.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

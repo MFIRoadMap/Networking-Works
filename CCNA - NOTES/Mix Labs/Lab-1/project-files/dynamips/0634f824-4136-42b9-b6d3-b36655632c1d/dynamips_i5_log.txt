@@ -1,0 +1,153 @@
+Sep 17 12:04:17.965 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Sep 17 12:04:17.966 HYPERVISOR: Started on IP = localhost, TCP port = 53660.
+Sep 17 12:04:18.476 HYPERVISOR: exec_cmd: hypervisor version 
+Sep 17 12:04:18.477 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips 
+Sep 17 12:04:18.477 GENERAL: working_dir=C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips
+Sep 17 12:04:18.478 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\a442b34e-bb7c-42a8-a748-f868c95adfab 
+Sep 17 12:04:18.478 GENERAL: working_dir=C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\a442b34e-bb7c-42a8-a748-f868c95adfab
+Sep 17 12:04:18.479 HYPERVISOR: exec_cmd: vm create R3 3 c7200 
+Sep 17 12:04:18.481 VM: VM R3 created.
+Sep 17 12:04:18.482 HYPERVISOR: exec_cmd: vm set_con_tcp_port R3 5013 
+Sep 17 12:04:18.483 HYPERVISOR: exec_cmd: c7200 get_mac_addr R3 
+Sep 17 12:04:18.483 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:04:18.484 HYPERVISOR: exec_cmd: vm slot_add_binding R3 0 0 C7200-IO-FE 
+Sep 17 12:04:18.485 HYPERVISOR: exec_cmd: vm set_disk0 R3 0 
+Sep 17 12:04:18.486 HYPERVISOR: exec_cmd: vm set_exec_area R3 64 
+Sep 17 12:04:18.487 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:04:18.487 HYPERVISOR: exec_cmd: vm set_idle_pc R3 0x63184dd4 
+Sep 17 12:04:18.488 HYPERVISOR: exec_cmd: vm set_ios R3 C:/Users/LabPC/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Sep 17 12:04:18.489 HYPERVISOR: exec_cmd: c7200 set_mac_addr R3 ca03.24c8.0000 
+Sep 17 12:04:18.490 HYPERVISOR: exec_cmd: vm set_nvram R3 512 
+Sep 17 12:04:18.491 HYPERVISOR: exec_cmd: vm set_ram R3 512 
+Sep 17 12:04:18.491 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:04:18.492 HYPERVISOR: exec_cmd: vm slot_add_binding R3 1 0 PA-2FE-TX 
+Sep 17 12:04:18.492 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:04:18.493 HYPERVISOR: exec_cmd: vm slot_add_binding R3 2 0 PA-2FE-TX 
+Sep 17 12:04:18.495 HYPERVISOR: exec_cmd: vm set_con_tcp_port R3 5013 
+Sep 17 12:04:20.327 HYPERVISOR: exec_cmd: nio create_udp udp-bc86415a-213c-4a53-ac54-344de5b4d27f 10022 127.0.0.1 10023 
+Sep 17 12:04:20.579 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R3 1 1 udp-bc86415a-213c-4a53-ac54-344de5b4d27f 
+Sep 17 12:04:20.580 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:04:21.304 HYPERVISOR: exec_cmd: nio create_udp udp-a4027798-42c7-484f-8e46-86967df1d434 10036 127.0.0.1 10037 
+Sep 17 12:04:21.308 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R3 0 0 udp-a4027798-42c7-484f-8e46-86967df1d434 
+Sep 17 12:04:21.309 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:08:17.215 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:08:17.216 HYPERVISOR: exec_cmd: vm slot_remove_nio_binding R3 1 1 
+Sep 17 12:08:17.217 HYPERVISOR: exec_cmd: nio delete udp-bc86415a-213c-4a53-ac54-344de5b4d27f 
+Sep 17 12:08:35.366 HYPERVISOR: exec_cmd: nio create_udp udp-89b4eb8c-b9b4-4bbf-a6e7-a41517b7d1ad 10020 127.0.0.1 10021 
+Sep 17 12:08:35.369 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R3 1 0 udp-89b4eb8c-b9b4-4bbf-a6e7-a41517b7d1ad 
+Sep 17 12:08:35.370 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:14:56.580 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 12:14:56.585 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 12:14:56.585 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:14:56.591 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 12:14:56.592 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 12:15:26.935 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 12:24:23.824 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:24:23.824 HYPERVISOR: exec_cmd: vm slot_disable_nio R3 1 0 
+Sep 17 12:24:23.848 HYPERVISOR: exec_cmd: vm slot_remove_nio_binding R3 1 0 
+Sep 17 12:24:23.850 HYPERVISOR: exec_cmd: nio delete udp-89b4eb8c-b9b4-4bbf-a6e7-a41517b7d1ad 
+Sep 17 12:24:38.817 HYPERVISOR: exec_cmd: nio create_udp udp-0f58dcee-f483-426c-8d9e-ba6113a0c404 10022 127.0.0.1 10023 
+Sep 17 12:24:38.821 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R3 1 0 udp-0f58dcee-f483-426c-8d9e-ba6113a0c404 
+Sep 17 12:24:38.822 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:24:38.822 HYPERVISOR: exec_cmd: vm slot_enable_nio R3 1 0 
+Sep 17 12:31:07.328 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:07.329 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 12:31:07.479 VM: VM R3 shutdown.
+Sep 17 12:31:07.480 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 12:31:15.053 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 12:31:15.059 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 12:31:15.059 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:15.064 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 12:31:15.065 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 12:31:19.518 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:19.518 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x0 
+Sep 17 12:31:19.518 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:19.518 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:19.519 HYPERVISOR: exec_cmd: vm get_idle_pc_prop R3 0 
+Sep 17 12:31:34.801 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:31:34.802 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x63184bc8 
+Sep 17 12:31:34.802 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 12:31:37.818 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 12:39:47.889 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:39:47.889 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 12:39:48.046 VM: VM R3 shutdown.
+Sep 17 12:39:48.047 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 12:40:27.512 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 12:40:27.516 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 12:40:27.517 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:40:27.523 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 12:40:27.523 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 12:40:57.560 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 12:40:57.611 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x6318687c 
+Sep 17 13:01:49.820 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 13:01:49.821 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 13:01:50.002 VM: VM R3 shutdown.
+Sep 17 13:01:50.004 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 13:42:16.413 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 13:42:16.413 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 13:42:16.413 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 13:42:16.423 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 13:42:16.423 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 13:42:40.617 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 13:42:40.666 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x63184dd4 
+Sep 17 14:02:32.931 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:32.931 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 14:02:33.115 VM: VM R3 shutdown.
+Sep 17 14:02:33.115 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 14:02:33.931 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 14:02:33.931 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 14:02:33.931 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:33.931 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 14:02:33.931 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 14:02:40.760 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:40.760 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x0 
+Sep 17 14:02:40.760 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:40.760 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:40.765 HYPERVISOR: exec_cmd: vm get_idle_pc_prop R3 0 
+Sep 17 14:02:56.944 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:56.944 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x61e05874 
+Sep 17 14:02:56.944 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:02:59.945 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:02:59.945 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:02:59.945 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x6318687c 
+Sep 17 14:02:59.945 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:03:02.944 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:19:58.319 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:19:58.319 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 14:19:58.476 VM: VM R3 shutdown.
+Sep 17 14:19:58.476 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 14:26:43.371 HYPERVISOR: exec_cmd: vm set_ghost_status R3 2 
+Sep 17 14:26:43.371 HYPERVISOR: exec_cmd: vm set_ghost_file R3 C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Sep 17 14:26:43.371 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:26:43.371 HYPERVISOR: exec_cmd: vm set_config R3 configs\i3_startup-config.cfg 
+Sep 17 14:26:43.371 HYPERVISOR: exec_cmd: vm start R3 
+Sep 17 14:26:58.557 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:26:58.557 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x0 
+Sep 17 14:26:58.557 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:26:58.557 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:26:58.557 HYPERVISOR: exec_cmd: vm get_idle_pc_prop R3 0 
+Sep 17 14:27:14.777 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:27:14.777 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x61e05870 
+Sep 17 14:27:14.777 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:27:17.773 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:27:17.773 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:27:17.773 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x61e05874 
+Sep 17 14:27:17.773 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:27:20.778 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:27:20.778 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:27:20.778 HYPERVISOR: exec_cmd: vm set_idle_pc_online R3 0 0x62cbf334 
+Sep 17 14:27:20.778 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:27:23.783 HYPERVISOR: exec_cmd: vm cpu_usage R3 0 
+Sep 17 14:33:31.632 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:33:31.632 HYPERVISOR: exec_cmd: vm stop R3 
+Sep 17 14:33:31.802 VM: VM R3 shutdown.
+Sep 17 14:33:31.805 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 14:40:49.475 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:40:49.476 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 14:40:49.989 HYPERVISOR: exec_cmd: vm get_status R3 
+Sep 17 14:40:49.991 HYPERVISOR: exec_cmd: vm extract_config R3 
+Sep 17 14:40:49.993 HYPERVISOR: exec_cmd: vm delete R3 
+Sep 17 14:40:49.993 VM: VM R3 destroyed.
+Sep 17 14:40:49.995 HYPERVISOR: exec_cmd: hypervisor stop 
+Sep 17 14:40:50.463 HYPERVISOR: Stopped.
+Sep 17 14:40:50.463 GENERAL: reset done.

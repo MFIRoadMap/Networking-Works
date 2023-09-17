@@ -1,0 +1,22 @@
+Sep 17 12:04:15.843 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Sep 17 12:04:15.845 HYPERVISOR: Started on IP = localhost, TCP port = 53640.
+Sep 17 12:04:16.010 HYPERVISOR: exec_cmd: hypervisor version 
+Sep 17 12:04:16.012 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips 
+Sep 17 12:04:16.016 GENERAL: working_dir=C:\Users\LabPC\Desktop\Lab-1\project-files\dynamips
+Sep 17 12:04:16.016 HYPERVISOR: exec_cmd: ethsw create Switch1 
+Sep 17 12:04:19.280 HYPERVISOR: exec_cmd: nio create_udp udp-5ddcfcd3-4589-4afd-93d7-4eb448e288fd 10001 127.0.0.1 10000 
+Sep 17 12:04:19.280 HYPERVISOR: exec_cmd: ethsw add_nio Switch1 udp-5ddcfcd3-4589-4afd-93d7-4eb448e288fd 
+Sep 17 12:04:19.306 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1 udp-5ddcfcd3-4589-4afd-93d7-4eb448e288fd 10 
+Sep 17 12:04:19.361 HYPERVISOR: exec_cmd: nio create_udp udp-5ecad592-a4ab-4f59-9696-5aedd4a932c1 10003 127.0.0.1 10002 
+Sep 17 12:04:19.361 HYPERVISOR: exec_cmd: ethsw add_nio Switch1 udp-5ecad592-a4ab-4f59-9696-5aedd4a932c1 
+Sep 17 12:04:19.370 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1 udp-5ecad592-a4ab-4f59-9696-5aedd4a932c1 20 
+Sep 17 12:04:19.429 HYPERVISOR: exec_cmd: nio create_udp udp-740a9294-1e97-4b41-8851-e225bfa8ed97 10005 127.0.0.1 10004 
+Sep 17 12:04:19.431 HYPERVISOR: exec_cmd: ethsw add_nio Switch1 udp-740a9294-1e97-4b41-8851-e225bfa8ed97 
+Sep 17 12:04:19.463 HYPERVISOR: exec_cmd: ethsw set_access_port Switch1 udp-740a9294-1e97-4b41-8851-e225bfa8ed97 30 
+Sep 17 12:04:20.630 HYPERVISOR: exec_cmd: nio create_udp udp-a7954317-94f0-49a3-aee4-6e46a1ae6050 10024 127.0.0.1 10025 
+Sep 17 12:04:20.631 HYPERVISOR: exec_cmd: ethsw add_nio Switch1 udp-a7954317-94f0-49a3-aee4-6e46a1ae6050 
+Sep 17 12:04:20.638 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch1 udp-a7954317-94f0-49a3-aee4-6e46a1ae6050 1 
+Sep 17 14:40:49.495 HYPERVISOR: exec_cmd: ethsw delete Switch1 
+Sep 17 14:40:49.607 HYPERVISOR: exec_cmd: hypervisor stop 
+Sep 17 14:40:49.948 HYPERVISOR: Stopped.
+Sep 17 14:40:49.948 GENERAL: reset done.
