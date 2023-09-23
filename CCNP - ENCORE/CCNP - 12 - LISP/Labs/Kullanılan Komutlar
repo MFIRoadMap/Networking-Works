@@ -1,0 +1,219 @@
+Kullanılan Komutlar
+
+
+
+R1 - MS/MR router
+--------------------------------------------
+en
+conf ter
+hostname R2
+
+int fa 1/0 
+ip address 10.0.0.1 255.255.255.0
+no sh
+exit
+int fa 1/1
+ip address 30.0.0.1 255.255.255.0
+no sh
+exit
+
+router ospf 5
+network 10.0.0.1 0.0.0.255 area 15
+network 30.0.0.1 0.0.0.255 area 15
+exit
+
+
+
+router lisp
+
+site site2
+description LISP SiteR2
+authentication-key Si2Pa
+eid-prefix 192.168.10.0/24 
+eid-prefix 192.168.20.0/24 
+eid-prefix 20.0.0.0/24 
+eid-prefix 192.168.30.0/24 
+eid-prefix 192.168.40.0/24 
+exit
+
+site site3
+description LISP SiteR3
+authentication-key Si3Pa
+eid-prefix 192.168.50.0/24
+eid-prefix 192.168.60.0/24
+exit
+
+ipv4 map-server
+ipv4 map-resolver
+exit
+
+
+
+
+R2
+--------------------------------------------
+en
+conf ter
+hostname R2
+
+int fa 1/0
+ip address 20.0.0.2 255.255.255.0
+no sh
+exit
+int fa 1/1 
+ip address 10.0.0.2 255.255.255.0
+no sh
+exit
+
+int fa 2/0 
+ip address 192.168.10.1 255.255.255.0
+no sh
+exit
+int fa 2/1
+ip address 192.168.20.1 255.255.255.0
+no sh
+exit
+
+router ospf 5
+network 10.0.0.2 0.0.0.255 area 15
+exit
+
+router ospf 15
+network 20.0.0.2 0.0.0.255 area 25
+network 192.168.10.1 0.0.0.255 area 25
+network 192.168.20.1 0.0.0.255 area 25
+default-information originate always
+exit
+
+
+router lisp
+database-mapping 192.168.10.0/24 10.0.0.2 priority 1 weight 100
+database-mapping 192.168.20.0/24 10.0.0.2 priority 1 weight 100
+database-mapping 20.0.0.0/24 10.0.0.2 priority 1 weight 100
+database-mapping 192.168.30.0/24 10.0.0.2 priority 1 weight 100
+database-mapping 192.168.40.0/24 10.0.0.2 priority 1 weight 100
+
+ipv4 itr map-resolver 10.0.0.1
+ipv4 itr
+ipv4 etr map-server 10.0.0.1 key Si2Pa
+ipv4 etr
+
+loc-reach-algorithm rloc-probing
+exit
+
+
+
+
+R4
+--------------------------------------------
+en
+conf ter
+hostname R4
+
+int fa 1/1 
+ip address 20.0.0.4 255.255.255.0
+no sh
+exit
+
+int fa 2/0 
+ip address 192.168.30.1 255.255.255.0
+no sh
+exit
+int fa 2/1
+ip address 192.168.40.1 255.255.255.0
+no sh
+exit
+
+router ospf 15
+network 20.0.0.4 0.0.0.255 area 25
+network 192.168.30.1 0.0.0.255 area 25
+network 192.168.40.1 0.0.0.255 area 25
+exit
+
+
+
+
+
+R3
+--------------------------------------------
+en
+conf ter
+hostname R3
+
+int fa 1/0 
+ip address 30.0.0.3 255.255.255.0
+no sh
+exit
+
+int fa 2/0 
+ip address 192.168.50.1 255.255.255.0
+no sh
+exit
+int fa 2/1
+ip address 192.168.60.1 255.255.255.0
+no sh
+exit
+
+router ospf 5
+network 30.0.0.3 0.0.0.255 area 15
+exit
+
+
+router lisp
+database-mapping 192.168.50.0/24 30.0.0.3 priority 1 weight 100
+database-mapping 192.168.60.0/24 30.0.0.3 priority 1 weight 100
+
+ipv4 itr map-resolver 30.0.0.1
+ipv4 itr
+ipv4 etr map-server 30.0.0.1 key Si3Pa
+ipv4 etr
+
+loc-reach-algorithm rloc-probing
+exit
+
+
+
+
+
+R5
+--------------------------------------------
+
+
+
+
+
+VPC1 -> ip 192.168.10.5 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.20.5 255.255.255.0 192.168.20.1
+VPC3 -> ip 192.168.30.5 255.255.255.0 192.168.30.1
+VPC4 -> ip 192.168.40.5 255.255.255.0 192.168.40.1
+VPC5 -> ip 192.168.50.5 255.255.255.0 192.168.50.1
+VPC6 -> ip 192.168.60.5 255.255.255.0 192.168.60.1
+
+
+
+NOT: VPC'lere ip adresini doğru atamazsan (gateway adresi belirtmeden verirsen) topoloji çalışmaz tabi :D
+
+NOT: Bu topoolojide Area 25'den Area 15'deki MS/MR routera erişilebilmesi için R2'de "default-information originate always" komutuyla Area 25'de Default Router olarak R2 belirlenmesi gerekiyor. Bu sayede Area 25 içerisinde tanımlı olmayan networkler için paketler R2'ye gönderilecek. Bu paketlerin içerisinde LİSP topolojisine ait paketler de bulunacaktır. Paketler bu komut sonrasında R2 üzerinden R1'e(MS/MR) routera bağlanabilecek ve diğer networklere erişebilir duruma gelecektir. 
+|--> Bu komut routerda tanımlandığı Area içerisindeki Default Gateway görevini üstleniyor gibi görülebilir. 
+
+SORU : Farklı Area'lar üzerinden redistribute yapılarka da LISP protokolü kullanılabilir mi?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://www.dasblinkenlichten.com/lisp-a-base-configuration-to-build-on/
+https://www.linkedin.com/pulse/simple-lisp-topology-configuration-lab-bryan-bales
+https://www.digitaltut.com/lisp-lab/2
