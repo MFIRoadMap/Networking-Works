@@ -1,0 +1,40 @@
+İstenenler
+---------------------------------------
+- R1, R2 ve R7 OSPF area 5'de çalışacak şekilde konfigüre edilmeli
+- R4, R3 ve R7 EIGRP AS 15'de çalışacak şekilde konfigüre edilmeli
+	|--> R7 üzerinde EIGRP ve OSPF protokolleri arasında rota paylaşımı yapılmalı
+- R6, R5 OSPF area 10'da çalışacak şekilde konfigüre edilmeli
+	|--> R7 ve R5 arasında OSPF 5 ve OSPF 10 arasında rota aktarımı için ABR router konfigürasyonları yapılmalı
+
+- Konfigürasyonlar sonunda area 5 ve 10, area 0 üzerinden rota paylaşımı yapabilmeli
+- EIGRP protokolü çalışan routerlar da area 0 ile aralarında rota paylaşımı yapabilmeli
+	|--> Bu sayede cihazlar farklı dinamik yönlendirme protokolü kullanılsa da, farklı area'larda olsalar da birbirlerine erişebilir duruma gelmeliler.
+
+	(topolojide kullanılacak ip aralıkları sana bırakılmıştır.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
