@@ -63,6 +63,10 @@ int fa 1/0
 ip address 10.0.0.2 255.255.255.0
 no sh
 exit
+int fa 1/1
+ip address 50.0.0.2 255.255.255.0
+no sh
+exit
 int fa 2/1
 ip address 192.168.20.1 255.255.255.0
 no sh
@@ -71,6 +75,7 @@ exit
 router ospf 5 
 network 20.0.0.2 0.0.0.255 area 10
 network 10.0.0.2 0.0.0.255 area 10
+network 50.0.0.2 0.0.0.255 area 10
 network 192.168.20.1 0.0.0.255 area 10
 exit
 
@@ -126,19 +131,14 @@ int fa 1/0
 crypto map CM1
 exit
 
-
-ip nat pool NAT_POOL 30.0.0.226 30.0.0.240 netmask 255.255.255.224 
-access-list 10 permit 192.168.10.0 0.0.0.255
-ip nat inside source list 10 pool NAT_POOL overload
+//NAT ÇALIŞMIYOR
+no ip nat pool NAT_POOL 30.0.0.226 30.0.0.240 netmask 255.255.255.224 
+no access-list 10 permit 192.168.10.0 0.0.0.255
+no ip nat inside source list 10 pool NAT_POOL overload
 int fa 1/0 
-ip nat inside 
+no ip nat inside 
+no ip nat outside
 exit
-int fa 0/0
-ip nat outside
-exit
-
-
-
 
 
 
@@ -157,6 +157,10 @@ int fa 1/0
 ip address 30.0.0.4 255.255.255.0
 no sh
 exit
+int fa 1/1
+ip address 50.0.0.4 255.255.255.0
+no sh
+exit
 int fa 2/1
 ip address 192.168.40.1 255.255.255.0
 no sh
@@ -164,7 +168,7 @@ exit
 
 router ospf 5
 network 40.0.0.4 0.0.0.255 area 10
-network 30.0.0.4 0.0.0.255 area 10
+network 50.0.0.4 0.0.0.255 area 10
 network 192.168.40.1 0.0.0.255 area 10
 exit
 
@@ -180,32 +184,15 @@ int fa 1/0
 ip address 40.0.0.5 255.255.255.0
 no sh
 exit
-int fa 2/0
-ip address 192.168.50.1 255.255.255.0
-no sh
-exit
 int fa 2/1
-ip address 192.168.60.1 255.255.255.0
+ip address 192.168.50.1 255.255.255.0
 no sh
 exit
 
 router ospf 5
 network 40.0.0.5 0.0.0.255 area 10
 network 192.168.50.1 0.0.0.255 area 10
-network 192.168.60.1 0.0.0.255 area 10
 exit
-
-
-ip access-list standard SPEC_IP_LIST
-permit 30.0.0.0 0.0.0.255
-exit
-int fa 2/0
-ip access-group SPEC_IP_LIST out
-exit
-
-! ACL 1/0 arayüzüne uygulandığında ospf paketleri de engelleniyor
-
-
 
 
 
@@ -215,7 +202,7 @@ VPC2 : ip 192.168.20.5 255.255.255.0 192.168.20.1
 VPC3 : ip 192.168.30.5 255.255.255.0 192.168.30.1
 VPC4 : ip 192.168.40.5 255.255.255.0 192.168.40.1
 VPC5 : ip 192.168.50.5 255.255.255.0 192.168.50.1
-VPC5 : ip 192.168.60.5 255.255.255.0 192.168.60.1
+
 
 
 

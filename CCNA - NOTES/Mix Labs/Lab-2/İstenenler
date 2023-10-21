@@ -1,0 +1,24 @@
+İstenenler
+
+- Topolojideki bütün routerlar OSPF area 10 da çalışacak.
+- R1'in 2/1 arayüzüne bağlı network R3'e kadar tünellenecek
+	|--> Paketler R3 üzerinde tünelden çıkarıldığında NAT işlemine tabi tutulacak
+	|--> NAT işleminde tanımlanan ip adresi R5'in fa 2/0 arayüzüne erişenilmeli
+		|--> R1'in fa 2/0 arayüzüne sadece R1'in f 2/1 arayüzündeki cihaz erişebilmeşi.
+
+Bu koşullar sağlandığında labı tamamlamış olacaksın. Bu süreçte kullanılacak teknolojiler;
+- OSPF
+- ACL
+- NAT
+- GRE/IPSEC
+
+
+
+
+
+
+
+
+
+
+
