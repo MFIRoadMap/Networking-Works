@@ -257,7 +257,7 @@ EtherswirchRouter olduğu için VLAN veritabanına VLAN'ların ayrıca kayıt ya
 VLAN'ların aralarına haberleşebilmeleri için L3 switch üzerinde her VLAN arayüzüne ip adresleri ve default gateway adresleri tanımlandı. 
 
 L3 switch sayesinde VLAN'lar aralarında haberleşebilirken ip alabilmek için router arayüzüne ulaşması gerekiyor ki VLAN etiketine göre hangi ip havuzundan ip adresi çekeceği belirlenebilsin (bir tür L2-L3 arası bağlantı sağlanıyor) ve doğru havuza yönlendirilebilsin. Son durumda da istemciler dahil oldukları VLAN'a göre ip adreslerini sunucudan alabiliyor (Burada Router üzerinde her bir sub-interface arayüzü içerisinde relay-agent özelliği ile farklı bir network üzerinden ip adresi alabilmeleri de sağlanabilirdi).
-|--> İsteğe bağlı olarak Sub-Interface oluşturmak yerine OSPF gibi dinamik yönlendirme protokollerinden biri kullanılarak da VLAN'lar farklı networklere/Internet ortamına çıkarılabilir. Örneğini Mix Lab kısmındaki Lab-2-'de bulabilirsin
+|--> İsteğe bağlı olarak Sub-Interface oluşturmak yerine OSPF gibi dinamik yönlendirme protokollerinden biri kullanılarak da VLAN'lar farklı networklere/Internet ortamına çıkarılabilir. Örneğini Mix Lab kısmındaki Lab-3-'de bulabilirsin
 
 
 NOT: OSPF protokolü oturmadan routerlarsa sub-interface konfigürasyonuna başlama. Başlandığında OSPF oturmayabiliyor.
