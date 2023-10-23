@@ -1,0 +1,38 @@
+İSTENENLER
+
+- VPC'ler ilgili VLAN'lara alındı. Bu VLAN'ların aralarında haberleşebilemsi gerekiyor.
+|--> Aynı zamanda VLAN'lar arası haberleşme kritik olduğu için L3 switchler arası yedekleme yapılmak isteniyor. Bunun için Etherchannel konfigürasyonu yapılmalı. Burada karlışacağın problemlerden birisi her ne kadar iki switch olsa da VLAN'lar için tanımlanan Default Gateway adresi tek olaması olacaktır. 
+
+- R1 ve R2 üzerinden cihazların VPC9'a erişirken Local Network içerisinde kullanılan ip adresleri dışında bir ip adresiyle erişebilmeleri isteniyor.
+
+Unutma network yöneticisi sensin. İp adres seçimi tamamiyle sana bıralıldı.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

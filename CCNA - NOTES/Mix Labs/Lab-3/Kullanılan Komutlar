@@ -28,7 +28,7 @@ network 70.0.10.1 0.0.0.255 area 100
 exit
 
 ip nat pool NAT_POOL_R1 70.0.10.226 70.0.10.240 netmask 255.255.255.224
-access-list 5 permit 0.0.0.0 255.255.255.255 
+access-list 5 permit any
 ip nat inside source list 5 pool NAT_POOL_R1 overload
 int fa 0/0
 ip nat outside
@@ -69,7 +69,7 @@ exit
 
 
 ip nat pool NAT_POOL_R2 70.0.20.226 70.0.20.240 netmask 255.255.255.224
-access-list 5 permit 0.0.0.0 255.255.255.255 
+access-list 5 permit any
 ip nat inside source list 5 pool NAT_POOL_R2 overload
 int fa 0/0
 ip nat outside
@@ -89,6 +89,10 @@ conf ter
 hostname R2
 
 
+int fa 0/0
+ip address 4.4.4.3 255.255.255.0
+no sh
+exit
 int fa 1/0
 ip address 70.0.10.3 255.255.255.0
 no sh
@@ -102,6 +106,7 @@ exit
 router ospf 5
 network 70.0.10.3 0.0.0.255 area 100
 network 70.0.20.3 0.0.0.255 area 100
+network 4.4.4.3 0.0.0.255 area 100
 exit
 
 
@@ -109,7 +114,25 @@ exit
 
 R4
 --------------------------------------
+en
+conf ter
+hostname R4
 
+
+int fa 0/0
+ip address 4.4.4.4 255.255.255.0
+no sh
+exit
+int fa 2/1
+ip address 192.168.90.1 255.255.255.0
+no sh
+exit
+
+
+router ospf 5
+network 4.4.4.4 0.0.0.255 area 100
+network 192.168.90.1 0.0.0.255 area 100
+exit
 
 
 
@@ -291,7 +314,7 @@ VPC5 -> ip 192.168.20.10 255.255.255.0 192.168.20.1
 VPC6 -> ip 192.168.30.10 255.255.255.0 192.168.30.1
 VPC7 -> ip 192.168.20.15 255.255.255.0 192.168.20.1
 VPC8 -> ip 192.168.30.15 255.255.255.0 192.168.30.1
-VPC1 -> ip 192.168.70.5 255.255.255.0 192.168.70.1
+VPC9 -> ip 192.168.90.5 255.255.255.0 192.168.90.1
 
 
 
