@@ -1,0 +1,108 @@
+SW1 //SW5 için uygulanmadı
+
+Switch>en
+Switch#conf ter
+Switch(config)#hostname SW1
+SW1(config-vlan)#vlan 10
+SW1(config-vlan)#name Personel
+SW1(config-vlan)#vlan 20
+SW1(config-vlan)#name Sunucu
+SW1(config-vlan)#exit
+
+SW1(config)#interface range fastEthernet 0/1-10
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 10
+SW1(config-if-range)#interface range fastEthernet 0/11-20
+SW1(config-if-range)#switchport mode access 
+SW1(config-if-range)#switchport access vlan 20
+SW1(config-if-range)#exit
+
+SW1(config)#interface range gigabitEthernet 0/1-2
+SW1(config-if-range)#switchport mode trunk 
+SW1(config)#exit
+
+
+
+
+
+L3SW1
+
+Switch>en
+Switch#conf ter
+Switch(config)#hostname L3SW1
+
+L3SW1(config)#vlan 10
+L3SW1(config-vlan)#name Personel
+L3SW1(config-vlan)#vlan 20
+L3SW1(config-vlan)#name Sunucu
+L3SW1(config-vlan)#exit
+
+L3SW1(config)#interface range gigabitEthernet 1/0/1-4
+L3SW1(config-if-range)#switchport mode trunk 
+L3SW1(config-if-range)#exit
+
+L3SW1(config)#interface range gigabitEthernet 1/0/22-23
+L3SW1(config-if-range)#channel-group 2 mode desirable 
+L3SW1(config-if-range)#exit
+L3SW1(config)#interface port-channel 2
+L3SW1(config-if)#switchport mode trunk 
+L3SW1(config-if)#exit
+
+L3SW1(config)#ip routing
+L3SW1(config)#interface vlan 10 
+L3SW1(config-if)#ip address 192.168.10.2 255.255.255.0 //L3SW2 -> 192.168.10.3
+L3SW1(config-if)#exit
+L3SW1(config)#interface vlan 20 
+L3SW1(config-if)#ip address 192.168.20.2 255.255.255.0 //L3SW2 -> 192.168.20.3
+L3SW1(config-if)#exit
+
+L3SW1(config)#interface vlan 10
+L3SW1(config-if)#standby 10 ip 192.168.10.1
+L3SW1(config-if)#standby 10 preempt 
+L3SW1(config-if)#exit
+L3SW1(config)#interface vlan 20
+L3SW1(config-if)#standby 20 ip 192.168.20.1
+L3SW1(config-if)#standby 20 preempt 
+L3SW1(config-if)#exit
+
+L3SW1(config)#interface gigabitEthernet 1/0/24
+L3SW1(config-if)#no switchport 
+L3SW1(config-if)#ip address 10.0.10.2 255.255.255.0
+L3SW1(config-if)#no sh
+L3SW1(config-if)#exit
+
+//Burada L3 switchlerde default rota da yazılabilir 
+//ip route 0.0.0.0 0.0.0.0 10.0.10.1 
+L3SW1(config)#ip route 192.168.30.0 255.255.255.0 10.0.10.1
+
+
+R1
+
+Router>en
+Router#conf ter
+Router(config)#hostname R1
+
+R1(config)#interface gigabitEthernet 0/0
+R1(config-if)#ip address 10.0.10.1 255.255.255.0
+R1(config-if)#no sh
+R1(config-if)#exit
+R1(config)#interface gigabitEthernet 0/1
+R1(config-if)#ip address 10.0.20.1 255.255.255.0
+R1(config-if)#no sh
+R1(config-if)#exit
+R1(config)#interface gigabitEthernet 0/2
+R1(config-if)#ip address 10.0.30.1 255.255.255.0
+R1(config-if)#no sh
+R1(config-if)#exit
+
+R1(config)#ip route 192.168.10.0 255.255.255.0 10.0.10.2
+R1(config)#ip route 192.168.10.0 255.255.255.0 10.0.20.2
+R1(config)#ip route 192.168.20.0 255.255.255.0 10.0.10.2
+R1(config)#ip route 192.168.20.0 255.255.255.0 10.0.20.2
+R1(config)#ip route 192.168.30.0 255.255.255.0 10.0.30.2
+
+
+R2 -statik rota tanımı
+
+R2(config)#ip route 192.168.10.0 255.255.255.0 10.0.30.1
+R2(config)#ip route 192.168.20.0 255.255.255.0 10.0.30.1

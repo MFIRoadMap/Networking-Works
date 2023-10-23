@@ -1,0 +1,65 @@
+ADIM-0-
+- İstemcilerin ip adreslerini tanımlayın
+- L2 Switchlere hostname verin
+- L2 switchlerde VLAN'ları tanımlayın ve portlara atayın (SW5 için uygulanmayacak)
+*** VLAN 10 -> Personel  Fa0/1-10 
+*** VLAN 20 -> Sunucu  Fa0/11-20 
+- L2 -> L3 Switchler arası bağlantı portlarını Trunk moduna alın.
+- L2 switchlerde VLAN konfigürasyonunu kontrol edin. 
+*** sh vlan brief
+*** sh interfaces trunk 
+
+
+ADIM-1-
+- L3 switchlerin güç sağlayıcılarını takın.
+- L3 swtichlere ip hostname verin
+- VLAN'ları oluşturup potlara atayın
+- L3 -> L2 Swtichler arası bağlantı portlarını Trunk moduna alın
+- L3 switchlerde VLAN konfigürasyonunu kontrol edin. 
+*** sh vlan brief
+*** sh interfaces trunk 
+
+ADIM-2-
+- L3 switchlerin birbirine bağlı portlarında yedekleme için EtherChannel konfigürayonu yapılacak.
+*** LACP - mod ->  desirable - channel -> 2
+*** Portların sanal arayüzüne girip Trunk moduna almayı unutma
+*** Kontrol için "sh etherchannel summary "
+
+ADIM-3-
+- L3 switchlerin yönlendirme tablolarını devreye alın.
+- VLAN'lar arasında haberleşebilmesi için L3 switchlerde VLAN arayüzlerine ip adresleri verin.
+*** L3SW1'de VLAN 10 -> 192.168.10.2 255.255.255.0  
+*** L3SW1'de VLAN 20 -> 192.168.20.2 255.255.255.0  
+*** L3SW2'de VLAN 10 -> 192.168.10.3 255.255.255.0
+*** L3SW2'de VLAN 20 -> 192.168.20.3 255.255.255.0
+- İstemcilerden DG adreslerine ping atılabiliyor mu?
+*** istemciler aralarında ping atılabiliyor mu?
+*** sh ip route
+
+ADIM-4-
+- L3 switchlerde her VLAN için HSRP protokolüyle mantıksal bir ip adresi oluşturarak bağlı olunan networke erişim için L3 seitchler arasında yedeklilik oluşturun.
+*** Unutma standby numaraları yedeklenecek cihazlarda aynı olması gerekiyor 
+*** *** Standby - VLAN 10 -> 10, VLAN 20 -> 20.
+*** Preempt özelliğini açın 
+*** VLAN 10 Mantıksal ip adresi : 192.168.10.1
+*** VLAN 20 Mantıksal ip adresi : 192.168.20.1
+*** HSRP otutduktan sonra kontrol "sh standby brief" - ek olarak aktif routerun güç saylayıcılarını çıkarıp ping atmayı deneyebilirsin
+
+ADIM-5-
+- L3 switchlerin routera bağlı portlarını L3 moduna alıp ip adreslerini tanımlayın.
+- Routerlara hostname verin.
+- Routerlara ip adreslerini verip portlarını açın.
+*** İstemcilerden routerun herhangi bir arayüzüne ping atılabiliyor mu? (Çözeriz :D)
+- Eksik networkler için routerlarda static rota tanımı yapın.
+*** paket R1'den 192.168.10.0 networküne ulaştırılmak için hangi switche gönderilecek sence?
+*** *** Her ikisi için de statik rota tanımı yapmalısın. Bu sayede yedek hat oluşacak ve trafik dengelenerek gönderilecek.
+
+ADIM-6-
+- Artık istemcilere ping atarakkontrol etmelisin. Son durumda istemciler aralarında ping atabilir durumda olmalı.
+*** Aktifliği alan L3 switchin bağlantısı kesildiğinde HSRP protokolünün oturmasını bekle. Bir süre ping atamayabilirsin. VRRP daha hızlı oturuyordu unutma.
+
+
+
+
+
+
