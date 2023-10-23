@@ -1,0 +1,46 @@
+NOTLAR
+---------------------------------
+- L3 switchler üzerinde bir sorun yaşanması durumunda VLAN'lar arası haberleşmenin kesilmemesi için VLAN arayüzlerinde TEK GATEWAY TANIMI YAPILIRKEN KULLANILAN FJRP protokollerinden biri olan VRRP kullanıldı. Bu sayede VLAN'lara atanan Gateway adresleri değişmeden aktif olan router Master seçilerek VLAN'lar arası haberleşmenin daim olması sağlandı.
+|--> Ayanı zamanda L3 switchler arasındaki bağlantının güvenilirliğini arttırmak adına Etherchannel konfigürasyonu yapıldı.
+
+* Konfigürasyonda L3 switchler üzerindeki kısım tamalandıktan sonra Master switch kapatılarak Master'lığı Backup switch e devredildiği görülebilir.
+
+
+- VLAN'ları farklı bir networke veya Internete çıkarmak için SubInterface'ler oluşturmak yerine L3 switchlerin birer arayüzleri L3'e çekilerek dinamik yönlendirme protokolü yardımıyla (OSPF) İnternete çıkarılacak routerun öğrenilmesi sağlandı. 
+|--> Burada ek olarka internet ortamına çıkarılmadan önce herhangi bir yerde ip adresleri NAT işelmine de tabi tutulara Puvlic ip adresleriine dönüştürülebilirdi. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
