@@ -1,0 +1,41 @@
+Jan 17 22:00:47.493 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Jan 17 22:00:47.495 HYPERVISOR: Started on IP = localhost, TCP port = 50573.
+Jan 17 22:00:47.994 HYPERVISOR: exec_cmd: hypervisor version 
+Jan 17 22:00:47.995 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\VMUser\Desktop\Çalışmalar\1-Networking\CCNP\CCNP - 14 - Enterprise Network Architecture\Lab\Three-Tier Design\project-files\dynamips 
+Jan 17 22:00:47.997 GENERAL: working_dir=C:\Users\VMUser\Desktop\Çalışmalar\1-Networking\CCNP\CCNP - 14 - Enterprise Network Architecture\Lab\Three-Tier Design\project-files\dynamips
+Jan 17 22:00:47.997 HYPERVISOR: exec_cmd: ethsw create Switch4 
+Jan 17 22:00:51.906 HYPERVISOR: exec_cmd: nio create_udp udp-753a975d-e84d-49a8-acbb-ce959705d83e 10024 127.0.0.1 10025 
+Jan 17 22:00:51.908 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-753a975d-e84d-49a8-acbb-ce959705d83e 
+Jan 17 22:00:51.926 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:00:52.035 HYPERVISOR: exec_cmd: nio create_udp udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 10028 127.0.0.1 10029 
+Jan 17 22:00:52.035 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 
+Jan 17 22:00:52.049 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:01:15.457 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:01:15.493 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:03:32.731 HYPERVISOR: exec_cmd: nio create_udp udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 10081 127.0.0.1 10080 
+Jan 17 22:03:32.731 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 
+Jan 17 22:03:32.758 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 1 
+Jan 17 22:03:38.740 HYPERVISOR: exec_cmd: nio create_udp udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 10082 127.0.0.1 10083 
+Jan 17 22:03:38.741 HYPERVISOR: exec_cmd: ethsw add_nio Switch4 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 
+Jan 17 22:03:38.767 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 1 
+Jan 17 22:05:02.460 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 1 
+Jan 17 22:05:02.462 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 1 
+Jan 17 22:05:02.462 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:05:02.463 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:05:29.550 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 103 
+Jan 17 22:05:29.550 HYPERVISOR: exec_cmd: ethsw set_access_port Switch4 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 102 
+Jan 17 22:05:29.551 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:05:29.552 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch4 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:06:08.787 HYPERVISOR: exec_cmd: ethsw rename Switch4 Switch3 
+Jan 17 22:06:08.788 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 103 
+Jan 17 22:06:08.790 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 102 
+Jan 17 22:06:08.791 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:06:08.792 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:06:08.902 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-eb97bfcc-d4d6-471e-ac2b-7b63eaf08da4 103 
+Jan 17 22:06:08.904 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-0fd04ec7-386c-4a9c-83f6-b7895ca6ab40 102 
+Jan 17 22:06:08.904 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-753a975d-e84d-49a8-acbb-ce959705d83e 1 
+Jan 17 22:06:08.906 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-8adf6903-953d-471d-9e83-ee34cc1a54e6 1 
+Jan 17 22:06:14.536 HYPERVISOR: exec_cmd: ethsw delete Switch3 
+Jan 17 22:06:14.660 HYPERVISOR: exec_cmd: hypervisor stop 
+Jan 17 22:06:14.881 HYPERVISOR: Stopped.
+Jan 17 22:06:14.882 GENERAL: reset done.

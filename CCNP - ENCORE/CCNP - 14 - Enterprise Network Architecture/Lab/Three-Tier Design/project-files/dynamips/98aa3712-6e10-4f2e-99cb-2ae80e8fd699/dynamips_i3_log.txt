@@ -1,0 +1,37 @@
+Jan 17 22:00:46.908 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Jan 17 22:00:46.910 HYPERVISOR: Started on IP = localhost, TCP port = 50570.
+Jan 17 22:00:47.385 HYPERVISOR: exec_cmd: hypervisor version 
+Jan 17 22:00:47.389 HYPERVISOR: exec_cmd: hypervisor working_dir C:\Users\VMUser\Desktop\Çalışmalar\1-Networking\CCNP\CCNP - 14 - Enterprise Network Architecture\Lab\Three-Tier Design\project-files\dynamips 
+Jan 17 22:00:47.389 GENERAL: working_dir=C:\Users\VMUser\Desktop\Çalışmalar\1-Networking\CCNP\CCNP - 14 - Enterprise Network Architecture\Lab\Three-Tier Design\project-files\dynamips
+Jan 17 22:00:47.391 HYPERVISOR: exec_cmd: ethsw create Switch3 
+Jan 17 22:00:51.690 HYPERVISOR: exec_cmd: nio create_udp udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 10016 127.0.0.1 10017 
+Jan 17 22:00:51.691 HYPERVISOR: exec_cmd: ethsw add_nio Switch3 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 
+Jan 17 22:00:51.694 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 1 
+Jan 17 22:00:51.775 HYPERVISOR: exec_cmd: nio create_udp udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 10020 127.0.0.1 10021 
+Jan 17 22:00:51.775 HYPERVISOR: exec_cmd: ethsw add_nio Switch3 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 
+Jan 17 22:00:51.788 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 1 
+Jan 17 22:01:15.433 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 1 
+Jan 17 22:01:15.489 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 1 
+Jan 17 22:03:24.842 HYPERVISOR: exec_cmd: nio create_udp udp-d84f8888-826a-4da5-8190-5aee8ff40817 10077 127.0.0.1 10076 
+Jan 17 22:03:24.843 HYPERVISOR: exec_cmd: ethsw add_nio Switch3 udp-d84f8888-826a-4da5-8190-5aee8ff40817 
+Jan 17 22:03:24.864 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-d84f8888-826a-4da5-8190-5aee8ff40817 1 
+Jan 17 22:03:27.966 HYPERVISOR: exec_cmd: nio create_udp udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 10079 127.0.0.1 10078 
+Jan 17 22:03:27.967 HYPERVISOR: exec_cmd: ethsw add_nio Switch3 udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 
+Jan 17 22:03:27.993 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 1 
+Jan 17 22:04:56.913 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-d84f8888-826a-4da5-8190-5aee8ff40817 103 
+Jan 17 22:04:56.915 HYPERVISOR: exec_cmd: ethsw set_access_port Switch3 udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 101 
+Jan 17 22:04:56.917 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 1 
+Jan 17 22:04:56.918 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch3 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 1 
+Jan 17 22:06:03.849 HYPERVISOR: exec_cmd: ethsw rename Switch3 Switch2 
+Jan 17 22:06:03.851 HYPERVISOR: exec_cmd: ethsw set_access_port Switch2 udp-d84f8888-826a-4da5-8190-5aee8ff40817 103 
+Jan 17 22:06:03.851 HYPERVISOR: exec_cmd: ethsw set_access_port Switch2 udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 101 
+Jan 17 22:06:03.853 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch2 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 1 
+Jan 17 22:06:03.854 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch2 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 1 
+Jan 17 22:06:03.945 HYPERVISOR: exec_cmd: ethsw set_access_port Switch2 udp-d84f8888-826a-4da5-8190-5aee8ff40817 103 
+Jan 17 22:06:03.948 HYPERVISOR: exec_cmd: ethsw set_access_port Switch2 udp-a6f19ecc-3fd7-4c59-b080-632d5d937ada 101 
+Jan 17 22:06:03.949 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch2 udp-a2e71a6d-4529-4c96-a0ea-c9434ab3dac0 1 
+Jan 17 22:06:03.950 HYPERVISOR: exec_cmd: ethsw set_dot1q_port Switch2 udp-3759b0c3-3ebb-4972-bb52-abb8fd24a614 1 
+Jan 17 22:06:14.537 HYPERVISOR: exec_cmd: ethsw delete Switch2 
+Jan 17 22:06:14.648 HYPERVISOR: exec_cmd: hypervisor stop 
+Jan 17 22:06:14.722 HYPERVISOR: Stopped.
+Jan 17 22:06:14.722 GENERAL: reset done.

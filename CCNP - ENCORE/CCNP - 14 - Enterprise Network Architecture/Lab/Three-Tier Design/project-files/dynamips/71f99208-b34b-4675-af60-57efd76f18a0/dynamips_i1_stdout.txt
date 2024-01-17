@@ -1,0 +1,6 @@
+cygwin warning:
+  MS-DOS style path detected: C:\Users\VMUser\Desktop\\xC3\x87al\xC4\xB1\xC5\x9Fmalar\1-Networking\CCNP\CCNP - 14 - Enterprise Network Architecture\Lab\Three-Tier Design\project-files\dynamips
+  Preferred POSIX equivalent is: /cygdrive/c/Users/VMUser/Desktop/\xC3\x87al\xC4\xB1\xC5\x9Fmalar/1-Networking/CCNP/CCNP - 14 - Enterprise Network Architecture/Lab/Three-Tier Design/project-files/dynamips
+  CYGWIN environment variable option "nodosfilewarning" turns off this warning.
+  Consult the user's guide for more details about POSIX paths:
+    http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
