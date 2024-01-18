@@ -1,0 +1,5 @@
+
+NOTLAR: 
+
+- VLAN'lar arası haberleşmede Access katmanındaki switchler arasında yapılması gerekiyordu. Buradaki sorun aynı VLAN'a ait ama farklı switchler üzerinde bulunan switchler aynı networkte görüneceği için paketleri gateway'a göndermeyecektir. Bu durumda farklı switchler üzerindeki istemciler haberleşemeyecekti. 
+ Bu soruna çözüm olarak Subnet maskeleri üzerinde oynamalar yapmaya karar verdim. Her Access katmanı switch üzerinde her VLAN için ayrı bir subnet aralığı kullandım. Bu sayede Access katmanında farklı switch üzerinde bulunan istemciye paket gönderilmek istendiğinde subnet bilgisi yardımıyla farklı netwrk üzerinde görünecek ve paket bağlı olunan switch üzerindeki tanımlı gateway'a gönderilecektir. Bu sayede Access katmanındaki switch üzerinden paket L3'e taşınarak OSPF yardımıyla (Distribution Layer switch üzerinden) hedef Access katmanındaki switche bağlı istemciye ulaştırılacaktır.
