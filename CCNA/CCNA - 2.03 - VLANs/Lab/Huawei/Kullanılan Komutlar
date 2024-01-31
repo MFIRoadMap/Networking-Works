@@ -1,0 +1,194 @@
+CE6800-1
+-------------------------------------------
+system-view
+sysname CE6800-1
+
+vlan 10
+description CE6800-1_VLAN10 
+vlan 20
+vlan 30
+vlan 40
+quit
+
+
+interface ge 1/0/10
+port default vlan 10
+undo shutdown 
+quit
+interface ge 1/0/11
+port default vlan 10
+undo shutdown 
+quit
+interface ge 1/0/12
+port default vlan 10
+undo shutdown 
+quit
+
+
+port-group PG1
+group-member ge 1/0/13 to ge 1/0/15
+port default vlan 20
+quit
+port-group PG2
+group-member ge 1/0/16 to ge 1/0/18
+port default vlan 30
+quit
+
+
+
+interface ge 1/0/1
+description **CE-3_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+interface ge 1/0/0
+description **CE-2_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+
+quit 
+y
+
+
+
+
+CE6800-2
+-------------------------------------------
+system-view
+sysname CE6800-2
+
+vlan 10
+description CE6800-2_VLAN10 
+vlan 20
+vlan 30
+vlan 40
+quit
+
+
+port-group PG0
+group-member ge 1/0/10 to ge 1/0/12
+port default vlan 10
+quit
+port-group PG1
+group-member ge 1/0/13 to ge 1/0/15
+port default vlan 20
+quit
+port-group PG2
+group-member ge 1/0/16 to ge 1/0/18
+port default vlan 30
+quit
+
+
+
+interface ge 1/0/1
+description **CE-1_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+interface ge 1/0/0
+description **CE-3_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+
+quit
+y
+
+
+
+CE6800-3
+-------------------------------------------
+system-view
+sysname CE6800-3
+
+vlan 10
+description CE6800-3_VLAN10 
+vlan 20
+vlan 30
+vlan 40
+quit
+
+
+port-group PG0
+group-member ge 1/0/10 to ge 1/0/12
+port default vlan 10
+quit
+port-group PG1
+group-member ge 1/0/13 to ge 1/0/15
+port default vlan 20
+quit
+port-group PG2
+group-member ge 1/0/16 to ge 1/0/18
+port default vlan 30
+quit
+
+
+
+interface ge 1/0/1
+description **CE-2_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+interface ge 1/0/0
+description **CE-1_Connection**
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 40
+undo shutdown
+quit
+
+quit
+y
+
+
+
+
+
+VPC1 -> ip 192.168.10.20 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.20.20 255.255.255.0 192.168.20.1
+VPC3 -> ip 192.168.30.20 255.255.255.0 192.168.30.1
+VPC4 -> ip 192.168.10.25 255.255.255.0 192.168.10.1
+VPC5 -> ip 192.168.20.25 255.255.255.0 192.168.20.1
+VPC6 -> ip 192.168.30.25 255.255.255.0 192.168.30.1
+
+
+
+
+
+
+
+
+Remarking QoS konfigürasyonu
+---------------------------
+traffic classifier C1
+	if-match vlan 10
+	quit
+
+traffic behaviour B1
+	remark 8021p 3
+	quit
+
+traffic policy P1
+	classifier C1 behaviour B1
+	quit
+
+int ge 1/0/1
+	traffic-policy p1 inbound
+	quit
+
+
+
+
+
+
+
+
+
+
+
+
