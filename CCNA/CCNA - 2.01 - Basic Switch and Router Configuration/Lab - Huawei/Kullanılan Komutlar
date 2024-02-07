@@ -1,0 +1,130 @@
+CE6800_1
+----------------------------------------------
+system-view
+sysname CE6800_1
+
+vlan 1 
+quit
+
+interface ge 1/0/0
+undo sh
+quit
+interface ge 1/0/1
+undo sh
+quit
+
+interface vlanif 1
+ip address 192.168.10.1 24
+undo sh
+quit
+commit 
+
+
+
+ntp authentication enable
+ntp authentication-keyid 40 authentication-mode hmac-sha256 Huawei123
+ntp trusted authentication-keyid 40
+ntp unicast-server 192.168.10.2 authentication-keyid 40
+commit
+
+
+
+telnet server enable
+user-interface vty 0 4 
+protocol inbound telnet
+authentication-mode aaa
+quit
+
+aaa
+local-user nadmin password irreversible-cipher Huawei.123   
+local-user nadmin service-type telnet    
+local-user nadmin level 3  
+quit
+commit
+
+
+
+
+
+CE6800_2
+----------------------------------------------
+system-view
+sysname CE6800_2
+
+vlan 1
+quit
+
+interface ge 1/0/0
+undo sh
+quit
+
+interface vlanif 1
+ip address 192.168.10.2 24
+undo sh
+quit
+commit 
+
+
+
+clock timezone TR add 03:00:00
+
+ntp refclock-master 1
+ntp authentication enable
+ntp authentication-keyid 40 authentication-mode hmac-sha256 Huawei123
+ntp trusted authentication-keyid 40
+
+undo ntp server disable 
+commit
+
+
+
+stelnet server enable
+user-interface vty 0 4 
+protocol inbound ssh
+authentication-mode aaa
+quit
+
+aaa
+local-user newadmin password irreversible-cipher Huawei.123   
+local-user newadmin service-type ssh    
+local-user newadmin level 3  
+quit
+
+rsa local-key-pair create 
+commit
+
+
+
+C7206_1 (SSH ve Telnet bağlantılarını test etmek için koyuldu. VPC'ler desteklemiyordu)
+----------------------------------------------
+en
+conf ter
+hostname C7206_1
+
+int fa 0/0
+ip address 192.168.10.5 255.255.255.0
+no sh 
+exit
+
+
+
+
+
+
+VPC1 -> ip 192.168.1.10 255.255.255.0 192.168.1.1
+VPC2 -> ip 192.168.1.20 255.255.255.0 192.168.1.1
+VPC3 -> ip 192.168.1.30 255.255.255.0 192.168.1.1
+VPC4 -> ip 192.168.1.40 255.255.255.0 192.168.1.1
+
+
+
+
+
+//Telnet Password Config
+telnet server enable
+user-interface vty 0 4 
+protocol inbound telnet
+authentication-mode password
+set authentication password cipher Huawei123
+user privilege level 3
+
