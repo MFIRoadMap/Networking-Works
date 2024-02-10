@@ -1,0 +1,128 @@
+L3SW1
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname L3SW1
+
+ip routing
+
+int fa 1/0
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/1
+switchport mode trunk
+switchport trunk encapsulation dot1q
+exit
+
+int vlan 10
+ip address 192.168.10.1 255.255.255.0
+no sh
+int vlan 20
+ip address 192.168.20.1 255.255.255.0
+no sh
+int vlan 30
+ip address 192.168.30.1 255.255.255.0
+no sh
+exit
+
+
+
+
+
+
+L3SW2
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname L3SW2
+
+ip routing
+
+int fa 1/0
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/12
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/13
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/14
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/15
+switchport mode trunk
+switchport trunk encapsulation dot1q
+exit
+
+
+
+
+
+
+
+
+L3SW3
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname L3SW3
+
+ip routing
+
+int fa 1/0
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/12
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/13
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/14
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int fa 1/15
+switchport mode trunk
+switchport trunk encapsulation dot1q
+exit
+
+
+
+
+
+
+
+
+
+VPC1 -> ip 192.168.10.10 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.20.10 255.255.255.0 192.168.20.1
+VPC3 -> ip 192.168.30.10 255.255.255.0 192.168.30.1
+VPC4 -> ip 192.168.10.15 255.255.255.0 192.168.10.1
+VPC5 -> ip 192.168.20.15 255.255.255.0 192.168.20.1
+VPC6 -> ip 192.168.30.15 255.255.255.0 192.168.30.1
+VPC7 -> ip 192.168.10.20 255.255.255.0 192.168.10.1
+VPC7 -> ip 192.168.20.20 255.255.255.0 192.168.20.1
+
+

@@ -1,0 +1,325 @@
+L3SW1
+---------------------------------------
+en
+conf ter
+hostname L3SW1
+
+ip routing
+
+int fa 1/0
+ip address 10.0.110.1 255.255.255.252
+no sh 
+exit
+int fa 2/0
+ip address 10.0.120.1 255.255.255.252
+no sh 
+exit
+int fa 3/0
+ip address 10.0.130.1 255.255.255.252
+no sh 
+exit
+int fa 4/0
+ip address 10.0.140.1 255.255.255.252
+no sh 
+exit
+
+
+router ospf 30
+network 10.0.110.1 0.0.0.3 area 50
+network 10.0.120.1 0.0.0.3 area 50
+network 10.0.130.1 0.0.0.3 area 50
+network 10.0.140.1 0.0.0.3 area 50
+exit
+
+
+
+
+
+L3SW2
+---------------------------------------
+en
+conf ter
+hostname L3SW2
+
+ip routing
+
+int fa 2/0
+ip address 10.0.210.1 255.255.255.252
+no sh 
+exit
+int fa 3/0
+ip address 10.0.220.1 255.255.255.252
+no sh 
+exit
+int fa 3/0
+ip address 10.0.230.1 255.255.255.252
+no sh 
+exit
+int fa 4/0
+ip address 10.0.240.1 255.255.255.252
+no sh 
+exit
+
+
+router ospf 30
+network 10.0.210.1 0.0.0.3 area 50
+network 10.0.220.1 0.0.0.3 area 50
+network 10.0.230.1 0.0.0.3 area 50
+network 10.0.240.1 0.0.0.3 area 50
+exit
+
+
+
+
+
+
+
+SW1
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname SW1
+
+ip routing
+
+int vlan 10
+ip address 192.168.10.1 255.255.255.224
+no sh
+exit
+int vlan 20
+ip address 192.168.20.1 255.255.255.224
+no sh
+exit
+int vlan 30
+ip address 192.168.30.1 255.255.255.224
+no sh
+exit
+
+
+int fa 1/0
+switchport mode access
+switchport access vlan 10
+exit
+int fa 1/1
+switchport mode access
+switchport access vlan 20
+exit
+
+int fa 0/0
+ip address 10.0.110.2 255.255.255.252
+no sh 
+exit
+int fa 0/1
+ip address 10.0.210.2 255.255.255.252
+no sh 
+exit
+
+router ospf 30
+network 192.168.10.1 0.0.0.31 area 50
+network 192.168.20.1 0.0.0.31 area 50
+network 192.168.30.1 0.0.0.31 area 50
+network 10.0.210.2 0.0.0.3 area 50
+network 10.0.110.2 0.0.0.3 area 50
+exit
+
+
+
+
+SW2
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname SW2
+
+ip routing
+
+int vlan 10
+ip address 192.168.10.33 255.255.255.224
+no sh
+exit
+int vlan 20
+ip address 192.168.20.33 255.255.255.224
+no sh
+exit
+int vlan 30
+ip address 192.168.30.33 255.255.255.224
+no sh
+exit
+
+
+int fa 1/0
+switchport mode access
+switchport access vlan 30
+exit
+int fa 1/1
+switchport mode access
+switchport access vlan 10
+exit
+
+int fa 0/0
+ip address 10.0.120.2 255.255.255.252
+no sh 
+exit
+int fa 0/1
+ip address 10.0.220.2 255.255.255.252
+no sh 
+exit
+
+router ospf 30
+network 192.168.10.33 0.0.0.31 area 50
+network 192.168.20.33 0.0.0.31 area 50
+network 192.168.30.33 0.0.0.31 area 50
+network 10.0.220.2 0.0.0.3 area 50
+network 10.0.120.2 0.0.0.3 area 50
+exit
+
+
+
+
+SW3
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname SW3
+
+ip routing
+
+int vlan 10
+ip address 192.168.10.65 255.255.255.224
+no sh
+exit
+int vlan 20
+ip address 192.168.20.65 255.255.255.224
+no sh
+exit
+int vlan 30
+ip address 192.168.30.65 255.255.255.224
+no sh
+exit
+
+
+int fa 1/0
+switchport mode access
+switchport access vlan 30
+exit
+int fa 1/1
+switchport mode access
+switchport access vlan 20
+exit
+
+int fa 0/0
+ip address 10.0.130.2 255.255.255.252
+no sh 
+exit
+int fa 0/1
+ip address 10.0.230.2 255.255.255.252
+no sh 
+exit
+
+router ospf 30
+network 192.168.10.65 0.0.0.31 area 50
+network 192.168.20.65 0.0.0.31 area 50
+network 192.168.30.65 0.0.0.31 area 50
+network 10.0.230.2 0.0.0.3 area 50
+network 10.0.130.2 0.0.0.3 area 50
+exit
+
+
+
+SW4
+---------------------------------------
+en
+
+vlan database 
+vlan 10
+vlan 20
+vlan 30
+exit
+
+conf ter
+hostname SW4
+
+ip routing
+
+int vlan 10
+ip address 192.168.10.97 255.255.255.224
+no sh
+exit
+int vlan 20
+ip address 192.168.20.97 255.255.255.224
+no sh
+exit
+int vlan 30
+ip address 192.168.30.97 255.255.255.224
+no sh
+exit
+
+
+int fa 1/0
+switchport mode access
+switchport access vlan 10
+exit
+int fa 1/1
+switchport mode access
+switchport access vlan 20
+exit
+
+int fa 0/0
+ip address 10.0.140.2 255.255.255.252
+no sh 
+exit
+int fa 0/1
+ip address 10.0.240.2 255.255.255.252
+no sh 
+exit
+
+router ospf 30
+network 192.168.10.97 0.0.0.31 area 50
+network 192.168.20.97 0.0.0.31 area 50
+network 192.168.30.97 0.0.0.31 area 50
+network 10.0.240.2 0.0.0.3 area 50
+network 10.0.140.2 0.0.0.3 area 50
+exit
+
+
+
+
+
+
+
+VPC1 : ip 192.168.10.2 255.255.255.0 192.168.10.1
+VPC2 : ip 192.168.20.2 255.255.255.0 192.168.20.1
+VPC3 : ip 192.168.30.34 255.255.255.0 192.168.30.33
+VPC4 : ip 192.168.10.34 255.255.255.0 192.168.10.33
+VPC5 : ip 192.168.30.66 255.255.255.0 192.168.30.65
+VPC6 : ip 192.168.20.66 255.255.255.0 192.168.20.65
+VPC7 : ip 192.168.10.98 255.255.255.0 192.168.10.97
+VPC8 : ip 192.168.20.98 255.255.255.0 192.168.20.97
+
+
+
+
+
+
+
