@@ -14,7 +14,7 @@ undo sh
 quit
 
 interface vlanif 1
-ip address 192.168.10.1 24
+ip address 192.168.0.140 24
 undo sh
 quit
 commit 
@@ -59,7 +59,7 @@ undo sh
 quit
 
 interface vlanif 1
-ip address 192.168.10.2 24
+ip address 192.168.0.240 24
 undo sh
 quit
 commit 
@@ -94,17 +94,6 @@ rsa local-key-pair create
 commit
 
 
-
-C7206_1 (SSH ve Telnet bağlantılarını test etmek için koyuldu. VPC'ler desteklemiyordu)
-----------------------------------------------
-en
-conf ter
-hostname C7206_1
-
-int fa 0/0
-ip address 192.168.10.5 255.255.255.0
-no sh 
-exit
 
 
 
