@@ -1,0 +1,106 @@
+ArubaCX-1
+-------------------------------------------------------
+en
+conf ter
+
+hostname ArubaCX-1
+
+
+interface 1/1/1-1/1/6
+no routing
+no shutdown
+exit
+spanning-tree
+
+
+int vlan 1
+ip address 192.168.1.100/24
+no shutdown
+exit
+
+
+ntp authentication
+ntp authentication-key 35 sha1 Aruba123
+ntp trusted-key 35
+ntp server 192.168.1.200 burst key-id 35
+ntp enable
+
+
+int mgmt
+ip dhcp
+no shutdown
+exit
+
+
+
+
+
+
+
+
+ArubaCX-2
+-------------------------------------------------------
+
+
+
+int vlan 1
+ip address 192.168.0.200/24
+no shutdown
+exit
+
+
+clock timezone turkey
+
+ntp vrf mgmt
+
+ntp authentication
+ntp authentication-key 35 sha1 Aruba123
+ntp trusted-key 35
+ntp master vrf default stratum 4
+ntp enable
+
+
+int mgmt
+ip static 192.168.0.130/24
+no shutdown
+exit
+
+
+
+
+VPC1 -> ip 192.168.1.10 255.255.255.0 192.168.1.1
+VPC2 -> ip 192.168.1.15 255.255.255.0 192.168.1.1
+VPC3 -> ip 192.168.1.20 255.255.255.0 192.168.1.1
+VPC4 -> ip 192.168.1.25 255.255.255.0 192.168.1.1
+
+
+
+
+
+// Managemetn portu dışında herhangi bir fiziksel arayüz üzerinden bağlanılmak istendiğinde kullanılacak komut - portların L3 olduğuna dikkat çekerim. Fiziksel portlara ip adres ivermek için L2'ye çekilmedi.
+ssh server vrf default
+
+int 1/1/4
+ip address 192.168.0.130/24
+no shutdown 
+exit
+
+
+// Managemetn portu dışında herhangi bir sanal arayüz üzerinden bağlanılmak istendiğinde kullanılacak komuttur. Portların L2'e çalıştığına dikkat çekerim. 
+
+interface 1/1/1-1/1/6
+no routing
+no shutdown
+exit
+spanning-tree
+
+ssh server vrf default
+
+int vlan 1
+ip address 192.168.0.130/24
+no shutdown
+exit
+
+
+
+
