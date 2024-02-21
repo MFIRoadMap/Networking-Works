@@ -1,0 +1,134 @@
+ArubaCX-1
+------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+interface 1/1/2-1/1/6
+no routing
+no sh
+exit
+
+
+vlan 10
+name FN
+vlan 20
+name HR
+vlan 30
+name PRINT
+exit
+
+int 1/1/4
+vlan access 10
+no shutdown
+exit
+int 1/1/5
+vlan access 20
+no shutdown
+exit
+int 1/1/6
+vlan access 30
+no shutdown
+exit
+
+int vlan 10 
+ip address 192.168.10.1/24
+no shutdown
+exit
+int vlan 20 
+ip address 192.168.20.1/24
+no shutdown
+exit
+int vlan 30 
+ip address 192.168.30.1/24
+no shutdown
+exit
+
+int 1/1/1
+ip address 192.168.100.1/24
+no shutdown
+exit
+
+
+
+
+
+
+
+
+
+ArubaCX-2
+------------------------------------------
+en
+conf ter
+hostname ArubaCX-2
+
+interface 1/1/1-1/1/6
+no routing
+no sh
+exit
+
+
+vlan 10
+name HR
+vlan 20
+name FN
+
+int 1/1/5
+vlan access 10
+no shutdown
+exit
+int 1/1/6
+vlan access 20
+no shutdown
+exit
+
+interface 1/1/1
+vlan access 10
+no sh
+exit
+interface 1/1/2
+vlan access 20
+no sh
+exit
+
+
+
+
+ArubaCXRouter-1
+------------------------------------------
+en
+conf ter
+
+hostname ArubaCXRouter-1
+
+vlan 10
+name HR
+vlan 20
+name FN
+
+int 1/1/1
+ip address 192.168.10.1/24
+no sh
+exit
+int 1/1/2
+ip address 192.168.20.1/24
+no sh
+exit
+
+
+
+
+
+
+VPC0 -> ip 192.168.100.10 255.255.255.0 192.168.100.1
+VPC1 -> ip 192.168.10.10 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.20.10 255.255.255.0 192.168.20.1
+VPC3 -> ip 192.168.30.10 255.255.255.0 192.168.30.1
+
+VPC4 -> ip 192.168.10.10 255.255.255.0 192.168.10.1
+VPC5 -> ip 192.168.20.10 255.255.255.0 192.168.20.1
+
+
+
+
