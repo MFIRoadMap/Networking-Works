@@ -1,0 +1,96 @@
+L3SW1
+--------------------------------------
+en
+vlan database
+vlan 10
+vlan 20
+vlan 30
+exit
+conf ter
+hostname L3SW1
+
+int range fa 1/0 - 4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+spanning-tree vlan 10 root primary
+spanning-tree vlan 20 root secondary
+
+
+
+
+
+
+
+L3SW2
+--------------------------------------
+en
+vlan database
+vlan 10
+vlan 20
+vlan 30
+exit
+conf ter
+hostname L3SW2
+
+int range fa 1/0 - 4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+spanning-tree vlan 20 root primary
+spanning-tree vlan 30 root secondary
+
+
+
+
+
+L3SW3
+--------------------------------------
+en
+vlan database
+vlan 10
+vlan 20
+vlan 30
+exit
+conf ter
+hostname L3SW3
+
+int range fa 1/0 - 4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+spanning-tree vlan 30 root primary
+spanning-tree vlan 10 root secondary
+
+
+
+
+
+L3SW4
+--------------------------------------
+en
+vlan database
+vlan 10
+vlan 20
+vlan 30
+exit
+conf ter
+hostname L3SW4
+
+int range fa 1/0 - 4
+switchport mode trunk
+switchport trunk allowed vlan all
+exit
+
+
+
+
+
+
+
+
+
+NOTLAR : Kullandığım switchlerde varsayılanda PVST+ versiyone devredeydi. Bu nedenle doğrudan özelleştirmeye başladım.

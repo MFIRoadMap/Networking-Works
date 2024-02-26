@@ -1,0 +1,125 @@
+
+SW1	
+-----------------------------------
+en
+conf ter
+hostname SW1
+vlan 10
+name Personel
+vlan 20
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-24
+switchport mode access 
+exit
+
+interface range fastEthernet 0/1-7
+switchport access vlan 10
+exit
+interface range fastEthernet 0/8-15
+switchport access vlan 20
+exit
+interface range gigabitEthernet 0/1-2
+switchport mode trunk 
+exit
+
+spanning-tree mode rapid-pvst
+
+interface range fastEthernet 0/8-15
+spanning-tree portfast 
+spanning-tree bpduguard enable
+exit
+
+spanning-tree vlan 1-4096 priority 4096
+
+end
+wr
+
+
+
+
+
+
+
+SW2
+-----------------------------------
+en
+conf ter
+hostname SW2
+vlan 10
+name Personel
+vlan 20
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-24
+switchport mode access 
+exit
+
+interface range fastEthernet 0/1-7
+switchport access vlan 10
+exit
+interface range fastEthernet 0/8-15
+switchport access vlan 20
+exit
+interface range gigabitEthernet 0/1-2
+switchport mode trunk 
+exit
+
+spanning-tree mode rapid-pvst
+
+interface range fastEthernet 0/8-15
+spanning-tree portfast 
+spanning-tree bpduguard enable
+exit
+
+end 
+wr
+
+
+
+SW3
+-----------------------------------
+en
+conf ter
+hostname SW3
+vlan 10
+name Personel
+vlan 20
+name Yonetici
+exit
+
+interface range fastEthernet 0/1-24
+switchport mode access 
+exit
+
+interface range fastEthernet 0/1-7
+switchport access vlan 10
+exit
+interface range fastEthernet 0/8-15
+switchport access vlan 20
+exit
+interface range gigabitEthernet 0/1-2
+switchport mode trunk 
+exit
+
+spanning-tree mode rapid-pvst
+
+interface range fastEthernet 0/8-15
+spanning-tree portfast 
+spanning-tree bpduguard enable
+exit
+
+end 
+wr
+
+
+
+
+---------------------------------------------
+
+do sh spanning-tree //Root Switch'in tüm portları Designated port özelliğinde oluyordu. Bu topolojide SW3 Root Swtichtir.
+
+Konfigürasyon sonunda;
+do sh spanning-tree //Root switch kontrolü için (SW1'de tanımlı 3 VLAN için de "This bridge is the root" yazması gerekiyor)
