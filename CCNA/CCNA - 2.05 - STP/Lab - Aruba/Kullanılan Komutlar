@@ -1,0 +1,112 @@
+ArubaCX-1
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+interface 1/1/1-1/1/6
+no routing
+no sh
+exit
+
+vlan 10
+vlan 20
+vlan 30
+exit
+
+interface 1/1/1-1/1/2
+vlan trunk allowed all
+exit
+
+spanning-tree mode rpvst
+spanning-tree
+spanning-tree vlan 10,20,30
+
+spanning-tree vlan 10 priority 1
+spanning-tree vlan 30 priority 2
+
+int 1/1/6
+spanning-tree port-type admin-edge
+spanning-tree bpdu-guard
+exit
+
+int 1/1/1
+spanning-tree cost 10
+exit
+int 1/1/1
+spanning-tree vlan 10 cost 10
+exit
+
+
+ArubaCX-2
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-2
+
+interface 1/1/1-1/1/6
+no routing
+no sh
+exit
+
+vlan 10
+vlan 20
+vlan 30
+exit
+
+interface 1/1/1-1/1/2
+vlan trunk allowed all
+exit
+
+spanning-tree mode rpvst
+spanning-tree
+spanning-tree vlan 10,20,30
+
+spanning-tree vlan 20 priority 1
+spanning-tree vlan 10 priority 2
+
+int 1/1/6
+spanning-tree port-type admin-edge
+spanning-tree bpdu-guard
+exit
+
+int 1/1/2
+spanning-tree vlan 10 port-priority 1
+exit
+
+
+
+
+ArubaCX-3
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-3
+
+interface 1/1/1-1/1/6
+no routing
+no sh
+exit
+
+vlan 10
+vlan 20
+vlan 30
+exit
+
+interface 1/1/1-1/1/2
+vlan trunk allowed all
+exit
+
+spanning-tree mode rpvst
+spanning-tree
+spanning-tree vlan 10,20,30
+
+spanning-tree vlan 30 priority 1
+spanning-tree vlan 20 priority 2
+
+int 1/1/6
+spanning-tree port-type admin-edge
+spanning-tree bpdu-guard
+exit
+
+
