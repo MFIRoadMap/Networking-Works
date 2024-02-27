@@ -1,0 +1,160 @@
+STP
+
+Switch1
+--------------------------------------------
+system-view
+sysname Switch1
+
+stp enable
+Y
+stp mode stp
+commit
+
+int ge 1/0/2
+stp cost 1
+quit
+
+int ge 1/0/1
+stp port priority 0
+quit
+
+int ge 1/0/10
+stp edged-port enable
+quit
+stp bpdu-protection
+commit
+
+
+
+
+
+
+Switch2
+--------------------------------------------
+system-view
+sysname Switch2
+
+stp enable
+Y
+stp mode stp
+commit
+
+stp root primary
+commit
+
+int ge 1/0/10
+stp edged-port enable
+quit
+stp bpdu-protection
+commit
+
+
+
+Switch3
+--------------------------------------------
+system-view
+sysname Switch3
+
+stp enable
+Y
+stp mode stp
+commit
+
+stp root secondary
+
+int ge 1/0/0
+stp cost 1
+quit
+int ge 1/0/1
+stp cost 1
+quit
+commit
+
+int ge 1/0/10
+stp edged-port enable
+quit
+stp bpdu-protection
+commit
+
+
+
+
+VBST	//VBST versiyonu doğru çalışmadı. STP komutlarında VLAN parametresi de bulunmuyor.
+
+Switch1
+--------------------------------------------
+system-view
+sysname Switch1
+
+stp enable
+Y
+
+vlan batch 10 20 30
+
+int range ge 1/0/0 ge 1/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+stp no-agreement-check
+quit
+
+stp mode vbst
+commit
+
+
+
+Switch2
+--------------------------------------------
+system-view
+sysname Switch2
+
+stp enable
+Y
+
+vlan batch 10 20 30
+
+int range ge 1/0/0 ge 1/0/1
+port link-type trunk
+port trunk allow-pass vlan all
+stp no-agreement-check
+quit
+
+stp mode vbst
+commit
+
+
+
+
+
+
+Switch3
+--------------------------------------------
+system-view
+sysname Switch3
+
+stp enable
+Y
+
+vlan batch 10 20 30
+
+int range ge 1/0/0 ge 1/0/2
+port link-type trunk
+port trunk allow-pass vlan all
+stp no-agreement-check
+quit
+
+stp mode vbst
+commit
+
+
+
+
+
+
+
+VPC1 -> ip 192.168.10.10 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.10.15 255.255.255.0 192.168.10.1
+VPC3 -> ip 192.168.10.20 255.255.255.0 192.168.10.1
+
+
+
+
