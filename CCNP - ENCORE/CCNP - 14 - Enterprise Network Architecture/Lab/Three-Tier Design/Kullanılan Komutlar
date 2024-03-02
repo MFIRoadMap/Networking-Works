@@ -226,4 +226,3 @@ VPC8 : ip 192.168.102.15 255.255.255.0 192.168.102.1
 
 
 
-Aynı network içinde olduğu çin SVI arayüzlerine tek bir ip adresi tanımlanabiliyor. Bu nedenle InterVLAN Communication süreci bir üst katman olan Core katmanında yapılması gerekti. InterVLAN Communication işleminin Distribution katmanında yapılabilmesi için FHRP protokolleri kullanılarak VLAN arayüzlerinin yedeklenmesi gerekiyor ama bu durumda da L3 switchler arasında L3 yedekleme yapılmış oluyor (Yani L2 trafik geçmeyecek ve aynı zamanda sadece birisi kullanılabilecek). Yani L2 STP Based tasarımının gerekliliklerini karşılamıyor.
