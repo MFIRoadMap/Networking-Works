@@ -1,0 +1,168 @@
+L2 konfigürasyonu
+***************************************************
+ArubaCX-1
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+vlan 10,20,30
+exit
+
+
+interface lag 1
+no routing
+no sh
+exit
+
+interface lag 2
+no routing
+no sh
+exit
+
+int 1/1/1-1/1/2
+lag 1
+no sh
+exit
+int 1/1/3-1/1/4
+lag 2
+no sh
+exit
+
+
+interface lag 1
+lacp mode active
+vlan trunk allowed all
+exit
+
+interface lag 2
+lacp mode active
+vlan trunk allowed all
+exit
+
+
+interface 1/1/5
+no routing
+vlan access 10
+no sh
+exit
+interface 1/1/6
+no routing
+vlan access 20
+no sh
+exit
+
+
+
+
+
+ArubaCX-2
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-2
+
+vlan 10,20,30
+exit
+
+
+interface lag 1
+no routing
+no sh
+exit
+
+interface lag 2
+no routing
+no sh
+exit
+
+int 1/1/1-1/1/2
+lag 1
+no sh
+exit
+int 1/1/3-1/1/4
+lag 2
+no sh
+exit
+
+
+interface lag 1
+lacp mode active
+vlan trunk allowed all
+exit
+
+interface lag 2
+lacp mode active
+vlan trunk allowed all
+exit
+
+
+interface 1/1/5
+no routing
+vlan access 30
+no sh
+exit
+interface 1/1/6
+no routing
+vlan access 10
+no sh
+exit
+
+
+
+ArubaCX-3
+--------------------------------------------
+en
+conf ter
+hostname ArubaCX-3
+
+vlan 10,20,30
+exit
+
+
+interface lag 1
+no routing
+no sh
+exit
+
+interface lag 2
+no routing
+no sh
+exit
+
+int 1/1/1-1/1/2
+lag 1
+no sh
+exit
+int 1/1/3-1/1/4
+lag 2
+no sh
+exit
+
+
+interface lag 1
+lacp mode active
+vlan trunk allowed all
+exit
+
+interface lag 2
+lacp mode active
+vlan trunk allowed all
+exit
+
+
+interface 1/1/5
+no routing
+vlan access 20
+no sh
+exit
+interface 1/1/6
+no routing
+vlan access 30
+no sh
+exit
+
+
+
+
+
