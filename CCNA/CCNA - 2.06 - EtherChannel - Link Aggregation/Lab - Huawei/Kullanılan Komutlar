@@ -1,0 +1,178 @@
+CE6800-1
+--------------------------------------------
+system-view
+
+sysname CE6800-1
+commit
+
+vlan batch 10 20 30
+
+stp enable
+Y
+
+commit
+
+
+int eth-trunk 1
+mode lacp-static
+quit
+
+int ge 1/0/0
+eth-trunk 1
+quit
+int ge 1/0/1
+eth-trunk 1
+quit
+
+
+int eth-trunk 2
+trunkport ge 1/0/2 to 1/0/3
+mode lacp-static
+quit
+commit
+
+
+int eth-trunk 1
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+int eth-trunk 2
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+
+int ge 1/0/10
+port link-type access
+port default vlan 10
+quit
+int ge 1/0/11
+port link-type access
+port default vlan 20
+quit
+commit
+
+
+
+
+
+
+CE6800-2
+--------------------------------------------
+system-view
+
+sysname CE6800-2
+commit
+
+vlan batch 10 20 30
+
+stp enable
+Y
+
+commit
+
+
+int eth-trunk 2
+mode lacp-static
+quit
+
+int ge 1/0/0
+eth-trunk 2
+quit
+int ge 1/0/1
+eth-trunk 2
+quit
+
+int eth-trunk 1
+trunkport ge 1/0/2 to 1/0/3
+mode lacp-static
+quit
+commit
+
+
+int eth-trunk 1
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+int eth-trunk 2
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+
+int ge 1/0/10
+port link-type access
+port default vlan 30
+quit
+int ge 1/0/11
+port link-type access
+port default vlan 10
+quit
+commit
+
+
+
+
+
+CE6800-3
+--------------------------------------------
+system-view
+
+sysname CE6800-3
+commit
+
+vlan batch 10 20 30
+
+stp enable
+Y
+
+commit
+
+int eth-trunk 3
+mode lacp-static
+quit
+int ge 1/0/0
+eth-trunk 3
+quit
+int ge 1/0/1
+eth-trunk 3
+quit
+
+
+int eth-trunk 2
+trunkport ge 1/0/2 to 1/0/3
+mode lacp-static
+quit
+commit
+
+
+
+int eth-trunk 2
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+int eth-trunk 3
+port link-type trunk
+port trunk allow-pass vlan 10 20 30
+quit
+
+int ge 1/0/10
+port link-type access
+port default vlan 20
+quit
+int ge 1/0/11
+port link-type access
+port default vlan 30
+quit
+commit
+
+
+
+
+
+
+
+VPC1 -> ip 192.168.10.10 255.255.255.0 192.168.10.1
+VPC2 -> ip 192.168.20.10 255.255.255.0 192.168.20.1
+VPC3 -> ip 192.168.30.10 255.255.255.0 192.168.30.1
+VPC4 -> ip 192.168.10.20 255.255.255.0 192.168.10.1
+VPC5 -> ip 192.168.20.20 255.255.255.0 192.168.20.1
+VPC6 -> ip 192.168.30.20 255.255.255.0 192.168.30.1
