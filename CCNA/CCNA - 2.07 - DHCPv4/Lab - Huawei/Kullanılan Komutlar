@@ -1,0 +1,237 @@
+DHCP Configuration for VLAN - Interface based Configuration
+**************************************************
+AR1k-1
+--------------------------------------
+system-view
+sysname AR1k-1
+
+int g 0/0/0
+ip address 192.168.100.1 24
+quit
+
+int g 0/0/0
+dhcp select interface
+dhcp server lease day 3
+dhcp server dns-list 8.8.8.8 8.8.4.4
+dhcp server excluded-ip-address 192.168.100.2 192.168.100.50
+quit
+
+
+int g 0/0/1.1
+ip address 192.168.10.1 24
+dot1q termination vid 10
+
+int g 0/0/1.1
+dhcp select interface
+dhcp server lease unlimited
+dhcp server dns-list 8.8.8.8 8.8.4.4
+quit
+
+
+int g 0/0/1.2
+ip address 192.168.20.1 24
+dot1q termination vid 20
+
+int g 0/0/1.2
+dhcp select interface
+dhcp server lease unlimited
+dhcp server dns-list 8.8.8.8 8.8.4.4
+quit
+
+
+
+CE-6800-1
+--------------------------------------
+system-view
+sysname CE-6800-1
+
+vlan 10 
+vlan 20
+quit
+
+int ge 1/0/1
+port link-type access
+port default vlan 10
+undo shutdown
+quit
+commit
+
+int ge 1/0/2
+port link-type access
+port default vlan 20
+undo shutdown
+quit
+commit
+
+int ge 1/0/0
+port link-type trunk 
+port trunk allow-pass vlan 10 20
+undo shutdown
+quit
+commit
+
+
+
+//Global tanımlı ip havuzu kullanılmak isteniyorsa
+********************************************
+AR1k-1
+--------------------------------------
+system-view
+sysname AR1k-1
+
+int g 0/0/0
+ip address 192.168.100.1 24
+quit
+
+int g 0/0/0
+dhcp select interface
+dhcp server lease day 3
+dhcp server dns-list 8.8.8.8 8.8.4.4
+dhcp server excluded-ip-address 192.168.100.2 192.168.100.50
+quit
+
+
+int g 0/0/1.1
+ip address 192.168.150.1 24
+dot1q termination vid 10
+dhcp select global
+quit
+ip pool VLAN10
+gateway-list 192.168.150.1
+network 192.168.150.1 mask 255.255.255.0
+dns-list 8.8.8.8 8.8.4.4
+quit
+dhcp enable
+
+
+
+
+
+
+
+
+Global DHCP Konfigürasyonu
+**********************************************
+CE-6800-1
+--------------------------------------
+system-view
+sysname CE-6800-1
+
+int ge 1/0/1
+undo portswitch
+ip address 192.168.10.1 24
+undo sh
+quit
+commit
+
+ip pool IKPool
+gateway-list 192.168.10.1
+network 192.168.10.1 mask 255.255.255.0
+dns-list 8.8.8.8 8.8.4.4
+excluded-ip-address 192.168.10.2 192.168.10.50
+quit
+dhcp enable
+commit
+
+
+
+
+
+
+
+DHCP Relay Agent Configuration (CE-6800 switch üzerinde)
+************************************************
+CE6800-1
+-----------------------------------------
+system-view
+sysname CE6800-1
+
+ip pool IP-Pool-1
+gateway-list 192.168.10.1
+network 192.168.10.1 mask 255.255.255.0
+quit
+ip pool IP-Pool-2
+gateway-list 192.168.20.1
+network 192.168.20.1 mask 255.255.255.0
+quit
+dhcp enable
+
+int g 0/0/1
+ip address 10.0.0.1 24
+undo shutdown
+quit
+
+dhcp enable
+ip route-static 0.0.0.0 0.0.0.0 10.0.0.2
+
+
+
+
+
+DHCP Relay Agent Configuration (AR1000 Router üzerinde)
+*******************************************************
+AR1k-1
+--------------------------------------
+system-view
+sysname AR1k-1
+
+int g 0/0/0
+ip address 192.168.100.1 24
+dhcp select relay
+dhcp relay server-ip 10.0.0.2
+quit
+
+int g 0/0/1
+ip address 10.0.0.1 24
+quit
+
+dhcp enable
+ip route-static 0.0.0.0 0.0.0.0 10.0.0.2
+
+
+CE-6800-1
+--------------------------------------
+system-view
+sysname CE6800-1
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.2 24
+undo sh
+quit
+commit
+
+ip pool Pool-1
+gateway-list 192.168.100.1
+network 192.168.100.1 mask 255.255.255.0
+dns-list 8.8.8.8 8.8.4.4
+quit
+dhcp enable
+commit
+
+ip route-static 0.0.0.0 0.0.0.0 10.0.0.1
+commit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
