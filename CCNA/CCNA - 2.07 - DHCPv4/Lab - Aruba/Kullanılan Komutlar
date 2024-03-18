@@ -48,15 +48,15 @@ pool Pool-10
 range 192.168.10.1 192.168.10.100
 range 192.168.10.150 192.168.10.252
 lease 12:00:00
-domain-name example.to
+domain-name example10.to
 default-router 192.168.10.1 192.168.10.10
 dns-server 8.8.8.8 8.8.4.4
 exit
 
 pool Pool-20
-range 192.168.20.1 192.168.20.255
+range 192.168.20.1 192.168.20.100
 lease 12:00:00
-domain-name example.to
+domain-name example20.to
 default-router 192.168.20.1 192.168.20.10
 dns-server 8.8.8.8 8.8.4.4
 exit
@@ -91,10 +91,9 @@ ip address 192.168.20.1/24
 ip helper-address 10.0.0.1
 no sh
 exit
-end
-
 ip route 0.0.0.0/0 10.0.0.1
 
+end
 
 
 
