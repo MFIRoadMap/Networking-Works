@@ -1,0 +1,199 @@
+AÇIKLAMA
+|--> Konfigürasyonlarda kullanılan (DHCP ve SLAAC witch DHCP yöntemlerinde) DHCP sunucusunu da L3 switchler üzerinde konfigüre ettim. DHCP istemcileri öncelikle ip bilgilerini nasıl alacağını routera soruyorlar. Nasıl alacaklarını öğrendikten sonra DHCP üzerinden alacağı bilgiler varsa (bizim labaratuvarımız için) tekrar routera gelerek ip bilgilerini talep ediyor. Kafa karışıklığı yaratmayacağını umuyorum.
+
+
+DHCPv6 Server Konfigürasyonu
+**********************************************************
+CE6800-1
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+dhcpv6 pool Pool1
+address prefix 2001:ABCD:FFFF:CCCC::/64    
+excluded-address 2001:ABCD:FFFF:CCCC::1 to 2001:ABCD:FFFF:CCCC::50
+dns-server 2001:FBFB:FBFB:FBFB::10
+quit
+
+int ge 1/0/1
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ABCD:FFFF:CCCC::1/64
+dhcpv6 server Pool1
+quit
+
+commit
+
+
+
+
+
+
+
+
+DHCPv6 Only SLAAC Konfigürasyonu
+**********************************************************
+CE6800-1
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+int ge 1/0/1
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ABCD:FFFF:CCCC::1/64
+ipv6 nd ra halt disable
+quit
+
+commit
+
+
+
+
+
+
+DHCPv6 SLAAC with DHCP Konfigürasyonu
+**********************************************************
+CE6800-1
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+dhcpv6 pool Pool1
+dns-server 2001:FBFB:FBFB:FBFB::10
+quit
+
+int ge 1/0/1
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ABCD:FFFF:CCCC::1/64
+ipv6 nd ra halt disable
+ipv6 nd autoconfig other-flag
+
+dhcpv6 server Pool1
+quit
+
+commit
+
+
+
+
+
+
+
+DHCPv6 DHCP Konfigürasyonu
+**********************************************************
+CE6800-1
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+dhcpv6 pool Pool1
+address prefix 2001:ABCD:FFFF:CCCC::/64    
+excluded-address 2001:ABCD:FFFF:CCCC::1 to 2001:ABCD:FFFF:CCCC::50
+dns-server 2001:FBFB:FBFB:FBFB::10
+quit
+
+int ge 1/0/1
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ABCD:FFFF:CCCC::1/64
+ipv6 nd autoconfig managed-address-flag
+
+dhcpv6 server Pool1
+quit
+
+commit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DHCPv6 Relay Agent Konfigürasyonu
+**********************************************************
+CE6800-1
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+dhcpv6 pool Pool1
+address prefix 2001:ABCD:FFFF:CCCC::1/64
+excluded-address 2001:ABCD:FFFF:CCCC::1 to 2001:ABCD:FFFF:CCCC::50
+dns-server 2001:FBFB:FBFB:FBFB::10
+quit
+
+int ge 1/0/0
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ACAC:ACAC:ACAC::100/64
+ipv6 nd autoconfig managed-address-flag
+dhcpv6 server Pool1
+quit
+
+commit
+
+
+
+CE6800-2
+----------------------------------------------
+system-view
+sysname CE6800-2
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+int ge 1/0/0
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ACAC:ACAC:ACAC::1/64
+quit
+
+int ge 1/0/1
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ABCD:FFFF:CCCC::1/64
+ipv6 nd autoconfig managed-address-flag
+dhcpv6 relay destination 2001:ACAC:ACAC:ACAC::100
+quit
+
+commit
+
+
+
