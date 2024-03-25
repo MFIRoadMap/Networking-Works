@@ -164,6 +164,7 @@ ipv6 nd autoconfig managed-address-flag
 dhcpv6 server Pool1
 quit
 
+ipv6 route 0::0 0 2001:ACAC:ACAC:ACAC::1
 commit
 
 
@@ -193,6 +194,7 @@ ipv6 nd autoconfig managed-address-flag
 dhcpv6 relay destination 2001:ACAC:ACAC:ACAC::100
 quit
 
+ipv6 route 0::0 0 2001:ACAC:ACAC:ACAC::100
 commit
 
 

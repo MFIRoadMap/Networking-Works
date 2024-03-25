@@ -1,0 +1,164 @@
+DHCPv6 Konfigürasyonu
+******************************************************
+ArubaCX-1
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+
+dhcpv6-server vrf default
+pool Pool1
+range 2001::1 2001::100 prefix-len 64
+range 2001::150 2001::200 prefix-len 64
+lease 12:00:00
+dns-server 2101::13 2101::14
+static-bind ipv6 2001::10 client-id AA:BB:CC:DD:EE:FF:11
+option 22 ipv6 2101::15
+exit
+enable
+exit
+
+int 1/1/2
+ipv6 address 2001::1/64
+no sh
+exit
+
+
+
+
+
+
+
+DHCPv6 SLAAC Konfigürasyonu
+******************************************************
+ArubaCX-1
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+int 1/1/2
+ipv6 address 2001::1/64
+no ipv6 nd suppress-ra dnssl rdnss mtu
+ipv6 nd ra dns server 2002::100
+no sh
+exit
+
+
+
+
+
+
+DHCPv6 SLAAC with DHCP Konfigürasyonu
+******************************************************
+ArubaCX-1
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+dhcpv6-server vrf default
+pool Pool1
+range 2001::1 2001::100 prefix-len 64
+dns-server 2101::13 2101::14
+option 22 ipv6 2101::15
+exit
+enable
+exit
+
+int 1/1/2
+ipv6 address 2001::1/64
+no ipv6 nd suppress-ra
+ipv6 nd ra other-config-flag
+no sh
+exit
+
+
+
+
+
+DHCPv6 Only DHCP Konfigürasyonu
+******************************************************
+ArubaCX-1
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+dhcpv6-server vrf default
+pool Pool1
+range 2001::1 2001::100 prefix-len 64
+dns-server 2101::13 2101::14
+option 22 ipv6 2101::15
+exit
+enable
+exit
+
+int 1/1/2
+ipv6 address 2001::1/64
+no ipv6 nd suppress-ra
+ipv6 nd ra managed-config-flag
+no sh
+exit
+
+
+
+
+
+
+
+
+
+DHCPv6 DHCP Relay Agent Konfigürasyonu
+******************************************************
+ArubaCX-1
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-1
+
+dhcpv6-relay
+dhcpv6-relay option 79
+
+int 1/1/2
+ipv6 address 2001::1/64
+ipv6 nd ra managed-config-flag
+ipv6 helper-address unicast 2010::2
+no sh
+exit
+
+int 1/1/1
+ipv6 address 2010::1/64
+no sh
+exit
+
+ipv6 route 0::0/0 2010::2
+
+
+
+
+ArubaCX-2
+--------------------------------------------------
+en
+conf ter
+hostname ArubaCX-2
+
+dhcpv6-server vrf default
+pool Pool1
+range 2001::1 2001::100 prefix-len 64
+dns-server 2101::13 2101::14
+option 22 ipv6 2101::15
+exit
+enable
+exit
+
+int 1/1/1
+ipv6 address 2010::2/64
+no sh
+exit
+
+ipv6 route 0::0/0 2010::1
+
+
+

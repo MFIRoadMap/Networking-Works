@@ -75,6 +75,8 @@ en
 conf ter
 hostname ArubaCX-2
 
+dhcp-relay
+
 int 1/1/1
 ip address 10.0.0.2/24
 no sh
@@ -91,9 +93,9 @@ ip address 192.168.20.1/24
 ip helper-address 10.0.0.1
 no sh
 exit
+
 ip route 0.0.0.0/0 10.0.0.1
 
-end
 
 
 
