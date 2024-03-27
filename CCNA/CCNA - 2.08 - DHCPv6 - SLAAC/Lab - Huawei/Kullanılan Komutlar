@@ -143,35 +143,6 @@ DHCPv6 Relay Agent Konfigürasyonu
 CE6800-1
 ----------------------------------------------
 system-view
-sysname CE6800-1
-commit
-
-dhcpv6 enable
-dhcpv6 duid llt
-
-dhcpv6 pool Pool1
-address prefix 2001:ABCD:FFFF:CCCC::1/64
-excluded-address 2001:ABCD:FFFF:CCCC::1 to 2001:ABCD:FFFF:CCCC::50
-dns-server 2001:FBFB:FBFB:FBFB::10
-quit
-
-int ge 1/0/0
-undo portswitch
-ipv6 enable
-undo sh
-ipv6 address 2001:ACAC:ACAC:ACAC::100/64
-ipv6 nd autoconfig managed-address-flag
-dhcpv6 server Pool1
-quit
-
-ipv6 route 0::0 0 2001:ACAC:ACAC:ACAC::1
-commit
-
-
-
-CE6800-2
-----------------------------------------------
-system-view
 sysname CE6800-2
 commit
 
@@ -197,5 +168,34 @@ quit
 ipv6 route 0::0 0 2001:ACAC:ACAC:ACAC::100
 commit
 
+
+
+
+CE6800-2
+----------------------------------------------
+system-view
+sysname CE6800-1
+commit
+
+dhcpv6 enable
+dhcpv6 duid llt
+
+dhcpv6 pool Pool1
+address prefix 2001:ABCD:FFFF:CCCC::1/64
+excluded-address 2001:ABCD:FFFF:CCCC::1 to 2001:ABCD:FFFF:CCCC::50
+dns-server 2001:FBFB:FBFB:FBFB::10
+quit
+
+int ge 1/0/0
+undo portswitch
+ipv6 enable
+undo sh
+ipv6 address 2001:ACAC:ACAC:ACAC::100/64
+ipv6 nd autoconfig managed-address-flag
+dhcpv6 server Pool1
+quit
+
+ipv6 route 0::0 0 2001:ACAC:ACAC:ACAC::1
+commit
 
 
