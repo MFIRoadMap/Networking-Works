@@ -1,0 +1,375 @@
+Temel VRRP Konfigürasyonu
+************************************************
+CE6800-1-SW
+-----------------------------------------
+system-view
+sysname CE6800-1-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+CE6800-2
+-----------------------------------------
+system-view
+sysname CE6800-2-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10
+vrrp vrid 1 timer advertise 1
+vrrp recover-delay 10
+vrrp vrid 1 authentication-mode md5 Hua.123! 
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 timer advertise 1
+vrrp recover-delay 10
+vrrp vrid 2 authentication-mode md5 Hua.456! 
+quit
+
+commit
+
+
+
+
+CE6800-3
+-----------------------------------------
+system-view
+sysname CE6800-3-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10
+vrrp vrid 1 timer advertise 1
+vrrp recover-delay 10
+vrrp vrid 1 authentication-mode md5 Hua.123! 
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 timer advertise 1
+vrrp recover-delay 10
+vrrp vrid 2 authentication-mode md5 Hua.456! 
+quit
+
+commit
+
+
+
+
+
+
+
+CE6800-4-SW
+-----------------------------------------
+system-view
+sysname CE6800-4-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mVRRP Konfigürasyon
+*****************************************************
+CE6800-1-SW
+-----------------------------------------
+system-view
+sysname CE6800-1-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+CE6800-2
+-----------------------------------------
+system-view
+sysname CE6800-2-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10
+vrrp vrid 1 admin ignore-if-down
+vrrp vrid 1 holding-multiplier 3
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 track admin-vrrp interface ge 1/0/0 vrid 1 unflowdown
+quit
+
+commit
+
+
+
+
+
+CE6800-3
+-----------------------------------------
+system-view
+sysname CE6800-3-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10 
+vrrp vrid 1 admin ignore-if-down
+vrrp vrid 1 holding-multiplier 3
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 track admin-vrrp interface ge 1/0/0 vrid 1 unflowdown
+quit
+
+commit
+
+
+
+
+
+CE6800-4-SW
+-----------------------------------------
+system-view
+sysname CE6800-4-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Object Tracing konfigürasyonu
+***********************************************
+CE6800-1-SW
+-----------------------------------------
+system-view
+sysname CE6800-1-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+CE6800-2
+-----------------------------------------
+system-view
+sysname CE6800-2-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.2 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10
+vrrp vrid 1 track ip route 20.0.0.10 32 reduce 30
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 track ip route 10.0.0.10 32 reduce 30
+quit
+
+commit
+
+
+
+
+
+CE6800-3
+-----------------------------------------
+system-view
+sysname CE6800-3-SW
+
+int ge 1/0/0
+undo portswitch
+ip address 10.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/1
+undo portswitch
+ip address 20.0.0.3 24
+undo sh
+quit 
+
+int ge 1/0/0
+vrrp vrid 1 virtual-ip 10.0.0.1
+vrrp vrid 1 preempt timer delay 10 
+vrrp vrid 1 track ip route 20.0.0.10 32 reduce 30
+quit
+
+int ge 1/0/1
+vrrp vrid 2 virtual-ip 20.0.0.1
+vrrp vrid 2 preempt timer delay 10
+vrrp vrid 2 track ip route 10.0.0.10 32 reduce 30
+quit
+
+commit
+
+
+
+
+CE6800-4-SW
+-----------------------------------------
+system-view
+sysname CE6800-4-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+
