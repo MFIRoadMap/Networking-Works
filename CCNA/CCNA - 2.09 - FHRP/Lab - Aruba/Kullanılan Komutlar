@@ -1,0 +1,130 @@
+Temel VRRP Konfigürasyonu
+********************************************
+CE6800-1-Switch
+------------------------------------
+system-view
+sysname CE6800-1-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+
+ArubaCX-2-Router
+-----------------------------------
+en
+conf ter
+
+hostname ArubaCX-2-Router
+
+router vrrp enable
+
+int 1/1/1
+ip address 10.0.0.2/24
+no sh
+
+vrrp 1 address-family ipv4
+version 2
+address 10.0.0.1 primary
+priority 130
+preempt delay minimum 5
+no shutdown
+exit 
+exit
+
+int 1/1/2
+ip address 20.0.0.2/24
+no sh
+
+vrrp 1 address-family ipv4
+version 2
+address 20.0.0.1 primary
+preempt delay minimum 5
+no shutdown
+exit 
+exit
+
+
+
+
+ArubaCX-3-Router
+-----------------------------------
+en
+conf ter
+
+hostname ArubaCX-3-Router
+
+router vrrp enable
+
+int 1/1/1
+ip address 10.0.0.3/24
+no sh
+
+vrrp 1 address-family ipv4
+version 2
+address 10.0.0.1 primary
+preempt delay minimum 5
+no shutdown
+exit 
+exit
+
+int 1/1/2
+ip address 20.0.0.3/24
+no sh
+
+vrrp 1 address-family ipv4
+version 2
+address 20.0.0.1 primary
+preempt delay minimum 5
+no shutdown
+exit 
+exit
+
+
+CE6800-4-Switch
+------------------------------------
+system-view
+sysname CE6800-1-SW
+
+int range ge 1/0/0 to ge 1/0/1
+portswitch
+undo sh
+quit
+
+int ge 1/0/7
+portswitch
+undo sh
+quit
+
+commit
+
+
+
+
+
+Win1
+-------------------------
+ip : 10.0.0.10 
+sm : 255.255.255.0
+dg : 10.0.0.1
+
+
+Win2
+-------------------------
+ip : 20.0.0.10 
+sm : 255.255.255.0
+dg : 20.0.0.1
+
+
+
