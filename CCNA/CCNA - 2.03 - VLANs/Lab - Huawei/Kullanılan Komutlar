@@ -37,13 +37,11 @@ undo shutdown
 quit
 commit
 
-port-group PG1
-group-member ge 1/0/13 to ge 1/0/15
+int range ge 1/0/13 to ge 1/0/15
 port link-type access 
 port default vlan 20
 quit
-port-group PG2
-group-member ge 1/0/16 to ge 1/0/18
+int range ge 1/0/16 to ge 1/0/18
 port link-type access 
 port default vlan 30
 quit
@@ -85,18 +83,15 @@ vlan batch 10 20 30 40
 quit
 commit
 
-port-group PG0
-group-member ge 1/0/10 to ge 1/0/12
+int range ge 1/0/10 to ge 1/0/12
 port link-type access 
 port default vlan 10
 quit
-port-group PG1
-group-member ge 1/0/13 to ge 1/0/15
+int range ge 1/0/13 to ge 1/0/15
 port link-type access 
 port default vlan 20
 quit
-port-group PG2
-group-member ge 1/0/16 to ge 1/0/18
+int range ge 1/0/16 to ge 1/0/18
 port link-type access 
 port default vlan 30
 quit
@@ -143,18 +138,15 @@ quit
 commit
 
 
-port-group PG0
-group-member ge 1/0/10 to ge 1/0/12
+int range ge 1/0/10 to ge 1/0/12
 port link-type access 
 port default vlan 10
 quit
-port-group PG1
-group-member ge 1/0/13 to ge 1/0/15
+int range ge 1/0/13 to ge 1/0/15
 port link-type access 
 port default vlan 20
 quit
-port-group PG2
-group-member ge 1/0/16 to ge 1/0/18
+int range ge 1/0/16 to ge 1/0/18
 port link-type access 
 port default vlan 30
 quit
