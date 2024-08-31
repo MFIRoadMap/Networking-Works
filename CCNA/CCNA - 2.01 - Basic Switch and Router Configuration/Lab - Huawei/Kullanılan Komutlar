@@ -126,3 +126,19 @@ authentication-mode password
 set authentication password cipher Huawei123
 user privilege level 3
 
+
+
+//Web Access
+sys
+aaa
+local-user admin1 password irreversible-cipher Ab*45678
+local-user admin1 service-type http 
+local-user admin1 privilege level 15 
+quit
+
+int vlanif 1
+ip address 192.168.1.200 24
+quit
+
+http secure-server enable 
+http server-source -i Vlanif 1
